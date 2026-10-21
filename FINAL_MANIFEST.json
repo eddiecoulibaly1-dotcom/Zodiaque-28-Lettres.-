@@ -1,0 +1,22 @@
+{
+  "name": "Zodiaque & 28 Lettres",
+  "version": "1.0.0-final",
+  "canonical": true,
+  "single_package": true,
+  "supersedes": [
+    "APPLICATION_V1",
+    "APPLICATION_V2_ASTRONOMIE",
+    "BUILD_FINAL"
+  ],
+  "abjad": "Abjad Maghrébin",
+  "letter_count": 28,
+  "elements": {
+    "Feu": 7,
+    "Terre": 7,
+    "Air": 7,
+    "Eau": 7
+  },
+  "astronomy_engine": "2.1.19",
+  "invented_correspondences": false,
+  "astronomy_astrology_separated": true
+}
