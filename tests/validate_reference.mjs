@@ -21,7 +21,7 @@ const elements = {
 };
 const seen = new Set();
 for(const l of letters){
-  assert.equal(l.abjad_value, expected[l.letter], `Valeur incorrecte pour ${l.letter}`);
+  assert.equal(l.abjad_maghribi, expected[l.letter], `Valeur incorrecte pour ${l.letter}`);
   assert.ok(l.letter && l.id && l.element, "Champ fondamental manquant.");
   assert.equal(seen.has(l.letter), false, `Lettre dupliquée: ${l.letter}`);
   seen.add(l.letter);
