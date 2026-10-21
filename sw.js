@@ -1,4 +1,4 @@
-const CACHE="zodiaque-28-lettres-v3-final";
+const CACHE="zodiaque-28-lettres-app-v1";
 const ASSETS=["./","./index.html","./styles.css","./app.js","./manifest.webmanifest","./icon.svg",
 "./referentiel/lettres.json","./referentiel/zodiaque.json","./referentiel/planetes.json",
 "./referentiel/correspondances.json","./referentiel/phases_lunaires.json","./referentiel/jours_lunaires.json",
