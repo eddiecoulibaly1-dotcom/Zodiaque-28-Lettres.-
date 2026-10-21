@@ -1,106 +1,156 @@
 {
-  "schema_version": "1.0.0",
-  "reference_status": "CONFIGURABLE",
+  "schema_version": "2.0.0",
+  "status": "REFERENCE_COMPLETE",
   "planets": [
     {
       "id": "sun",
       "name_fr": "Soleil",
+      "name_ar": "الشمس",
       "symbol": "☉",
-      "name_ar": null,
-      "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "classification": "luminaire",
+      "astrological_theme": "expression",
+      "keywords": [
+        "vitalité"
+      ],
+      "source_ids": [
+        "SRC_IRANICA_HOROSCOPE"
+      ],
+      "interpretation_status": "traditional_or_modern_astrological_not_scientific"
     },
     {
       "id": "moon",
       "name_fr": "Lune",
+      "name_ar": "القمر",
       "symbol": "☽",
-      "name_ar": null,
-      "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "classification": "luminaire",
+      "astrological_theme": "réceptivité",
+      "keywords": [
+        "cycles et sensibilité"
+      ],
+      "source_ids": [
+        "SRC_IRANICA_HOROSCOPE"
+      ],
+      "interpretation_status": "traditional_or_modern_astrological_not_scientific"
     },
     {
       "id": "mercury",
       "name_fr": "Mercure",
+      "name_ar": "عطارد",
       "symbol": "☿",
-      "name_ar": null,
-      "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "classification": "planet",
+      "astrological_theme": "communication",
+      "keywords": [
+        "pensée et échanges"
+      ],
+      "source_ids": [
+        "SRC_ASTRO_RULERS"
+      ],
+      "interpretation_status": "traditional_or_modern_astrological_not_scientific"
     },
     {
       "id": "venus",
       "name_fr": "Vénus",
+      "name_ar": "الزهرة",
       "symbol": "♀",
-      "name_ar": null,
-      "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "classification": "planet",
+      "astrological_theme": "relation",
+      "keywords": [
+        "valeurs et esthétique"
+      ],
+      "source_ids": [
+        "SRC_ASTRO_RULERS"
+      ],
+      "interpretation_status": "traditional_or_modern_astrological_not_scientific"
     },
     {
       "id": "mars",
       "name_fr": "Mars",
+      "name_ar": "المريخ",
       "symbol": "♂",
-      "name_ar": null,
-      "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "classification": "planet",
+      "astrological_theme": "action",
+      "keywords": [
+        "affirmation et énergie"
+      ],
+      "source_ids": [
+        "SRC_ASTRO_RULERS"
+      ],
+      "interpretation_status": "traditional_or_modern_astrological_not_scientific"
     },
     {
       "id": "jupiter",
       "name_fr": "Jupiter",
+      "name_ar": "المشتري",
       "symbol": "♃",
-      "name_ar": null,
-      "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "classification": "planet",
+      "astrological_theme": "expansion",
+      "keywords": [
+        "croissance et sens"
+      ],
+      "source_ids": [
+        "SRC_ASTRO_RULERS"
+      ],
+      "interpretation_status": "traditional_or_modern_astrological_not_scientific"
     },
     {
       "id": "saturn",
       "name_fr": "Saturne",
+      "name_ar": "زحل",
       "symbol": "♄",
-      "name_ar": null,
-      "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "classification": "planet",
+      "astrological_theme": "structure",
+      "keywords": [
+        "limites et responsabilité"
+      ],
+      "source_ids": [
+        "SRC_ASTRO_RULERS"
+      ],
+      "interpretation_status": "traditional_or_modern_astrological_not_scientific"
     },
     {
       "id": "uranus",
       "name_fr": "Uranus",
+      "name_ar": "أورانوس",
       "symbol": "♅",
-      "name_ar": null,
-      "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "classification": "modern_planet",
+      "astrological_theme": "innovation",
+      "keywords": [
+        "rupture et originalité"
+      ],
+      "source_ids": [
+        "SRC_ASTRO_RULERS"
+      ],
+      "interpretation_status": "traditional_or_modern_astrological_not_scientific"
     },
     {
       "id": "neptune",
       "name_fr": "Neptune",
+      "name_ar": "نبتون",
       "symbol": "♆",
-      "name_ar": null,
-      "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "classification": "modern_planet",
+      "astrological_theme": "imagination",
+      "keywords": [
+        "symbolisme et idéal"
+      ],
+      "source_ids": [
+        "SRC_ASTRO_RULERS"
+      ],
+      "interpretation_status": "traditional_or_modern_astrological_not_scientific"
     },
     {
       "id": "pluto",
       "name_fr": "Pluton",
+      "name_ar": "بلوتو",
       "symbol": "♇",
-      "name_ar": null,
-      "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "classification": "dwarf_planet_in_astronomy",
+      "astrological_theme": "transformation",
+      "keywords": [
+        "interprétation astrologique moderne"
+      ],
+      "source_ids": [
+        "SRC_ASTRO_RULERS"
+      ],
+      "interpretation_status": "traditional_or_modern_astrological_not_scientific"
     }
   ]
 }

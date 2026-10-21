@@ -1,17 +1,19 @@
 {
   "application": "Zodiaque & 28 Lettres",
-  "version": "3.0.0-final",
-  "reference_schema_version": "1.0.0",
+  "package_version": "4.0.0-reference-final",
+  "status": "READY_FOR_APPLICATION_BUILD",
   "foundation_locked": true,
-  "reference_files": {
-    "lettres.json": "54b291216f141f0e9191db1be8135717d46362d0e3dac11bf47a9a1f1af7e41e",
-    "zodiaque.json": "75dc82f4826d4508bb1c216dcac1e7b1d291d5999a929d641f3e253026f3e6ef",
-    "planetes.json": "3ba0c37610eada37a037074d9f42408e8cacb34cc6149f88787c2ebf1c596039",
-    "correspondances.json": "d7084a18ef772910c3542b9487814cbc8bb8a2bdef6d992649f312189e61d5e2",
-    "phases_lunaires.json": "f640ce2aa718ca20dc2e2e5aefe8cb450569a6cd1475bf33bd9d4cba401871bd",
-    "jours_lunaires.json": "b5a00abae65f783b7fe8fcf744821e8b6993f3eb05e27cbb85bc76029d469542",
-    "sources.json": "a5840cc506d8e3c1b90a3973a191742327bb2ded93992618aef64a91037af26a"
+  "files_sha256": {
+    "correspondances.json": "609a9b9566ebc946afc75d2bd38eebd88d2c3856977da6ed94f7419ca9d92e63",
+    "elements.json": "f49d90db57a7b4cfa8e4c6c666ee0ec503dfd6181d12f9b4b528cdf9d1be59f2",
+    "jours_lunaires.json": "a6236cc4166900824534f13b4244b8ded634a0b65b400ebff0fcfde21a6e39fa",
+    "lettres.json": "8cf6ce06d618b996845aaa7201e4eb3554a642ee95d55a7bcb7206a907e32d7c",
+    "modalites.json": "78d2ee9f4abee8abd3f9c4bb82058886c79c1bb6aab043f7dc7b31532aec5a3c",
+    "phases_lunaires.json": "42716b5b4625ec8fa3a680b982883ec52f21298a9b8b7912b5c662ae4db80843",
+    "planetes.json": "a6aae1cf6de4026f9882e7d15e3a801c34e7b461feeda565a9983a2e80b10d04",
+    "sources.json": "24e51e0738a555efa17064a96ea33c2f0a5485d26f560a3e3d1a7a050fa1b1d3",
+    "zodiaque.json": "28056bfc6c310f4c0e6a83c431d5edfd63da99f498ada5f2980ca88a60bfd6c7"
   },
-  "correspondence_policy": "undefined_until_explicitly_sourced",
-  "astronomy_policy": "indicative_until_a_precise_engine_is_integrated"
+  "created": "2026-10-21",
+  "note": "Le manifeste doit être régénéré si un fichier de référence est modifié."
 }

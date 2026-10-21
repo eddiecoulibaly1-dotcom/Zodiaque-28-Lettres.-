@@ -1,456 +1,540 @@
 {
-  "schema_version": "1.0.0",
-  "reference_status": "LOCKED_FOUNDATION",
+  "schema_version": "2.0.0",
+  "status": "FOUNDATION_LOCKED",
   "system": "Abjad Maghrébin",
-  "authority_note": "Les valeurs et la classification élémentaire de ce fichier constituent le socle fondamental de l'application.",
+  "description": "Référentiel de 28 lettres; valeurs occidentales/Maghribi selon la convention retenue par le projet.",
   "letters": [
     {
       "id": "letter_01",
       "position": 1,
       "letter": "ا",
-      "name_ar": "Alif",
-      "name_fr": "ا",
+      "name_ar": "ʾalif",
+      "name_fr": "Alif",
       "transliteration": "a",
-      "abjad_value": 1,
+      "abjad_maghribi": 1,
       "element": "Feu",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_02",
       "position": 2,
       "letter": "ب",
-      "name_ar": "Ba",
-      "name_fr": "ب",
+      "name_ar": "bāʾ",
+      "name_fr": "Ba",
       "transliteration": "b",
-      "abjad_value": 2,
+      "abjad_maghribi": 2,
       "element": "Terre",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_03",
       "position": 3,
       "letter": "ج",
-      "name_ar": "Jim",
-      "name_fr": "ج",
+      "name_ar": "jīm",
+      "name_fr": "Jim",
       "transliteration": "j",
-      "abjad_value": 3,
+      "abjad_maghribi": 3,
       "element": "Air",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_04",
       "position": 4,
       "letter": "د",
-      "name_ar": "Dal",
-      "name_fr": "د",
+      "name_ar": "dāl",
+      "name_fr": "Dal",
       "transliteration": "d",
-      "abjad_value": 4,
+      "abjad_maghribi": 4,
       "element": "Eau",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_05",
       "position": 5,
       "letter": "ه",
-      "name_ar": "Ha",
-      "name_fr": "ه",
+      "name_ar": "hāʾ",
+      "name_fr": "Ha",
       "transliteration": "h",
-      "abjad_value": 5,
+      "abjad_maghribi": 5,
       "element": "Feu",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_06",
       "position": 6,
       "letter": "و",
-      "name_ar": "Waw",
-      "name_fr": "و",
+      "name_ar": "wāw",
+      "name_fr": "Waw",
       "transliteration": "w",
-      "abjad_value": 6,
+      "abjad_maghribi": 6,
       "element": "Terre",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_07",
       "position": 7,
       "letter": "ز",
-      "name_ar": "Zay",
-      "name_fr": "ز",
+      "name_ar": "zāy",
+      "name_fr": "Zay",
       "transliteration": "z",
-      "abjad_value": 7,
+      "abjad_maghribi": 7,
       "element": "Air",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_08",
       "position": 8,
       "letter": "ح",
-      "name_ar": "Ha emphatique",
-      "name_fr": "ح",
+      "name_ar": "ḥāʾ",
+      "name_fr": "Ha",
       "transliteration": "ḥ",
-      "abjad_value": 8,
+      "abjad_maghribi": 8,
       "element": "Eau",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_09",
       "position": 9,
       "letter": "ط",
-      "name_ar": "Ta",
-      "name_fr": "ط",
+      "name_ar": "ṭāʾ",
+      "name_fr": "Ta",
       "transliteration": "ṭ",
-      "abjad_value": 9,
+      "abjad_maghribi": 9,
       "element": "Feu",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_10",
       "position": 10,
       "letter": "ي",
-      "name_ar": "Ya",
-      "name_fr": "ي",
+      "name_ar": "yāʾ",
+      "name_fr": "Ya",
       "transliteration": "y",
-      "abjad_value": 10,
+      "abjad_maghribi": 10,
       "element": "Terre",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_11",
       "position": 11,
       "letter": "ك",
-      "name_ar": "Kaf",
-      "name_fr": "ك",
+      "name_ar": "kāf",
+      "name_fr": "Kaf",
       "transliteration": "k",
-      "abjad_value": 20,
+      "abjad_maghribi": 20,
       "element": "Air",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_12",
       "position": 12,
       "letter": "ل",
-      "name_ar": "Lam",
-      "name_fr": "ل",
+      "name_ar": "lām",
+      "name_fr": "Lam",
       "transliteration": "l",
-      "abjad_value": 30,
+      "abjad_maghribi": 30,
       "element": "Eau",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_13",
       "position": 13,
       "letter": "م",
-      "name_ar": "Mim",
-      "name_fr": "م",
+      "name_ar": "mīm",
+      "name_fr": "Mim",
       "transliteration": "m",
-      "abjad_value": 40,
+      "abjad_maghribi": 40,
       "element": "Feu",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_14",
       "position": 14,
       "letter": "ن",
-      "name_ar": "Nun",
-      "name_fr": "ن",
+      "name_ar": "nūn",
+      "name_fr": "Nun",
       "transliteration": "n",
-      "abjad_value": 50,
+      "abjad_maghribi": 50,
       "element": "Terre",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_15",
       "position": 15,
       "letter": "س",
-      "name_ar": "Sin",
-      "name_fr": "س",
+      "name_ar": "sīn",
+      "name_fr": "Sin",
       "transliteration": "s",
-      "abjad_value": 300,
+      "abjad_maghribi": 300,
       "element": "Feu",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_16",
       "position": 16,
       "letter": "ع",
-      "name_ar": "Ayn",
-      "name_fr": "ع",
+      "name_ar": "ʿayn",
+      "name_fr": "Ayn",
       "transliteration": "ʿ",
-      "abjad_value": 70,
+      "abjad_maghribi": 70,
       "element": "Eau",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_17",
       "position": 17,
       "letter": "ف",
-      "name_ar": "Fa",
-      "name_fr": "ف",
+      "name_ar": "fāʾ",
+      "name_fr": "Fa",
       "transliteration": "f",
-      "abjad_value": 80,
+      "abjad_maghribi": 80,
       "element": "Feu",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_18",
       "position": 18,
       "letter": "ص",
-      "name_ar": "Sad",
-      "name_fr": "ص",
+      "name_ar": "ṣād",
+      "name_fr": "Sad",
       "transliteration": "ṣ",
-      "abjad_value": 60,
+      "abjad_maghribi": 60,
       "element": "Air",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_19",
       "position": 19,
       "letter": "ض",
-      "name_ar": "Dad",
-      "name_fr": "ض",
+      "name_ar": "ḍād",
+      "name_fr": "Dad",
       "transliteration": "ḍ",
-      "abjad_value": 90,
+      "abjad_maghribi": 90,
       "element": "Terre",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_20",
       "position": 20,
       "letter": "ق",
-      "name_ar": "Qaf",
-      "name_fr": "ق",
+      "name_ar": "qāf",
+      "name_fr": "Qaf",
       "transliteration": "q",
-      "abjad_value": 100,
+      "abjad_maghribi": 100,
       "element": "Air",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_21",
       "position": 21,
       "letter": "ر",
-      "name_ar": "Ra",
-      "name_fr": "ر",
+      "name_ar": "rāʾ",
+      "name_fr": "Ra",
       "transliteration": "r",
-      "abjad_value": 200,
+      "abjad_maghribi": 200,
       "element": "Eau",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_22",
       "position": 22,
       "letter": "ش",
-      "name_ar": "Shin",
-      "name_fr": "ش",
+      "name_ar": "shīn",
+      "name_fr": "Shin",
       "transliteration": "sh",
-      "abjad_value": 1000,
+      "abjad_maghribi": 1000,
       "element": "Eau",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_23",
       "position": 23,
       "letter": "ت",
-      "name_ar": "Ta",
-      "name_fr": "ت",
+      "name_ar": "tāʾ",
+      "name_fr": "Ta",
       "transliteration": "t",
-      "abjad_value": 400,
+      "abjad_maghribi": 400,
       "element": "Terre",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_24",
       "position": 24,
       "letter": "ث",
-      "name_ar": "Tha",
-      "name_fr": "ث",
+      "name_ar": "thāʾ",
+      "name_fr": "Tha",
       "transliteration": "th",
-      "abjad_value": 500,
+      "abjad_maghribi": 500,
       "element": "Air",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_25",
       "position": 25,
       "letter": "خ",
-      "name_ar": "Kha",
-      "name_fr": "خ",
+      "name_ar": "khāʾ",
+      "name_fr": "Kha",
       "transliteration": "kh",
-      "abjad_value": 600,
+      "abjad_maghribi": 600,
       "element": "Eau",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_26",
       "position": 26,
       "letter": "ذ",
-      "name_ar": "Dhal",
-      "name_fr": "ذ",
+      "name_ar": "dhāl",
+      "name_fr": "Dhal",
       "transliteration": "dh",
-      "abjad_value": 700,
+      "abjad_maghribi": 700,
       "element": "Feu",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_27",
       "position": 27,
       "letter": "ظ",
-      "name_ar": "Za",
-      "name_fr": "ظ",
+      "name_ar": "ẓāʾ",
+      "name_fr": "Za",
       "transliteration": "ẓ",
-      "abjad_value": 800,
+      "abjad_maghribi": 800,
       "element": "Terre",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     },
     {
       "id": "letter_28",
       "position": 28,
       "letter": "غ",
-      "name_ar": "Ghayn",
-      "name_fr": "غ",
+      "name_ar": "ghayn",
+      "name_fr": "Ghayn",
       "transliteration": "gh",
-      "abjad_value": 900,
+      "abjad_maghribi": 900,
       "element": "Air",
       "zodiac_sign_id": null,
       "planet_id": null,
       "symbolic_meaning": null,
-      "keywords": [],
-      "source_ids": [],
-      "notes": null
+      "symbolic_status": "undefined",
+      "source_ids": [
+        "SRC_ABJAD_MAGHRIBI",
+        "SRC_PROJECT_ELEMENT_CLASSIFICATION"
+      ],
+      "notes": "Aucune correspondance symbolique lettre-signe-planète n'est présumée."
     }
   ]
 }

@@ -1,210 +1,439 @@
 {
-  "schema_version": "1.0.0",
-  "reference_status": "CONFIGURABLE",
+  "schema_version": "2.0.0",
+  "status": "REFERENCE_COMPLETE",
+  "system": "Astrologie occidentale conventionnelle; interprétations explicitement non scientifiques.",
   "signs": [
     {
       "id": "aries",
       "order": 1,
       "name_fr": "Bélier",
-      "name_ar": null,
+      "name_ar": "الحمل",
+      "symbol": "♈",
       "element": "Feu",
       "modality": "Cardinal",
       "polarity": "Yang",
-      "ruling_planet": "Mars",
-      "keywords": [],
-      "characteristics": [],
-      "strengths": [],
-      "challenges": [],
-      "symbolism": null,
-      "source_ids": [],
-      "notes": "Données conventionnelles à compléter selon le référentiel choisi."
+      "ruler_traditional": "Mars",
+      "ruler_modern": "Mars",
+      "keywords": [
+        "initiative",
+        "affirmation",
+        "élan",
+        "courage"
+      ],
+      "strengths": [
+        "action",
+        "audace",
+        "initiative"
+      ],
+      "challenges": [
+        "impulsivité",
+        "précipitation"
+      ],
+      "description_traditional": "Traditionnellement associé à l'initiative, à l'action et à l'affirmation de soi.",
+      "date_range_tropical": null,
+      "letter_correspondence": null,
+      "source_ids": [
+        "SRC_IRANICA_HOROSCOPE",
+        "SRC_ASTRO_RULERS",
+        "SRC_ASTRO_ELEMENTS_MODES"
+      ],
+      "interpretation_status": "traditional_astrological_not_scientific"
     },
     {
       "id": "taurus",
       "order": 2,
       "name_fr": "Taureau",
-      "name_ar": null,
+      "name_ar": "الثور",
+      "symbol": "♉",
       "element": "Terre",
       "modality": "Fixe",
       "polarity": "Yin",
-      "ruling_planet": "Vénus",
-      "keywords": [],
-      "characteristics": [],
-      "strengths": [],
-      "challenges": [],
-      "symbolism": null,
-      "source_ids": [],
-      "notes": "Données conventionnelles à compléter selon le référentiel choisi."
+      "ruler_traditional": "Vénus",
+      "ruler_modern": "Venus",
+      "keywords": [
+        "stabilité",
+        "ressources",
+        "sens",
+        "persévérance"
+      ],
+      "strengths": [
+        "constance",
+        "patience",
+        "endurance"
+      ],
+      "challenges": [
+        "inertie",
+        "attachement"
+      ],
+      "description_traditional": "Traditionnellement associé à la stabilité, aux ressources et à la continuité.",
+      "date_range_tropical": null,
+      "letter_correspondence": null,
+      "source_ids": [
+        "SRC_IRANICA_HOROSCOPE",
+        "SRC_ASTRO_RULERS",
+        "SRC_ASTRO_ELEMENTS_MODES"
+      ],
+      "interpretation_status": "traditional_astrological_not_scientific"
     },
     {
       "id": "gemini",
       "order": 3,
       "name_fr": "Gémeaux",
-      "name_ar": null,
+      "name_ar": "الجوزاء",
+      "symbol": "♊",
       "element": "Air",
       "modality": "Mutable",
       "polarity": "Yang",
-      "ruling_planet": "Mercure",
-      "keywords": [],
-      "characteristics": [],
-      "strengths": [],
-      "challenges": [],
-      "symbolism": null,
-      "source_ids": [],
-      "notes": "Données conventionnelles à compléter selon le référentiel choisi."
+      "ruler_traditional": "Mercure",
+      "ruler_modern": "Mercury",
+      "keywords": [
+        "communication",
+        "curiosité",
+        "échange",
+        "mobilité"
+      ],
+      "strengths": [
+        "adaptabilité",
+        "vivacité",
+        "apprentissage"
+      ],
+      "challenges": [
+        "dispersion",
+        "inconstance"
+      ],
+      "description_traditional": "Traditionnellement associé à l'échange, à la curiosité et à la circulation de l'information.",
+      "date_range_tropical": null,
+      "letter_correspondence": null,
+      "source_ids": [
+        "SRC_IRANICA_HOROSCOPE",
+        "SRC_ASTRO_RULERS",
+        "SRC_ASTRO_ELEMENTS_MODES"
+      ],
+      "interpretation_status": "traditional_astrological_not_scientific"
     },
     {
       "id": "cancer",
       "order": 4,
       "name_fr": "Cancer",
-      "name_ar": null,
+      "name_ar": "السرطان",
+      "symbol": "♋",
       "element": "Eau",
       "modality": "Cardinal",
       "polarity": "Yin",
-      "ruling_planet": "Lune",
-      "keywords": [],
-      "characteristics": [],
-      "strengths": [],
-      "challenges": [],
-      "symbolism": null,
-      "source_ids": [],
-      "notes": "Données conventionnelles à compléter selon le référentiel choisi."
+      "ruler_traditional": "Lune",
+      "ruler_modern": "Moon",
+      "keywords": [
+        "protection",
+        "famille",
+        "mémoire",
+        "sensibilité"
+      ],
+      "strengths": [
+        "attachement",
+        "protection",
+        "réceptivité"
+      ],
+      "challenges": [
+        "susceptibilité",
+        "repli"
+      ],
+      "description_traditional": "Traditionnellement associé à la protection, à la mémoire et au foyer.",
+      "date_range_tropical": null,
+      "letter_correspondence": null,
+      "source_ids": [
+        "SRC_IRANICA_HOROSCOPE",
+        "SRC_ASTRO_RULERS",
+        "SRC_ASTRO_ELEMENTS_MODES"
+      ],
+      "interpretation_status": "traditional_astrological_not_scientific"
     },
     {
       "id": "leo",
       "order": 5,
       "name_fr": "Lion",
-      "name_ar": null,
+      "name_ar": "الأسد",
+      "symbol": "♌",
       "element": "Feu",
       "modality": "Fixe",
       "polarity": "Yang",
-      "ruling_planet": "Soleil",
-      "keywords": [],
-      "characteristics": [],
-      "strengths": [],
-      "challenges": [],
-      "symbolism": null,
-      "source_ids": [],
-      "notes": "Données conventionnelles à compléter selon le référentiel choisi."
+      "ruler_traditional": "Soleil",
+      "ruler_modern": "Sun",
+      "keywords": [
+        "expression",
+        "rayonnement",
+        "créativité",
+        "volonté"
+      ],
+      "strengths": [
+        "générosité",
+        "créativité",
+        "présence"
+      ],
+      "challenges": [
+        "orgueil",
+        "dramatisation"
+      ],
+      "description_traditional": "Traditionnellement associé au rayonnement, à la créativité et à l'expression.",
+      "date_range_tropical": null,
+      "letter_correspondence": null,
+      "source_ids": [
+        "SRC_IRANICA_HOROSCOPE",
+        "SRC_ASTRO_RULERS",
+        "SRC_ASTRO_ELEMENTS_MODES"
+      ],
+      "interpretation_status": "traditional_astrological_not_scientific"
     },
     {
       "id": "virgo",
       "order": 6,
       "name_fr": "Vierge",
-      "name_ar": null,
+      "name_ar": "العذراء",
+      "symbol": "♍",
       "element": "Terre",
       "modality": "Mutable",
       "polarity": "Yin",
-      "ruling_planet": "Mercure",
-      "keywords": [],
-      "characteristics": [],
-      "strengths": [],
-      "challenges": [],
-      "symbolism": null,
-      "source_ids": [],
-      "notes": "Données conventionnelles à compléter selon le référentiel choisi."
+      "ruler_traditional": "Mercure",
+      "ruler_modern": "Mercury",
+      "keywords": [
+        "analyse",
+        "service",
+        "méthode",
+        "discernement"
+      ],
+      "strengths": [
+        "précision",
+        "organisation",
+        "analyse"
+      ],
+      "challenges": [
+        "perfectionnisme",
+        "sur-analyse"
+      ],
+      "description_traditional": "Traditionnellement associé à l'analyse, à la méthode et au discernement.",
+      "date_range_tropical": null,
+      "letter_correspondence": null,
+      "source_ids": [
+        "SRC_IRANICA_HOROSCOPE",
+        "SRC_ASTRO_RULERS",
+        "SRC_ASTRO_ELEMENTS_MODES"
+      ],
+      "interpretation_status": "traditional_astrological_not_scientific"
     },
     {
       "id": "libra",
       "order": 7,
       "name_fr": "Balance",
-      "name_ar": null,
+      "name_ar": "الميزان",
+      "symbol": "♎",
       "element": "Air",
       "modality": "Cardinal",
       "polarity": "Yang",
-      "ruling_planet": "Vénus",
-      "keywords": [],
-      "characteristics": [],
-      "strengths": [],
-      "challenges": [],
-      "symbolism": null,
-      "source_ids": [],
-      "notes": "Données conventionnelles à compléter selon le référentiel choisi."
+      "ruler_traditional": "Vénus",
+      "ruler_modern": "Venus",
+      "keywords": [
+        "équilibre",
+        "relation",
+        "esthétique",
+        "justice"
+      ],
+      "strengths": [
+        "diplomatie",
+        "coopération",
+        "sens esthétique"
+      ],
+      "challenges": [
+        "indécision",
+        "dépendance au regard"
+      ],
+      "description_traditional": "Traditionnellement associé à l'équilibre relationnel, à la coopération et à l'esthétique.",
+      "date_range_tropical": null,
+      "letter_correspondence": null,
+      "source_ids": [
+        "SRC_IRANICA_HOROSCOPE",
+        "SRC_ASTRO_RULERS",
+        "SRC_ASTRO_ELEMENTS_MODES"
+      ],
+      "interpretation_status": "traditional_astrological_not_scientific"
     },
     {
       "id": "scorpio",
       "order": 8,
       "name_fr": "Scorpion",
-      "name_ar": null,
+      "name_ar": "العقرب",
+      "symbol": "♏",
       "element": "Eau",
       "modality": "Fixe",
       "polarity": "Yin",
-      "ruling_planet": "Mars/Pluton",
-      "keywords": [],
-      "characteristics": [],
-      "strengths": [],
-      "challenges": [],
-      "symbolism": null,
-      "source_ids": [],
-      "notes": "Données conventionnelles à compléter selon le référentiel choisi."
+      "ruler_traditional": "Mars",
+      "ruler_modern": "Mars",
+      "keywords": [
+        "intensité",
+        "transformation",
+        "volonté",
+        "profondeur"
+      ],
+      "strengths": [
+        "persévérance",
+        "intensité",
+        "lucidité"
+      ],
+      "challenges": [
+        "fixation",
+        "méfiance"
+      ],
+      "description_traditional": "Traditionnellement associé à l'intensité, à la transformation et à la profondeur.",
+      "date_range_tropical": null,
+      "letter_correspondence": null,
+      "source_ids": [
+        "SRC_IRANICA_HOROSCOPE",
+        "SRC_ASTRO_RULERS",
+        "SRC_ASTRO_ELEMENTS_MODES"
+      ],
+      "interpretation_status": "traditional_astrological_not_scientific"
     },
     {
       "id": "sagittarius",
       "order": 9,
       "name_fr": "Sagittaire",
-      "name_ar": null,
+      "name_ar": "القوس",
+      "symbol": "♐",
       "element": "Feu",
       "modality": "Mutable",
       "polarity": "Yang",
-      "ruling_planet": "Jupiter",
-      "keywords": [],
-      "characteristics": [],
-      "strengths": [],
-      "challenges": [],
-      "symbolism": null,
-      "source_ids": [],
-      "notes": "Données conventionnelles à compléter selon le référentiel choisi."
+      "ruler_traditional": "Jupiter",
+      "ruler_modern": "Jupiter",
+      "keywords": [
+        "expansion",
+        "quête de sens",
+        "voyage",
+        "conviction"
+      ],
+      "strengths": [
+        "enthousiasme",
+        "vision",
+        "franchise"
+      ],
+      "challenges": [
+        "excès",
+        "dogmatisme"
+      ],
+      "description_traditional": "Traditionnellement associé à l'expansion, à la recherche de sens et à la vision.",
+      "date_range_tropical": null,
+      "letter_correspondence": null,
+      "source_ids": [
+        "SRC_IRANICA_HOROSCOPE",
+        "SRC_ASTRO_RULERS",
+        "SRC_ASTRO_ELEMENTS_MODES"
+      ],
+      "interpretation_status": "traditional_astrological_not_scientific"
     },
     {
       "id": "capricorn",
       "order": 10,
       "name_fr": "Capricorne",
-      "name_ar": null,
+      "name_ar": "الجدي",
+      "symbol": "♑",
       "element": "Terre",
       "modality": "Cardinal",
       "polarity": "Yin",
-      "ruling_planet": "Saturne",
-      "keywords": [],
-      "characteristics": [],
-      "strengths": [],
-      "challenges": [],
-      "symbolism": null,
-      "source_ids": [],
-      "notes": "Données conventionnelles à compléter selon le référentiel choisi."
+      "ruler_traditional": "Saturne",
+      "ruler_modern": "Saturn",
+      "keywords": [
+        "structure",
+        "responsabilité",
+        "ambition",
+        "temps"
+      ],
+      "strengths": [
+        "discipline",
+        "persévérance",
+        "organisation"
+      ],
+      "challenges": [
+        "rigidité",
+        "sur-contrôle"
+      ],
+      "description_traditional": "Traditionnellement associé à la structure, à la responsabilité et à la construction dans le temps.",
+      "date_range_tropical": null,
+      "letter_correspondence": null,
+      "source_ids": [
+        "SRC_IRANICA_HOROSCOPE",
+        "SRC_ASTRO_RULERS",
+        "SRC_ASTRO_ELEMENTS_MODES"
+      ],
+      "interpretation_status": "traditional_astrological_not_scientific"
     },
     {
       "id": "aquarius",
       "order": 11,
       "name_fr": "Verseau",
-      "name_ar": null,
+      "name_ar": "الدلو",
+      "symbol": "♒",
       "element": "Air",
       "modality": "Fixe",
       "polarity": "Yang",
-      "ruling_planet": "Saturne/Uranus",
-      "keywords": [],
-      "characteristics": [],
-      "strengths": [],
-      "challenges": [],
-      "symbolism": null,
-      "source_ids": [],
-      "notes": "Données conventionnelles à compléter selon le référentiel choisi."
+      "ruler_traditional": "Saturne",
+      "ruler_modern": "Saturn",
+      "keywords": [
+        "collectif",
+        "innovation",
+        "indépendance",
+        "idées"
+      ],
+      "strengths": [
+        "originalité",
+        "autonomie",
+        "vision collective"
+      ],
+      "challenges": [
+        "distance",
+        "entêtement"
+      ],
+      "description_traditional": "Le Verseau a Saturne comme maître traditionnel; Uranus est souvent utilisé comme maître moderne.",
+      "date_range_tropical": null,
+      "letter_correspondence": null,
+      "source_ids": [
+        "SRC_IRANICA_HOROSCOPE",
+        "SRC_ASTRO_RULERS",
+        "SRC_ASTRO_ELEMENTS_MODES"
+      ],
+      "interpretation_status": "traditional_astrological_not_scientific"
     },
     {
       "id": "pisces",
       "order": 12,
       "name_fr": "Poissons",
-      "name_ar": null,
+      "name_ar": "الحوت",
+      "symbol": "♓",
       "element": "Eau",
       "modality": "Mutable",
       "polarity": "Yin",
-      "ruling_planet": "Jupiter/Neptune",
-      "keywords": [],
-      "characteristics": [],
-      "strengths": [],
-      "challenges": [],
-      "symbolism": null,
-      "source_ids": [],
-      "notes": "Données conventionnelles à compléter selon le référentiel choisi."
+      "ruler_traditional": "Jupiter",
+      "ruler_modern": "Jupiter",
+      "keywords": [
+        "réceptivité",
+        "imagination",
+        "compassion",
+        "dissolution"
+      ],
+      "strengths": [
+        "empathie",
+        "imagination",
+        "souplesse"
+      ],
+      "challenges": [
+        "flou",
+        "fuite"
+      ],
+      "description_traditional": "Les Poissons ont Jupiter comme maître traditionnel; Neptune est souvent utilisé comme maître moderne.",
+      "date_range_tropical": null,
+      "letter_correspondence": null,
+      "source_ids": [
+        "SRC_IRANICA_HOROSCOPE",
+        "SRC_ASTRO_RULERS",
+        "SRC_ASTRO_ELEMENTS_MODES"
+      ],
+      "interpretation_status": "traditional_astrological_not_scientific"
     }
   ]
 }

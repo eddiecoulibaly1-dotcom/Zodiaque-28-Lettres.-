@@ -1,5 +1,61 @@
 {
-  "schema_version": "1.0.0",
-  "reference_status": "CONFIGURABLE",
-  "sources": []
+  "schema_version": "2.0.0",
+  "sources": [
+    {
+      "id": "SRC_ABJAD_MAGHRIBI",
+      "title": "Calcul abjad : valeur des lettres arabes — tableau Maghribi",
+      "publisher": "OpenArabic.org",
+      "url": "https://www.openarabic.org/fr/calcul-abjad/",
+      "scope": "Valeurs Maghribi; différences avec Mashriqi; règles de calcul.",
+      "accessed": "2026-10-21"
+    },
+    {
+      "id": "SRC_ABJAD_SCIAMVS",
+      "title": "The Archaic System of Abjad Numerals",
+      "publisher": "SCIAMVS",
+      "url": "https://www.sciamvs.org/files/SCIAMVS_19_167-200.pdf",
+      "scope": "Étude historique du système occidental/archaïque et des six lettres différenciées.",
+      "accessed": "2026-10-21"
+    },
+    {
+      "id": "SRC_IRANICA_HOROSCOPE",
+      "title": "HOROSCOPE",
+      "publisher": "Encyclopaedia Iranica",
+      "url": "https://www.iranicaonline.org/articles/horoscope/",
+      "scope": "Noms arabes des 12 signes, triplicités élémentaires, contexte historique de l'horoscope.",
+      "accessed": "2026-10-21"
+    },
+    {
+      "id": "SRC_ASTRO_RULERS",
+      "title": "Introduction to Astrology: The Rulers",
+      "publisher": "Astrodienst / Astro.com",
+      "url": "https://www.astro.com/astrology/in_ruler_e.htm",
+      "scope": "Attributions traditionnelles et modernes des maîtres des signes.",
+      "accessed": "2026-10-21"
+    },
+    {
+      "id": "SRC_ASTRO_ELEMENTS_MODES",
+      "title": "The Divine Zodiac",
+      "publisher": "Astrodienst / Astro.com",
+      "url": "https://www.astro.com/astrology/in_rgzodiac_e.htm",
+      "scope": "Éléments et modalités dans l'astrologie occidentale conventionnelle.",
+      "accessed": "2026-10-21"
+    },
+    {
+      "id": "SRC_NASA_MOON_PHASES",
+      "title": "Moon Phases",
+      "publisher": "NASA Science",
+      "url": "https://science.nasa.gov/moon/moon-phases/",
+      "scope": "Description astronomique des phases lunaires.",
+      "accessed": "2026-10-21"
+    },
+    {
+      "id": "SRC_PROJECT_ELEMENT_CLASSIFICATION",
+      "title": "Référentiel projet — classification élémentaire des 28 lettres",
+      "publisher": "Zodiaque & 28 Lettres",
+      "url": null,
+      "scope": "Classification imposée par le cahier des charges du projet; 7 lettres par élément.",
+      "accessed": "2026-10-21"
+    }
+  ]
 }

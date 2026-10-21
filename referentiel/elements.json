@@ -1,0 +1,102 @@
+{
+  "schema_version": "2.0.0",
+  "status": "FOUNDATION_LOCKED",
+  "elements": [
+    {
+      "id": "fire",
+      "name_fr": "Feu",
+      "name_ar": "النار",
+      "letters": [
+        "ا",
+        "ه",
+        "ط",
+        "م",
+        "ف",
+        "س",
+        "ذ"
+      ],
+      "symbolic_profile": {
+        "status": "astrological_traditional",
+        "keywords": [
+          "énergie",
+          "affirmation",
+          "élan",
+          "vitalité"
+        ],
+        "description": "Dans l'astrologie traditionnelle, le Feu est associé aux triplicités Bélier-Lion-Sagittaire. Les mots-clés sont interprétatifs et non scientifiques."
+      }
+    },
+    {
+      "id": "earth",
+      "name_fr": "Terre",
+      "name_ar": "الأرض",
+      "letters": [
+        "ب",
+        "و",
+        "ي",
+        "ن",
+        "ض",
+        "ت",
+        "ظ"
+      ],
+      "symbolic_profile": {
+        "status": "astrological_traditional",
+        "keywords": [
+          "stabilité",
+          "matérialité",
+          "pragmatisme",
+          "construction"
+        ],
+        "description": "Dans l'astrologie traditionnelle, la Terre correspond aux triplicités Taureau-Vierge-Capricorne."
+      }
+    },
+    {
+      "id": "air",
+      "name_fr": "Air",
+      "name_ar": "الهواء",
+      "letters": [
+        "ج",
+        "ز",
+        "ك",
+        "ص",
+        "ق",
+        "ث",
+        "غ"
+      ],
+      "symbolic_profile": {
+        "status": "astrological_traditional",
+        "keywords": [
+          "pensée",
+          "communication",
+          "relation",
+          "mobilité"
+        ],
+        "description": "Dans l'astrologie traditionnelle, l'Air correspond aux triplicités Gémeaux-Balance-Verseau."
+      }
+    },
+    {
+      "id": "water",
+      "name_fr": "Eau",
+      "name_ar": "الماء",
+      "letters": [
+        "د",
+        "ح",
+        "ل",
+        "ع",
+        "ر",
+        "خ",
+        "ش"
+      ],
+      "symbolic_profile": {
+        "status": "astrological_traditional",
+        "keywords": [
+          "sensibilité",
+          "réceptivité",
+          "émotion",
+          "intuition"
+        ],
+        "description": "Dans l'astrologie traditionnelle, l'Eau correspond aux triplicités Cancer-Scorpion-Poissons."
+      }
+    }
+  ]
+}

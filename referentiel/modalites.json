@@ -1,0 +1,48 @@
+{
+  "schema_version": "2.0.0",
+  "status": "REFERENCE_COMPLETE",
+  "modalities": [
+    {
+      "id": "cardinal",
+      "name_fr": "Cardinal",
+      "description": "Mode associé à l'initiation et au démarrage dans l'astrologie occidentale conventionnelle.",
+      "signs": [
+        "aries",
+        "cancer",
+        "libra",
+        "capricorn"
+      ],
+      "source_ids": [
+        "SRC_ASTRO_ELEMENTS_MODES"
+      ]
+    },
+    {
+      "id": "fixed",
+      "name_fr": "Fixe",
+      "description": "Mode associé à la stabilisation, la continuité et la consolidation dans l'astrologie occidentale conventionnelle.",
+      "signs": [
+        "taurus",
+        "leo",
+        "scorpio",
+        "aquarius"
+      ],
+      "source_ids": [
+        "SRC_ASTRO_ELEMENTS_MODES"
+      ]
+    },
+    {
+      "id": "mutable",
+      "name_fr": "Mutable",
+      "description": "Mode associé à l'adaptation, la transition et la flexibilité dans l'astrologie occidentale conventionnelle.",
+      "signs": [
+        "gemini",
+        "virgo",
+        "sagittarius",
+        "pisces"
+      ],
+      "source_ids": [
+        "SRC_ASTRO_ELEMENTS_MODES"
+      ]
+    }
+  ]
+}

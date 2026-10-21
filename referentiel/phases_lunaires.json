@@ -1,62 +1,94 @@
 {
-  "schema_version": "1.0.0",
-  "reference_status": "CONFIGURABLE",
+  "schema_version": "2.0.0",
+  "status": "ASTRONOMICAL_REFERENCE",
   "phases": [
     {
       "id": "new_moon",
       "name_fr": "Nouvelle Lune",
-      "sequence": 0,
-      "description": null,
-      "source_ids": []
+      "elongation": "≈0°",
+      "astronomical_description": "Conjonction géométrique approximative Soleil-Lune; la face éclairée est tournée vers le Soleil et la Lune est généralement peu visible depuis la Terre.",
+      "symbolic_interpretation": null,
+      "source_ids": [
+        "SRC_NASA_MOON_PHASES"
+      ],
+      "status": "astronomical_reference"
     },
     {
       "id": "waxing_crescent",
       "name_fr": "Premier croissant",
-      "sequence": 1,
-      "description": null,
-      "source_ids": []
+      "elongation": "≈0–90°",
+      "astronomical_description": "Phase croissante entre la nouvelle Lune et le premier quartier.",
+      "symbolic_interpretation": null,
+      "source_ids": [
+        "SRC_NASA_MOON_PHASES"
+      ],
+      "status": "astronomical_reference"
     },
     {
       "id": "first_quarter",
       "name_fr": "Premier quartier",
-      "sequence": 2,
-      "description": null,
-      "source_ids": []
+      "elongation": "≈90°",
+      "astronomical_description": "La Lune présente approximativement la moitié de son disque visible éclairé.",
+      "symbolic_interpretation": null,
+      "source_ids": [
+        "SRC_NASA_MOON_PHASES"
+      ],
+      "status": "astronomical_reference"
     },
     {
       "id": "waxing_gibbous",
       "name_fr": "Gibbeuse croissante",
-      "sequence": 3,
-      "description": null,
-      "source_ids": []
+      "elongation": "≈90–180°",
+      "astronomical_description": "Phase croissante après le premier quartier et avant la pleine Lune.",
+      "symbolic_interpretation": null,
+      "source_ids": [
+        "SRC_NASA_MOON_PHASES"
+      ],
+      "status": "astronomical_reference"
     },
     {
       "id": "full_moon",
       "name_fr": "Pleine Lune",
-      "sequence": 4,
-      "description": null,
-      "source_ids": []
+      "elongation": "≈180°",
+      "astronomical_description": "Opposition géométrique approximative Soleil-Lune; la face visible est largement éclairée.",
+      "symbolic_interpretation": null,
+      "source_ids": [
+        "SRC_NASA_MOON_PHASES"
+      ],
+      "status": "astronomical_reference"
     },
     {
       "id": "waning_gibbous",
       "name_fr": "Gibbeuse décroissante",
-      "sequence": 5,
-      "description": null,
-      "source_ids": []
+      "elongation": "≈180–270°",
+      "astronomical_description": "Phase décroissante après la pleine Lune et avant le dernier quartier.",
+      "symbolic_interpretation": null,
+      "source_ids": [
+        "SRC_NASA_MOON_PHASES"
+      ],
+      "status": "astronomical_reference"
     },
     {
       "id": "last_quarter",
       "name_fr": "Dernier quartier",
-      "sequence": 6,
-      "description": null,
-      "source_ids": []
+      "elongation": "≈270°",
+      "astronomical_description": "La Lune présente approximativement la moitié de son disque visible éclairé, en phase décroissante.",
+      "symbolic_interpretation": null,
+      "source_ids": [
+        "SRC_NASA_MOON_PHASES"
+      ],
+      "status": "astronomical_reference"
     },
     {
       "id": "waning_crescent",
       "name_fr": "Dernier croissant",
-      "sequence": 7,
-      "description": null,
-      "source_ids": []
+      "elongation": "≈270–360°",
+      "astronomical_description": "Phase décroissante entre le dernier quartier et la nouvelle Lune.",
+      "symbolic_interpretation": null,
+      "source_ids": [
+        "SRC_NASA_MOON_PHASES"
+      ],
+      "status": "astronomical_reference"
     }
   ]
 }

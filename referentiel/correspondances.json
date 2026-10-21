@@ -1,7 +1,7 @@
 {
-  "schema_version": "1.0.0",
-  "reference_status": "CONFIGURABLE",
-  "rule": "Ne jamais inventer une correspondance absente du référentiel.",
+  "schema_version": "2.0.0",
+  "status": "EXPLICITLY_UNDEFINED_UNTIL_SOURCED",
+  "rule": "Ne jamais inventer de correspondance lettre-signe-planète.",
   "records": [
     {
       "letter_id": "letter_01",
@@ -9,7 +9,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_02",
@@ -17,7 +17,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_03",
@@ -25,7 +25,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_04",
@@ -33,7 +33,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_05",
@@ -41,7 +41,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_06",
@@ -49,7 +49,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_07",
@@ -57,7 +57,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_08",
@@ -65,7 +65,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_09",
@@ -73,7 +73,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_10",
@@ -81,7 +81,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_11",
@@ -89,7 +89,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_12",
@@ -97,7 +97,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_13",
@@ -105,7 +105,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_14",
@@ -113,7 +113,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_15",
@@ -121,7 +121,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_16",
@@ -129,7 +129,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_17",
@@ -137,7 +137,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_18",
@@ -145,7 +145,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_19",
@@ -153,7 +153,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_20",
@@ -161,7 +161,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_21",
@@ -169,7 +169,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_22",
@@ -177,7 +177,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_23",
@@ -185,7 +185,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_24",
@@ -193,7 +193,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_25",
@@ -201,7 +201,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_26",
@@ -209,7 +209,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_27",
@@ -217,7 +217,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     },
     {
       "letter_id": "letter_28",
@@ -225,7 +225,7 @@
       "planet_id": null,
       "status": "undefined",
       "source_ids": [],
-      "notes": "Correspondance non définie dans le référentiel actuel."
+      "note": "Correspondance non définie dans le référentiel actuel."
     }
   ]
 }

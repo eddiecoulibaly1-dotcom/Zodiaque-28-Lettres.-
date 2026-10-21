@@ -1,230 +1,287 @@
 {
-  "schema_version": "1.0.0",
-  "reference_status": "CONFIGURABLE",
+  "schema_version": "2.0.0",
+  "status": "SYMBOLIC_STRUCTURE_COMPLETE",
+  "warning": "Il n'existe pas une signification universelle unique des 28 jours lunaires; aucune signification n'est inventée.",
   "lunar_cycle_days": [
     {
       "day": 1,
       "name_fr": "Jour lunaire 1",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 2,
       "name_fr": "Jour lunaire 2",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 3,
       "name_fr": "Jour lunaire 3",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 4,
       "name_fr": "Jour lunaire 4",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 5,
       "name_fr": "Jour lunaire 5",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 6,
       "name_fr": "Jour lunaire 6",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 7,
       "name_fr": "Jour lunaire 7",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 8,
       "name_fr": "Jour lunaire 8",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 9,
       "name_fr": "Jour lunaire 9",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 10,
       "name_fr": "Jour lunaire 10",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 11,
       "name_fr": "Jour lunaire 11",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 12,
       "name_fr": "Jour lunaire 12",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 13,
       "name_fr": "Jour lunaire 13",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 14,
       "name_fr": "Jour lunaire 14",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 15,
       "name_fr": "Jour lunaire 15",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 16,
       "name_fr": "Jour lunaire 16",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 17,
       "name_fr": "Jour lunaire 17",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 18,
       "name_fr": "Jour lunaire 18",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 19,
       "name_fr": "Jour lunaire 19",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 20,
       "name_fr": "Jour lunaire 20",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 21,
       "name_fr": "Jour lunaire 21",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 22,
       "name_fr": "Jour lunaire 22",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 23,
       "name_fr": "Jour lunaire 23",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 24,
       "name_fr": "Jour lunaire 24",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 25,
       "name_fr": "Jour lunaire 25",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 26,
       "name_fr": "Jour lunaire 26",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 27,
       "name_fr": "Jour lunaire 27",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     },
     {
       "day": 28,
       "name_fr": "Jour lunaire 28",
+      "definition": "Unité symbolique numérotée utilisée par l'application; ce numéro ne constitue pas à lui seul une mesure astronomique universelle.",
       "symbolic_meaning": null,
       "keywords": [],
       "source_ids": [],
-      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+      "status": "symbolic_tradition_not_universal",
+      "note": "Aucune signification universelle unique n'est attribuée sans sélection explicite d'une tradition et d'une source."
     }
   ]
 }
