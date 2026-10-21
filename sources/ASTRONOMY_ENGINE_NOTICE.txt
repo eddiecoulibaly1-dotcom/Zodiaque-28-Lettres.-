@@ -1,0 +1,6 @@
+Astronomy Engine
+Copyright (c) 2020-2026 Don Cross / Cosine Kitty
+Repository: https://github.com/cosinekitty/astronomy
+License: MIT
+
+This application uses the Astronomy Engine JavaScript library version 2.1.19.
