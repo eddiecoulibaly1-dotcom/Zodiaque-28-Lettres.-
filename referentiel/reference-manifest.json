@@ -1,0 +1,17 @@
+{
+  "application": "Zodiaque & 28 Lettres",
+  "version": "3.0.0-final",
+  "reference_schema_version": "1.0.0",
+  "foundation_locked": true,
+  "reference_files": {
+    "lettres.json": "54b291216f141f0e9191db1be8135717d46362d0e3dac11bf47a9a1f1af7e41e",
+    "zodiaque.json": "75dc82f4826d4508bb1c216dcac1e7b1d291d5999a929d641f3e253026f3e6ef",
+    "planetes.json": "3ba0c37610eada37a037074d9f42408e8cacb34cc6149f88787c2ebf1c596039",
+    "correspondances.json": "d7084a18ef772910c3542b9487814cbc8bb8a2bdef6d992649f312189e61d5e2",
+    "phases_lunaires.json": "f640ce2aa718ca20dc2e2e5aefe8cb450569a6cd1475bf33bd9d4cba401871bd",
+    "jours_lunaires.json": "b5a00abae65f783b7fe8fcf744821e8b6993f3eb05e27cbb85bc76029d469542",
+    "sources.json": "a5840cc506d8e3c1b90a3973a191742327bb2ded93992618aef64a91037af26a"
+  },
+  "correspondence_policy": "undefined_until_explicitly_sourced",
+  "astronomy_policy": "indicative_until_a_precise_engine_is_integrated"
+}

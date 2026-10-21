@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0.0",
+  "reference_status": "CONFIGURABLE",
+  "planets": [
+    {
+      "id": "sun",
+      "name_fr": "Soleil",
+      "symbol": "☉",
+      "name_ar": null,
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": null
+    },
+    {
+      "id": "moon",
+      "name_fr": "Lune",
+      "symbol": "☽",
+      "name_ar": null,
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": null
+    },
+    {
+      "id": "mercury",
+      "name_fr": "Mercure",
+      "symbol": "☿",
+      "name_ar": null,
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": null
+    },
+    {
+      "id": "venus",
+      "name_fr": "Vénus",
+      "symbol": "♀",
+      "name_ar": null,
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": null
+    },
+    {
+      "id": "mars",
+      "name_fr": "Mars",
+      "symbol": "♂",
+      "name_ar": null,
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": null
+    },
+    {
+      "id": "jupiter",
+      "name_fr": "Jupiter",
+      "symbol": "♃",
+      "name_ar": null,
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": null
+    },
+    {
+      "id": "saturn",
+      "name_fr": "Saturne",
+      "symbol": "♄",
+      "name_ar": null,
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": null
+    },
+    {
+      "id": "uranus",
+      "name_fr": "Uranus",
+      "symbol": "♅",
+      "name_ar": null,
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": null
+    },
+    {
+      "id": "neptune",
+      "name_fr": "Neptune",
+      "symbol": "♆",
+      "name_ar": null,
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": null
+    },
+    {
+      "id": "pluto",
+      "name_fr": "Pluton",
+      "symbol": "♇",
+      "name_ar": null,
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": null
+    }
+  ]
+}

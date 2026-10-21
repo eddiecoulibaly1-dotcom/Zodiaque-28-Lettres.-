@@ -1,0 +1,230 @@
+{
+  "schema_version": "1.0.0",
+  "reference_status": "CONFIGURABLE",
+  "lunar_cycle_days": [
+    {
+      "day": 1,
+      "name_fr": "Jour lunaire 1",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 2,
+      "name_fr": "Jour lunaire 2",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 3,
+      "name_fr": "Jour lunaire 3",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 4,
+      "name_fr": "Jour lunaire 4",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 5,
+      "name_fr": "Jour lunaire 5",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 6,
+      "name_fr": "Jour lunaire 6",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 7,
+      "name_fr": "Jour lunaire 7",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 8,
+      "name_fr": "Jour lunaire 8",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 9,
+      "name_fr": "Jour lunaire 9",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 10,
+      "name_fr": "Jour lunaire 10",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 11,
+      "name_fr": "Jour lunaire 11",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 12,
+      "name_fr": "Jour lunaire 12",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 13,
+      "name_fr": "Jour lunaire 13",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 14,
+      "name_fr": "Jour lunaire 14",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 15,
+      "name_fr": "Jour lunaire 15",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 16,
+      "name_fr": "Jour lunaire 16",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 17,
+      "name_fr": "Jour lunaire 17",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 18,
+      "name_fr": "Jour lunaire 18",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 19,
+      "name_fr": "Jour lunaire 19",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 20,
+      "name_fr": "Jour lunaire 20",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 21,
+      "name_fr": "Jour lunaire 21",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 22,
+      "name_fr": "Jour lunaire 22",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 23,
+      "name_fr": "Jour lunaire 23",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 24,
+      "name_fr": "Jour lunaire 24",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 25,
+      "name_fr": "Jour lunaire 25",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 26,
+      "name_fr": "Jour lunaire 26",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 27,
+      "name_fr": "Jour lunaire 27",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    },
+    {
+      "day": 28,
+      "name_fr": "Jour lunaire 28",
+      "symbolic_meaning": null,
+      "keywords": [],
+      "source_ids": [],
+      "notes": "Signification symbolique à compléter depuis une source explicitement validée."
+    }
+  ]
+}

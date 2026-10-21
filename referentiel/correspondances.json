@@ -1,0 +1,231 @@
+{
+  "schema_version": "1.0.0",
+  "reference_status": "CONFIGURABLE",
+  "rule": "Ne jamais inventer une correspondance absente du référentiel.",
+  "records": [
+    {
+      "letter_id": "letter_01",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_02",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_03",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_04",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_05",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_06",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_07",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_08",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_09",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_10",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_11",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_12",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_13",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_14",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_15",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_16",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_17",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_18",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_19",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_20",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_21",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_22",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_23",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_24",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_25",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_26",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_27",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    },
+    {
+      "letter_id": "letter_28",
+      "zodiac_sign_id": null,
+      "planet_id": null,
+      "status": "undefined",
+      "source_ids": [],
+      "notes": "Correspondance non définie dans le référentiel actuel."
+    }
+  ]
+}

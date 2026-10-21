@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0.0",
+  "reference_status": "CONFIGURABLE",
+  "phases": [
+    {
+      "id": "new_moon",
+      "name_fr": "Nouvelle Lune",
+      "sequence": 0,
+      "description": null,
+      "source_ids": []
+    },
+    {
+      "id": "waxing_crescent",
+      "name_fr": "Premier croissant",
+      "sequence": 1,
+      "description": null,
+      "source_ids": []
+    },
+    {
+      "id": "first_quarter",
+      "name_fr": "Premier quartier",
+      "sequence": 2,
+      "description": null,
+      "source_ids": []
+    },
+    {
+      "id": "waxing_gibbous",
+      "name_fr": "Gibbeuse croissante",
+      "sequence": 3,
+      "description": null,
+      "source_ids": []
+    },
+    {
+      "id": "full_moon",
+      "name_fr": "Pleine Lune",
+      "sequence": 4,
+      "description": null,
+      "source_ids": []
+    },
+    {
+      "id": "waning_gibbous",
+      "name_fr": "Gibbeuse décroissante",
+      "sequence": 5,
+      "description": null,
+      "source_ids": []
+    },
+    {
+      "id": "last_quarter",
+      "name_fr": "Dernier quartier",
+      "sequence": 6,
+      "description": null,
+      "source_ids": []
+    },
+    {
+      "id": "waning_crescent",
+      "name_fr": "Dernier croissant",
+      "sequence": 7,
+      "description": null,
+      "source_ids": []
+    }
+  ]
+}
