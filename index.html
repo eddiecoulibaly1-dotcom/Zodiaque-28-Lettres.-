@@ -1,27 +1,38 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b1020"><meta name="description" content="Zodiaque & 28 Lettres — référentiel Abjad Maghrébin, 28 lettres, 12 signes, éléments et cycle lunaire.">
-<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon.svg">
-<title>Zodiaque & 28 Lettres</title><link rel="stylesheet" href="./styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<meta name="description" content="Zodiaque & 28 Lettres — application autonome d'exploration du zodiaque, de l'Abjad Maghrébin, des 28 lettres arabes et des référentiels symboliques.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+<title>Zodiaque & 28 Lettres</title>
 </head>
 <body>
-<div class="app">
-<aside class="side" id="side">
-  <div class="brand"><div class="orb">☾</div><div><strong>Zodiaque & 28 Lettres</strong><small>Abjad Maghrébin</small></div></div>
-  <nav id="nav">
-    <button data-page="home">⌂ Accueil</button><button data-page="zodiac">♈ Zodiaque</button>
-    <button data-page="letters">ا 28 Lettres</button><button data-page="abjad">🔢 Calcul Abjad</button>
-    <button data-page="analysis">◉ Analyse élémentaire</button><button data-page="matrix">◎ Correspondances</button>
-    <button data-page="sunmoon">☀ Soleil & Lune</button><button data-page="calendar">◷ 28 jours lunaires</button>
-    <button data-page="profile">✦ Profil</button><button data-page="learn">? Méthode</button>
-    <button data-page="admin">⚙ Référentiel</button>
-  </nav>
+<header class="topbar">
+  <div>
+    <h1>Zodiaque & 28 Lettres</h1>
+    <p class="subtitle">Référentiel Abjad Maghrébin • exploration zodiacale • cycles lunaires</p>
+  </div>
+  <div class="badges"><span class="badge ok">Référentiel validé</span><span class="badge warn">Astronomie indicative</span></div>
+</header>
+<div class="layout">
+<aside class="sidebar">
+  <button class="nav active" data-view="home">Accueil</button>
+  <button class="nav" data-view="zodiac">12 signes</button>
+  <button class="nav" data-view="letters">28 lettres</button>
+  <button class="nav" data-view="abjad">Calcul Abjad</button>
+  <button class="nav" data-view="elements">Éléments</button>
+  <button class="nav" data-view="correspondences">Correspondances</button>
+  <button class="nav" data-view="moon">Soleil & Lune</button>
+  <button class="nav" data-view="lunar-days">28 jours lunaires</button>
+  <button class="nav" data-view="method">Méthode & limites</button>
+  <button class="nav" data-view="reference">Référentiel</button>
 </aside>
-<main><header class="top"><button id="menu" class="menu">☰</button><h2 id="pageTitle">Accueil</h2><span id="clock" class="pill">—</span></header>
-<section id="content" class="content"></section>
-<footer>Référentiel fondamental : Abjad Maghrébin fourni par le projet. Les correspondances non définies restent non définies. L’astronomie et l’astrologie sont séparées ; les interprétations astrologiques sont symboliques/traditionnelles.</footer>
-</main></div>
-<script src="./app.js" defer></script>
-</body></html>
+<main id="app" class="content" aria-live="polite"></main>
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>

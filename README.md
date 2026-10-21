@@ -1,34 +1,49 @@
-# Zodiaque & 28 Lettres — V2 contrôlée
+# Zodiaque & 28 Lettres — Version finale
 
-Cette version remplace le premier prototype après audit. Elle est conçue pour être remplie une fois avec un référentiel validé, sans inventer les correspondances manquantes.
+Application web autonome d'exploration du zodiaque, de l'Abjad Maghrébin, des 28 lettres arabes et des référentiels symboliques configurables.
 
-## Ce qui est contrôlé automatiquement
-- exactement 28 lettres ;
-- Abjad Maghrébin uniquement ;
-- valeurs obligatoires, notamment : س=300, ص=60, ض=90, خ=600, ش=1000, ق=100 ;
-- exactement 7 lettres par élément ;
-- une seule appartenance élémentaire par lettre ;
-- correspondances lettre↔zodiaque et lettre↔planète laissées `null` tant qu'elles ne sont pas validées ;
-- 28 jours lunaires présents, mais leurs significations restent vides tant qu'elles ne sont pas fournies.
+## Statut
 
-## Fichiers
-- `index.html` : structure de l'application.
-- `styles.css` : interface responsive.
-- `app.js` : logique de l'application et validation au démarrage.
-- `data/referentiel.json` : source de vérité à remplir/valider.
-- `tests/validate.mjs` : test automatisé du référentiel.
-- `manifest.webmanifest`, `sw.js`, `icon.svg` : base PWA hors `file://`.
+**Version : 3.0.0-final**
 
-## Lancer
-Pour une utilisation simple : ouvrir `index.html`.
-Pour le mode PWA/service worker : servir le dossier via HTTP(S), par exemple avec un serveur local.
+Cette version constitue la **base définitive à remplir** : l'architecture, le socle Abjad et la classification élémentaire sont séparés, documentés et testés.
 
-## Test
-Avec Node.js :
-`node tests/validate.mjs`
+### Socle verrouillé
+- 28 lettres arabes
+- Abjad Maghrébin
+- valeurs exactes, notamment `س=300`, `ص=60`, `ض=90`, `خ=600`, `ش=1000`, `ق=100`
+- 7 lettres par élément
+- aucune correspondance inventée
+
+### Modules
+- 12 signes du zodiaque
+- 28 lettres
+- calcul Abjad
+- analyse élémentaire
+- correspondances configurables
+- phases lunaires
+- cycle symbolique de 28 jours
+- méthode et limites
+- PWA / fonctionnement GitHub Pages
+
+## Remplissage
+
+Le référentiel se complète uniquement dans le dossier `referentiel/`.
+Consulter `documentation/GUIDE_REMPLISSAGE.md`.
+
+## Validation
+
+```bash
+node tests/validate_reference.mjs
+node tests/validate_structure.mjs
+```
 
 ## Important
-Cette V2 n'affirme pas que les calculs astronomiques simplifiés sont de précision professionnelle. Pour une version de production, le moteur astronomique doit être remplacé par une bibliothèque/éphéméride dédiée. De même, l'ascendant, les maisons, les aspects et les positions planétaires précises ne sont pas inventés dans cette version.
 
-## Remplissage définitif
-Le seul fichier de données à compléter en priorité est `data/referentiel.json`. Ne pas modifier les valeurs Abjad ni les groupes élémentaires sans validation explicite. Les champs `zodiac_sign_id`, `planet_id`, `symbolic_meaning`, `keywords` et `source` doivent être remplis uniquement avec les correspondances/sources validées du projet.
+L'astrologie et les correspondances symboliques sont présentées comme des systèmes traditionnels/symboliques, pas comme des faits scientifiques.
+
+Les fonctions astronomiques de haute précision ne sont pas revendiquées tant qu'un moteur astronomique spécialisé n'est pas intégré.
+
+## Licence
+
+À définir par le propriétaire du projet.

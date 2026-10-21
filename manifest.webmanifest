@@ -1,18 +1,9 @@
 {
   "name": "Zodiaque & 28 Lettres",
   "short_name": "Zodiaque 28",
-  "start_url": "./index.html",
-  "scope": "./",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#070b16",
-  "theme_color": "#0b1020",
-  "lang": "fr",
-  "icons": [
-    {
-      "src": "./icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
-  ]
+  "background_color": "#f8fafc",
+  "theme_color": "#0f172a",
+  "description": "Exploration du zodiaque, de l'Abjad Maghrébin et des 28 lettres arabes."
 }

@@ -1,61 +1,118 @@
+const DATA = {};
+const paths = {
+  letters:"referentiel/lettres.json",
+  zodiac:"referentiel/zodiaque.json",
+  planets:"referentiel/planetes.json",
+  correspondences:"referentiel/correspondances.json",
+  phases:"referentiel/phases_lunaires.json",
+  lunarDays:"referentiel/jours_lunaires.json",
+  sources:"referentiel/sources.json",
+  manifest:"referentiel/reference-manifest.json"
+};
 
-const state={ref:null, page:"home"};
+async function loadAll(){
+  const entries = Object.entries(paths);
+  await Promise.all(entries.map(async ([key,path])=>{
+    const res = await fetch(path,{cache:"no-cache"});
+    if(!res.ok) throw new Error(`Impossible de charger ${path} (${res.status})`);
+    DATA[key]=await res.json();
+  }));
+}
 const $=s=>document.querySelector(s);
-const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-async function boot(){
-  state.ref=await (await fetch("./data/referentiel.json",{cache:"no-store"})).json();
-  const result=validateReference(state.ref);
-  if(!result.ok) throw new Error(result.errors.join("\n"));
-  document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>go(b.dataset.page));
-  $("#menu").onclick=()=>$("#side").classList.toggle("open");
-  setInterval(()=>$("#clock").textContent=new Date().toLocaleString("fr-FR",{dateStyle:"medium",timeStyle:"short"}),1000);
-  go(location.hash.slice(1)||"home");
-}
-function validateReference(r){
- const errors=[], letters=r.letters||[];
- if(letters.length!==28) errors.push("Le référentiel doit contenir exactement 28 lettres.");
- const vals=Object.values(r.abjad||{}); if(vals.length!==28||new Set(vals).size!==28) errors.push("Les 28 valeurs Abjad doivent être présentes et uniques.");
- for(const l of letters){
-   if(r.abjad[l.letter]!==l.abjad_value) errors.push(`Valeur Abjad incohérente pour ${l.letter}.`);
-   if(!["Feu","Terre","Air","Eau"].includes(l.element)) errors.push(`Élément invalide pour ${l.letter}.`);
- }
- for(const e of ["Feu","Terre","Air","Eau"]){
-   if((r.elements[e]||[]).length!==7) errors.push(`${e} doit contenir exactement 7 lettres.`);
- }
- const all=[...Object.values(r.elements).flat()];
- if(new Set(all).size!==28||all.length!==28) errors.push("Chaque lettre doit appartenir à un seul élément.");
- return {ok:errors.length===0,errors};
-}
-function go(page){state.page=page;location.hash=page;$("#pageTitle").textContent=title(page);document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));$("#content").innerHTML=(views[page]||views.home)();bind(page);$("#side").classList.remove("open")}
-function title(p){return {home:"Accueil",zodiac:"Zodiaque",letters:"28 Lettres",abjad:"Calcul Abjad",analysis:"Analyse élémentaire",matrix:"Correspondances",sunmoon:"Soleil & Lune",calendar:"28 jours lunaires",profile:"Profil",learn:"Méthode",admin:"Référentiel"}[p]||"Accueil"}
-const E={Feu:"🔥",Terre:"🌿",Air:"🌬️",Eau:"💧"}; const cls=e=>e.toLowerCase();
-function home(){const r=state.ref;return `<div class="hero"><h1>Zodiaque & 28 Lettres</h1><p>Application autonome centrée sur le référentiel Abjad Maghrébin fourni par le projet. Les 28 valeurs et la classification élémentaire sont contrôlées automatiquement au chargement.</p><div class="controls"><button class="btn primary" onclick="go('abjad')">Calculer un nom</button><button class="btn" onclick="go('letters')">Voir les 28 lettres</button></div></div><div class="grid g4" style="margin-top:15px">${["Lettres","Zodiaque","Éléments","Phases lunaires"].map((x,i)=>`<div class="card"><div class="muted">${x}</div><div class="big">${[28,12,4,8][i]}</div></div>`).join("")}</div><div class="notice">⚠️ Les correspondances lettre ↔ signe et lettre ↔ planète sont volontairement vides tant qu'elles n'ont pas été fournies/validées.</div>`}
-function zodiac(){return `<div class="card"><h3>Les 12 signes</h3><p class="muted">Référentiel zodiacal général. Les dates sont indicatives et les correspondances avec les 28 lettres ne sont pas inventées.</p></div><div class="zodiac" style="margin-top:15px">${state.ref.zodiac_signs.map(s=>`<article class="zcard"><div class="zsym">${s.symbol}</div><b>${esc(s.name_fr)}</b><div class="muted">${esc(s.dates)}</div><div style="margin-top:8px"><span class="tag ${cls(s.element)}">${E[s.element]} ${s.element}</span><span class="tag">${s.modality}</span></div><div class="muted" style="margin-top:8px">Planète maîtresse : ${esc(s.ruling_planet)}</div></article>`).join("")}</div>`}
-function letters(){return `<div class="card"><h3>Table des 28 lettres</h3><div class="controls"><input id="lf" class="input" placeholder="Rechercher une lettre, un nom..."><select id="le" class="select"><option value="">Tous les éléments</option>${["Feu","Terre","Air","Eau"].map(e=>`<option>${e}</option>`).join("")}</select></div><div style="overflow:auto"><table><thead><tr><th>#</th><th>Lettre</th><th>Nom</th><th>Abjad</th><th>Élément</th><th>Signe</th><th>Planète</th></tr></thead><tbody id="lt"></tbody></table></div></div>`}
-function fillLetters(){const q=$("#lf").value.toLowerCase(),e=$("#le").value;$("#lt").innerHTML=state.ref.letters.filter(l=>(!q||(l.letter+l.name_fr+l.transliteration).toLowerCase().includes(q))&&(!e||l.element===e)).map(l=>`<tr><td>${l.position}</td><td class="arabic">${l.letter}</td><td>${esc(l.name_fr)}<br><span class="muted">${esc(l.transliteration)}</span></td><td><b>${l.abjad_value}</b></td><td><span class="tag ${cls(l.element)}">${E[l.element]} ${l.element}</span></td><td>${l.zodiac_sign_id||"Non définie"}</td><td>${l.planet_id||"Non définie"}</td></tr>`).join("")}
-function abjad(){return `<div class="grid g2"><div class="card"><h3>Calculateur Abjad Maghrébin</h3><p class="muted">Saisissez un texte arabe. Les caractères non présents dans les 28 lettres sont ignorés et signalés.</p><textarea id="ain" class="textarea" dir="rtl" placeholder="اكتب هنا"></textarea><div class="controls"><button id="acalc" class="btn primary">Calculer</button><button id="aclear" class="btn">Effacer</button></div></div><div id="aout" class="card"><div class="empty">Le résultat apparaîtra ici.</div></div></div>`}
-function calcText(text){const map=new Map(state.ref.letters.map(l=>[l.letter,l])), rows=[],ignored=[];for(const c of [...text]){if(map.has(c))rows.push(map.get(c));else if(/\p{L}/u.test(c))ignored.push(c)}const by={Feu:{n:0,v:0},Terre:{n:0,v:0},Air:{n:0,v:0},Eau:{n:0,v:0}};for(const l of rows){by[l.element].n++;by[l.element].v+=l.abjad_value}return {rows,total:rows.reduce((a,l)=>a+l.abjad_value,0),by,ignored}}
-function analysis(){return `<div class="card"><h3>Analyse élémentaire</h3><p class="muted">Cette analyse porte sur les lettres reconnues dans un texte.</p><textarea id="xain" class="textarea" dir="rtl" placeholder="اكتب النص"></textarea><button id="xcalc" class="btn primary" style="margin-top:10px">Analyser</button><div id="xout" style="margin-top:15px"></div></div>`}
-function matrix(){return `<div class="card"><h3>Matrice des correspondances</h3><div class="notice">Aucune correspondance lettre ↔ signe ou lettre ↔ planète n'est inventée. Une cellule « Non définie » reste vide dans le référentiel jusqu'à validation.</div><div style="overflow:auto"><table><thead><tr><th>Lettre</th><th>Abjad</th><th>Élément</th><th>Zodiaque</th><th>Planète</th></tr></thead><tbody>${state.ref.letters.map(l=>`<tr><td class="arabic">${l.letter}</td><td>${l.abjad_value}</td><td>${E[l.element]} ${l.element}</td><td>${l.zodiac_sign_id||"Non définie dans le référentiel actuel"}</td><td>${l.planet_id||"Non définie dans le référentiel actuel"}</td></tr>`).join("")}</tbody></table></div></div>`}
-function sunmoon(){const d=new Date();return `<div class="grid g2"><div class="card"><h3>☀ Soleil</h3><p class="muted">Calcul indicatif du lever/coucher. Pour une précision de production, brancher un moteur astronomique dédié.</p><div class="controls"><input id="sd" class="input" type="date" value="${d.toISOString().slice(0,10)}"><input id="lat" class="input" type="number" step="0.0001" placeholder="Latitude"><input id="lon" class="input" type="number" step="0.0001" placeholder="Longitude"><input id="tz" class="input" type="number" step="0.5" placeholder="UTC offset"><button id="scalc" class="btn primary">Calculer</button></div><div id="sout"></div></div><div class="card"><h3>🌙 Lune</h3><div class="moon"></div><div id="moonout" style="text-align:center;margin-top:12px"></div></div></div>`}
-function parseDate(s){const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d,12)}
-function solar(date,lat,lon,tz){const rad=x=>x*Math.PI/180,deg=x=>x*180/Math.PI,N=Math.floor((date-new Date(date.getFullYear(),0,0))/86400000),lngHour=lon/15;function one(rise){const t=N+((rise?6:18)-lngHour)/24,M=(0.9856*t)-3.289,L=(M+1.916*Math.sin(rad(M))+0.020*Math.sin(rad(2*M))+282.634)%360,RA=(deg(Math.atan(0.91764*Math.tan(rad(L))))+360)%360,quad=Math.floor(L/90)*90,raq=Math.floor(RA/90)*90;RA/=15;const dec=0.39782*Math.sin(rad(L)),cosH=(Math.cos(rad(90.833))-dec*Math.sin(rad(lat)))/(Math.cos(rad(lat))*Math.cos(Math.asin(dec)));if(cosH>1||cosH<-1)return null;let H=deg(Math.acos(cosH))/15;if(rise)H=24-H;return (H+RA-0.06571*t-6.622+lngHour)%24-tz}return{rise:one(true),set:one(false)}}
-function lunar(date){const known=Date.UTC(2000,0,6,18,14),syn=29.530588853,age=((date.getTime()-known)/86400000%syn+syn)%syn,illum=(1-Math.cos(2*Math.PI*age/syn))/2;const idx=Math.floor((age/syn)*8)%8;const p=state.ref.lunar_phases[idx];return{age,illum,name:p.name_fr,symbol:p.symbol}}
-function calendar(){return `<div class="card"><h3>28 jours lunaires</h3><p class="muted">Le numéro du jour lunaire est distinct de la date civile. Les significations symboliques ne sont pas préremplies : elles doivent être validées dans le référentiel.</p><div class="grid g4" style="margin-top:15px">${state.ref.lunar_days.map(d=>`<div class="card"><b>Jour ${d.day}</b><div class="muted">${d.symbolic_meaning||"Signification non définie"}</div></div>`).join("")}</div></div>`}
-function profile(){return `<div class="card"><h3>✦ Profil</h3><p class="muted">La date seule permet le signe solaire conventionnel. L'ascendant, les maisons et les positions planétaires précises ne sont pas calculés par cette version autonome.</p><div class="controls"><input id="bd" class="input" type="date"><input id="bt" class="input" type="time"><input id="bc" class="input" placeholder="Ville"><input id="bla" class="input" placeholder="Latitude"><input id="blo" class="input" placeholder="Longitude"><button id="pcalc" class="btn primary">Calculer</button></div><div id="pout" class="empty">Complétez les informations puis lancez le calcul.</div></div>`}
-function signFor(date){const m=date.getMonth()+1,d=date.getDate();const ranges=[[3,21,4,19],[4,20,5,20],[5,21,6,20],[6,21,7,22],[7,23,8,22],[8,23,9,22],[9,23,10,22],[10,23,11,21],[11,22,12,21],[12,22,1,19],[1,20,2,18],[2,19,3,20]];let i=ranges.findIndex(r=>(m===r[0]&&d>=r[1])||(m===r[2]&&d<=r[3]));return state.ref.zodiac_signs[i<0?11:i]}
-function learn(){return `<div class="grid g2"><div class="card"><h3>Règle Abjad</h3><p class="muted">Exclusivement Abjad Maghrébin.</p><p>Valeurs sensibles : س=300, ص=60, ض=90, خ=600, ش=1000, ق=100.</p></div><div class="card"><h3>Classification élémentaire</h3>${Object.entries(state.ref.elements).map(([e,ls])=>`<p><span class="tag ${cls(e)}">${E[e]} ${e}</span> ${ls.join("، ")}</p>`).join("")}</div><div class="card"><h3>Astronomie / astrologie</h3><p class="muted">Les calculs de position du Soleil et de la Lune relèvent de l'astronomie. Les interprétations astrologiques et symboliques sont présentées comme traditionnelles et non scientifiques.</p></div><div class="card"><h3>Principe de non-invention</h3><p class="muted">Aucune correspondance lettre–signe, lettre–planète ou signification de lettre n'est ajoutée sans donnée validée.</p></div></div>`}
-function admin(){const counts=Object.fromEntries(Object.entries(state.ref.elements).map(([e,ls])=>[e,ls.length]));return `<div class="card"><h3>⚙ Référentiel fondamental</h3><div class="notice">État du contrôle : <b class="success">VALIDÉ</b> si cette page se charge. Les 28 lettres, les valeurs Abjad et les 7/7/7/7 éléments sont vérifiés au démarrage.</div><div class="grid g4">${Object.entries(counts).map(([e,n])=>`<div class="card"><div class="muted">${e}</div><div class="big">${n}</div></div>`).join("")}</div><button id="export" class="btn primary" style="margin-top:15px">Exporter le référentiel</button></div>`}
-const views={home,zodiac,letters,abjad,analysis,matrix,sunmoon,calendar,profile,learn,admin};
-function bind(page){
- if(page==="letters"){fillLetters();$("#lf").oninput=fillLetters;$("#le").onchange=fillLetters}
- if(page==="abjad"){$("#acalc").onclick=()=>{const r=calcText($("#ain").value);$("#aout").innerHTML=`<div class="big">${r.total}</div><div class="muted">Total Abjad Maghrébin</div><table style="margin-top:10px"><tr><th>#</th><th>Lettre</th><th>Valeur</th><th>Élément</th></tr>${r.rows.map((l,i)=>`<tr><td>${i+1}</td><td class="arabic">${l.letter}</td><td>${l.abjad_value}</td><td>${E[l.element]} ${l.element}</td></tr>`).join("")}</table><div style="margin-top:10px">${Object.entries(r.by).map(([e,v])=>`<span class="tag ${cls(e)}">${E[e]} ${e}: ${v.n} / ${v.v}</span>`).join("")}</div>${r.ignored.length?`<div class="notice">Caractères alphabétiques ignorés : ${[...new Set(r.ignored)].join("، ")}</div>`:""}`};$("#aclear").onclick=()=>{$("#ain").value="";$("#aout").innerHTML='<div class="empty">Le résultat apparaîtra ici.</div>'}}
- if(page==="analysis"){$("#xcalc").onclick=()=>{const r=calcText($("#xain").value);const total=r.rows.length||1;$("#xout").innerHTML=`<div class="grid g4">${Object.entries(r.by).map(([e,v])=>`<div class="card"><b>${E[e]} ${e}</b><div class="big">${v.n}</div><div class="muted">${((v.n/total)*100).toFixed(1)} % · valeur ${v.v}</div></div>`).join("")}</div>`}}
- if(page==="sunmoon"){$("#scalc").onclick=()=>{const d=parseDate($("#sd").value),lat=+$("#lat").value,lon=+$("#lon").value,tz=+$("#tz").value,s=solar(d,lat,lon,tz),p=lunar(d);$("#sout").innerHTML=`<div class="grid g2"><div class="card"><div class="muted">Lever</div><div class="big">${s.rise==null?"—":fmt(s.rise)}</div></div><div class="card"><div class="muted">Coucher</div><div class="big">${s.set==null?"—":fmt(s.set)}</div></div></div>`;$("#moonout").innerHTML=`<b>${p.symbol} ${p.name}</b><br>${(p.illum*100).toFixed(0)} % illuminée · âge ${p.age.toFixed(2)} jours`};$("#scalc").click()}
- if(page==="profile"){$("#pcalc").onclick=()=>{if(!$("#bd").value)return;const s=signFor(parseDate($("#bd").value));$("#pout").className="card";$("#pout").innerHTML=`<div class="zsym">${s.symbol}</div><h3>${s.name_fr}</h3><p>${s.dates} · ${s.element} · ${s.modality}</p><div class="notice">Heure : ${esc($("#bt").value)||"non renseignée"} · Ville : ${esc($("#bc").value)||"non renseignée"}<br>Ascendant/maisons/positions planétaires : non calculés dans cette version autonome.</div>`}}
- if(page==="admin")$("#export").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(state.ref,null,2)],{type:"application/json"}));a.download="referentiel-zodiaque-28-lettres.json";a.click();URL.revokeObjectURL(a.href)}
-}
-function fmt(h){let x=((h%24)+24)%24,hh=Math.floor(x),mm=Math.round((x-hh)*60);if(mm===60){hh=(hh+1)%24;mm=0}return `${String(hh).padStart(2,"0")}:${String(mm).padStart(2,"0")}`}
-boot().catch(e=>{document.body.innerHTML=`<div style="padding:30px;font-family:system-ui"><h1>Erreur du référentiel</h1><pre>${esc(e.message)}</pre></div>`});
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const undefinedText="Correspondance non définie dans le référentiel actuel.";
 
-if('serviceWorker' in navigator && location.protocol!=='file:'){navigator.serviceWorker.register('./sw.js').catch(()=>{});}
+function render(view="home"){
+  document.querySelectorAll(".nav").forEach(b=>b.classList.toggle("active",b.dataset.view===view));
+  const app=$("#app");
+  try{
+    const fn={home:home,zodiac:zodiac,letters:letters,abjad:abjad,elements:elements,
+      correspondences:correspondences,moon:moon,lunarDays:lunarDays,method:method,reference:reference}[view];
+    app.innerHTML=fn();
+    bind(view);
+  }catch(e){
+    app.innerHTML=`<div class="card"><h2>Erreur d'affichage</h2><p>${esc(e.message)}</p></div>`;
+  }
+}
+function home(){
+ return `<h2>Bienvenue</h2>
+ <div class="notice"><strong>Socle fondamental verrouillé :</strong> 28 lettres, valeurs Abjad Maghrébin et classification élémentaire 7/7/7/7.</div>
+ <div class="grid">
+  <div class="card"><h3>28 lettres</h3><div class="stat">${DATA.letters.letters.length}</div><p class="muted">Référentiel arabe et Abjad Maghrébin.</p></div>
+  <div class="card"><h3>Signes</h3><div class="stat">${DATA.zodiac.signs.length}</div><p class="muted">12 signes et leurs catégories conventionnelles.</p></div>
+  <div class="card"><h3>Éléments</h3><div class="stat">4 × 7</div><p class="muted">Feu, Terre, Air, Eau.</p></div>
+  <div class="card"><h3>Jours lunaires</h3><div class="stat">${DATA.lunarDays.lunar_cycle_days.length}</div><p class="muted">Cycle symbolique de 28 jours, séparé du calendrier civil.</p></div>
+ </div>
+ <div class="card" style="margin-top:16px"><h3>Règle essentielle</h3><p>Aucune correspondance lettre ↔ signe ou lettre ↔ planète n'est inventée. Lorsqu'elle n'est pas sourcée et validée, elle reste explicitement indéfinie.</p></div>`;
+}
+function zodiac(){
+ return `<h2>12 signes du zodiaque</h2><div class="grid">${DATA.zodiac.signs.map(s=>`<div class="card"><h3>${esc(s.name_fr)}</h3><p><b>${esc(s.element)}</b> · ${esc(s.modality)} · ${esc(s.polarity)}</p><p>Maître : ${esc(s.ruling_planet)}</p><p class="muted">${esc(s.notes||"")}</p></div>`).join("")}</div>`;
+}
+function letters(){
+ return `<h2>Les 28 lettres</h2><div class="card"><input id="letterSearch" placeholder="Rechercher une lettre, un nom ou une translittération…"></div>
+ <div class="table-wrap" style="margin-top:14px"><table><thead><tr><th>#</th><th>Lettre</th><th>Nom</th><th>Translittération</th><th>Abjad</th><th>Élément</th></tr></thead><tbody id="letterRows">${letterRows(DATA.letters.letters)}</tbody></table></div>`;
+}
+function letterRows(rows){return rows.map(l=>`<tr><td>${l.position}</td><td class="arabic">${esc(l.letter)}</td><td>${esc(l.name_fr)}</td><td>${esc(l.transliteration)}</td><td><b>${l.abjad_value}</b></td><td>${esc(l.element)}</td></tr>`).join("")}
+function abjad(){
+ return `<h2>Calcul Abjad Maghrébin</h2><div class="card"><label>Texte arabe</label><textarea id="abjadInput" rows="4" dir="rtl" placeholder="اكتب النص هنا"></textarea><button class="primary" id="calcBtn" style="margin-top:10px">Calculer</button><div id="abjadResult" style="margin-top:16px"></div></div>
+ <div class="notice">Le calcul ignore les caractères qui ne font pas partie des 28 lettres du référentiel. Le détail lettre par lettre est conservé dans le résultat.</div>`;
+}
+function calcAbjad(text){
+ const map=new Map(DATA.letters.letters.map(l=>[l.letter,l]));
+ const details=[];let total=0;const counts={Feu:0,Terre:0,Air:0,Eau:0};
+ for(const ch of [...text]){
+   const l=map.get(ch);
+   if(l){total+=l.abjad_value;counts[l.element]++;details.push(l);}
+ }
+ return {total,counts,details};
+}
+function elements(){
+ const groups={Feu:[],Terre:[],Air:[],Eau:[]};
+ DATA.letters.letters.forEach(l=>groups[l.element].push(l));
+ return `<h2>Analyse élémentaire des lettres</h2><div class="grid">${Object.entries(groups).map(([e,arr])=>`<div class="card"><h3>${e}</h3><div class="stat">${arr.length}</div><p>${arr.map(l=>`<span class="pill">${esc(l.letter)} ${l.abjad_value}</span>`).join("")}</p></div>`).join("")}</div>`;
+}
+function correspondences(){
+ return `<h2>Correspondances</h2><div class="warning">Les correspondances non définies ne sont pas remplacées par des suppositions. Toute donnée ajoutée doit être accompagnée d'une source dans <code>referentiel/sources.json</code>.</div>
+ <div class="table-wrap"><table><thead><tr><th>Lettre</th><th>Valeur</th><th>Signe</th><th>Planète</th><th>Statut</th></tr></thead><tbody>${DATA.correspondences.records.map(c=>{const l=DATA.letters.letters.find(x=>x.id===c.letter_id);const z=DATA.zodiac.signs.find(x=>x.id===c.zodiac_sign_id);const p=DATA.planets.planets.find(x=>x.id===c.planet_id);return `<tr><td class="arabic">${esc(l?.letter)}</td><td>${l?.abjad_value??""}</td><td>${esc(z?.name_fr||undefinedText)}</td><td>${esc(p?.name_fr||undefinedText)}</td><td>${esc(c.status)}</td></tr>`}).join("")}</tbody></table></div>`;
+}
+function moon(){
+ return `<h2>Soleil & Lune</h2><div class="warning"><b>Important :</b> cette version ne prétend pas calculer des éphémérides astronomiques précises. Les calculs ci-dessous sont indicatifs. Pour les positions planétaires, maisons, ascendant, aspects, lever/coucher lunaire précis, un moteur astronomique spécialisé devra être intégré et documenté.</div>
+ <div class="grid"><div class="card"><h3>Phase lunaire</h3><label>Date</label><input type="date" id="moonDate"><div id="moonOut" style="margin-top:12px"></div></div>
+ <div class="card"><h3>Lever / coucher solaire</h3><p class="muted">Non calculés précisément dans le référentiel final. Une future intégration pourra utiliser latitude, longitude, fuseau et moteur astronomique documenté.</p></div></div>`;
+}
+function lunarDays(){
+ return `<h2>28 jours lunaires</h2><div class="grid">${DATA.lunarDays.lunar_cycle_days.map(d=>`<div class="card"><h3>${d.day} — ${esc(d.name_fr)}</h3><p>${esc(d.symbolic_meaning||undefinedText)}</p></div>`).join("")}</div>`;
+}
+function method(){
+ return `<h2>Méthode, distinction et limites</h2>
+ <div class="card"><h3>Abjad</h3><p>Le calcul numérique utilise exclusivement le référentiel Abjad Maghrébin fourni dans <code>referentiel/lettres.json</code>.</p></div>
+ <div class="card"><h3>Astronomie ≠ astrologie</h3><p><b>Astronomie :</b> mesures et calculs physiques/techniques. <b>Astrologie :</b> interprétations symboliques ou traditionnelles. L'application ne présente pas les interprétations astrologiques comme des faits scientifiques.</p></div>
+ <div class="card"><h3>Jour lunaire ≠ jour civil</h3><p>Le cycle lunaire symbolique de 28 jours est distinct de la date civile et de l'âge astronomique réel de la Lune.</p></div>
+ <div class="card"><h3>Correspondances</h3><p>${undefinedText} Tant qu'aucune source validée n'est renseignée, l'interface conserve cette absence.</p></div>`;
+}
+function reference(){
+ return `<h2>État du référentiel</h2><div class="grid">
+ <div class="card"><h3>Version</h3><p>${esc(DATA.manifest.version)}</p></div>
+ <div class="card"><h3>Socle verrouillé</h3><p>${DATA.manifest.foundation_locked?"Oui":"Non"}</p></div>
+ <div class="card"><h3>Lettres</h3><p>28 · Abjad Maghrébin</p></div>
+ <div class="card"><h3>Correspondances</h3><p>Nulles tant qu'elles ne sont pas explicitement sourcées.</p></div>
+ </div>
+ <div class="card" style="margin-top:16px"><h3>Fichiers de référence</h3><ul>${Object.keys(DATA.manifest.reference_files).map(k=>`<li><code>referentiel/${esc(k)}</code></li>`).join("")}</ul></div>`;
+}
+function bind(view){
+ if(view==="letters") $("#letterSearch").addEventListener("input",e=>{
+   const q=e.target.value.toLowerCase().trim();
+   const rows=DATA.letters.letters.filter(l=>[l.letter,l.name_fr,l.name_ar,l.transliteration,l.element].some(v=>String(v).toLowerCase().includes(q)));
+   $("#letterRows").innerHTML=letterRows(rows);
+ });
+ if(view==="abjad") $("#calcBtn").addEventListener("click",()=>{
+   const r=calcAbjad($("#abjadInput").value);
+   $("#abjadResult").innerHTML=`<div class="grid"><div><b>Total</b><div class="stat">${r.total}</div></div><div><b>Lettres reconnues</b><div class="stat">${r.details.length}</div></div></div>
+   <h3>Détail</h3><div class="table-wrap"><table><thead><tr><th>Lettre</th><th>Valeur</th><th>Élément</th></tr></thead><tbody>${r.details.map(l=>`<tr><td class="arabic">${esc(l.letter)}</td><td>${l.abjad_value}</td><td>${esc(l.element)}</td></tr>`).join("")}</tbody></table></div>`;
+ });
+ if(view==="moon") $("#moonDate").value=new Date().toISOString().slice(0,10);
+}
+document.querySelectorAll(".nav").forEach(b=>b.addEventListener("click",()=>render(b.dataset.view)));
+(async()=>{try{await loadAll();render("home");}catch(e){$("#app").innerHTML=`<div class="card"><h2>Chargement impossible</h2><p>${esc(e.message)}</p><p>Utilisez l'application via HTTP(S), par exemple GitHub Pages ou un serveur local. L'ouverture directe en <code>file://</code> peut bloquer le chargement des fichiers JSON.</p></div>`;}})();
+
+if ("serviceWorker" in navigator && (location.protocol==="https:" || location.hostname==="localhost")) navigator.serviceWorker.register("./sw.js").catch(()=>{});
