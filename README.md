@@ -1,49 +1,25 @@
-# Zodiaque & 28 Lettres — Version finale
+# Zodiaque & 28 Lettres — BUILD FINAL
 
-Application web autonome d'exploration du zodiaque, de l'Abjad Maghrébin, des 28 lettres arabes et des référentiels symboliques configurables.
+Ce dépôt constitue le **pack complet de construction** de l'application.
+
+Il comprend :
+- l'application web autonome ;
+- le référentiel final structuré ;
+- les règles fondamentales ;
+- les sources ;
+- les contrôles de cohérence ;
+- la documentation de construction.
 
 ## Statut
+**READY_FOR_APPLICATION_BUILD**
 
-**Version : 3.0.0-final**
-
-Cette version constitue la **base définitive à remplir** : l'architecture, le socle Abjad et la classification élémentaire sont séparés, documentés et testés.
-
-### Socle verrouillé
-- 28 lettres arabes
-- Abjad Maghrébin
-- valeurs exactes, notamment `س=300`, `ص=60`, `ض=90`, `خ=600`, `ش=1000`, `ق=100`
-- 7 lettres par élément
-- aucune correspondance inventée
-
-### Modules
-- 12 signes du zodiaque
-- 28 lettres
-- calcul Abjad
-- analyse élémentaire
-- correspondances configurables
-- phases lunaires
-- cycle symbolique de 28 jours
-- méthode et limites
-- PWA / fonctionnement GitHub Pages
-
-## Remplissage
-
-Le référentiel se complète uniquement dans le dossier `referentiel/`.
-Consulter `documentation/GUIDE_REMPLISSAGE.md`.
-
-## Validation
-
-```bash
-node tests/validate_reference.mjs
-node tests/validate_structure.mjs
-```
+Le socle Abjad Maghrébin et la classification élémentaire des 28 lettres sont verrouillés.
 
 ## Important
+Les données astrologiques sont des conventions traditionnelles/symboliques.
+Les correspondances lettre → signe → planète restent explicitement indéfinies tant qu'une tradition et une source ne sont pas sélectionnées.
+Les huit phases lunaires sont décrites astronomiquement.
+Les 28 jours lunaires sont conservés comme structure symbolique et ne sont pas présentés comme une mesure astronomique universelle.
 
-L'astrologie et les correspondances symboliques sont présentées comme des systèmes traditionnels/symboliques, pas comme des faits scientifiques.
-
-Les fonctions astronomiques de haute précision ne sont pas revendiquées tant qu'un moteur astronomique spécialisé n'est pas intégré.
-
-## Licence
-
-À définir par le propriétaire du projet.
+## Déploiement
+Le dossier peut être publié sur GitHub Pages. L'application charge ses fichiers JSON localement via HTTP(S).

@@ -52,7 +52,7 @@ function letters(){
  return `<h2>Les 28 lettres</h2><div class="card"><input id="letterSearch" placeholder="Rechercher une lettre, un nom ou une translittération…"></div>
  <div class="table-wrap" style="margin-top:14px"><table><thead><tr><th>#</th><th>Lettre</th><th>Nom</th><th>Translittération</th><th>Abjad</th><th>Élément</th></tr></thead><tbody id="letterRows">${letterRows(DATA.letters.letters)}</tbody></table></div>`;
 }
-function letterRows(rows){return rows.map(l=>`<tr><td>${l.position}</td><td class="arabic">${esc(l.letter)}</td><td>${esc(l.name_fr)}</td><td>${esc(l.transliteration)}</td><td><b>${l.abjad_value}</b></td><td>${esc(l.element)}</td></tr>`).join("")}
+function letterRows(rows){return rows.map(l=>`<tr><td>${l.position}</td><td class="arabic">${esc(l.letter)}</td><td>${esc(l.name_fr)}</td><td>${esc(l.transliteration)}</td><td><b>${l.abjad_maghribi}</b></td><td>${esc(l.element)}</td></tr>`).join("")}
 function abjad(){
  return `<h2>Calcul Abjad Maghrébin</h2><div class="card"><label>Texte arabe</label><textarea id="abjadInput" rows="4" dir="rtl" placeholder="اكتب النص هنا"></textarea><button class="primary" id="calcBtn" style="margin-top:10px">Calculer</button><div id="abjadResult" style="margin-top:16px"></div></div>
  <div class="notice">Le calcul ignore les caractères qui ne font pas partie des 28 lettres du référentiel. Le détail lettre par lettre est conservé dans le résultat.</div>`;
@@ -62,14 +62,14 @@ function calcAbjad(text){
  const details=[];let total=0;const counts={Feu:0,Terre:0,Air:0,Eau:0};
  for(const ch of [...text]){
    const l=map.get(ch);
-   if(l){total+=l.abjad_value;counts[l.element]++;details.push(l);}
+   if(l){total+=l.abjad_maghribi;counts[l.element]++;details.push(l);}
  }
  return {total,counts,details};
 }
 function elements(){
  const groups={Feu:[],Terre:[],Air:[],Eau:[]};
  DATA.letters.letters.forEach(l=>groups[l.element].push(l));
- return `<h2>Analyse élémentaire des lettres</h2><div class="grid">${Object.entries(groups).map(([e,arr])=>`<div class="card"><h3>${e}</h3><div class="stat">${arr.length}</div><p>${arr.map(l=>`<span class="pill">${esc(l.letter)} ${l.abjad_value}</span>`).join("")}</p></div>`).join("")}</div>`;
+ return `<h2>Analyse élémentaire des lettres</h2><div class="grid">${Object.entries(groups).map(([e,arr])=>`<div class="card"><h3>${e}</h3><div class="stat">${arr.length}</div><p>${arr.map(l=>`<span class="pill">${esc(l.letter)} ${l.abjad_maghribi}</span>`).join("")}</p></div>`).join("")}</div>`;
 }
 function correspondences(){
  return `<h2>Correspondances</h2><div class="warning">Les correspondances non définies ne sont pas remplacées par des suppositions. Toute donnée ajoutée doit être accompagnée d'une source dans <code>referentiel/sources.json</code>.</div>
@@ -108,7 +108,7 @@ function bind(view){
  if(view==="abjad") $("#calcBtn").addEventListener("click",()=>{
    const r=calcAbjad($("#abjadInput").value);
    $("#abjadResult").innerHTML=`<div class="grid"><div><b>Total</b><div class="stat">${r.total}</div></div><div><b>Lettres reconnues</b><div class="stat">${r.details.length}</div></div></div>
-   <h3>Détail</h3><div class="table-wrap"><table><thead><tr><th>Lettre</th><th>Valeur</th><th>Élément</th></tr></thead><tbody>${r.details.map(l=>`<tr><td class="arabic">${esc(l.letter)}</td><td>${l.abjad_value}</td><td>${esc(l.element)}</td></tr>`).join("")}</tbody></table></div>`;
+   <h3>Détail</h3><div class="table-wrap"><table><thead><tr><th>Lettre</th><th>Valeur</th><th>Élément</th></tr></thead><tbody>${r.details.map(l=>`<tr><td class="arabic">${esc(l.letter)}</td><td>${l.abjad_maghribi}</td><td>${esc(l.element)}</td></tr>`).join("")}</tbody></table></div>`;
  });
  if(view==="moon") $("#moonDate").value=new Date().toISOString().slice(0,10);
 }
