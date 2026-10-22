@@ -5,6 +5,7 @@ const PATHS = {
   letters:"referentiel/lettres.json", elements:"referentiel/elements.json",
   modalities:"referentiel/modalites.json", zodiac:"referentiel/zodiaque.json",
   planets:"referentiel/planetes.json", correspondences:"referentiel/correspondances.json",
+  traditionalCorrespondences:"referentiel/correspondances_traditionnelles.json",
   phases:"referentiel/phases_lunaires.json", lunarDays:"referentiel/jours_lunaires.json",
   sources:"referentiel/sources.json", manifest:"referentiel/reference-manifest.json"
 };
@@ -26,6 +27,11 @@ function sourcesHtml(ids=[]){
   const rows=ids.map(id=>map.get(id)).filter(Boolean);
   if(!rows.length) return `<span class="muted small">Aucune source associée.</span>`;
   return rows.map(s=>`<a class="source-link" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.publisher||s.title)}</a>`).join(" · ");
+}
+function traditionalSourceHtml(){
+  const rows=arr(DATA.traditionalCorrespondences?.sources);
+  if(!rows.length) return `<span class="muted small">Aucune source traditionnelle associée.</span>`;
+  return rows.map(s=>`<a class="source-link" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)}</a>`).join(" · ");
 }
 function setActive(view){
   document.querySelectorAll(".nav").forEach(b=>b.classList.toggle("active",b.dataset.view===view));
@@ -59,18 +65,49 @@ function viewHome(){
   <div class="card" style="margin-top:16px"><h3>Version du référentiel</h3><p><span class="tag">${esc(m.package_version||m.version||"final")}</span> · fondation verrouillée : <b>${m.foundation_locked?"oui":"non"}</b></p></div>`;
 }
 
+function traditionalForLetter(letter){
+  const t=DATA.traditionalCorrespondences||{};
+  const mansion=arr(t.letter_mansion_zodiac).find(x=>x.letter===letter);
+  const planetary=arr(t.seven_planetary_letters).find(x=>x.letter===letter);
+  const solar=arr(t.solar_letters).includes(letter);
+  const lunar=arr(t.lunar_letters).includes(letter);
+  return {mansion,planetary,solar,lunar};
+}
+function traditionalStatus(t){
+  const labels=[];
+  if(t.solar) labels.push("Solaire linguistique");
+  if(t.lunar) labels.push("Lunaire linguistique");
+  if(t.mansion) labels.push("Demeure lunaire");
+  if(t.planetary) labels.push(`Planétaire : ${t.planetary.planet}`);
+  return labels.length?labels.join(" · "):undefinedText;
+}
+function traditionalBadges(t){
+  return `<div class="sign-meta">${t.solar?`<span class="tag">Solaire</span>`:""}${t.lunar?`<span class="tag">Lunaire</span>`:""}${t.mansion?`<span class="pill">Maison ${t.mansion.position}</span>`:""}${t.planetary?`<span class="pill">${esc(t.planetary.planet)}</span>`:""}</div>`;
+}
+
 function viewLetters(){
-  return `<h2>Les 28 lettres</h2><p class="lead">Référentiel Abjad Maghrébin et classification élémentaire.</p>
+  return `<h2>Les 28 lettres</h2><p class="lead">Référentiel Abjad Maghrébin, classification élémentaire et correspondances traditionnelles documentées.</p>
   <div class="toolbar"><input id="letterSearch" placeholder="Rechercher : ا, Alif, a, Feu…"><select id="elementFilter"><option value="">Tous les éléments</option>${DATA.elements.elements.map(e=>`<option>${esc(e.name_fr)}</option>`).join("")}</select></div>
   <div id="letterGrid" class="grid wide">${letterCards(DATA.letters.letters)}</div>`;
 }
 function letterCards(rows){
- return rows.map(l=>`<article class="card letter-card">
+ return rows.map(l=>{
+   const t=traditionalForLetter(l.letter);
+   return `<article class="card letter-card">
    <div class="glyph arabic-lg">${esc(l.letter)}</div>
    <div><h3>${esc(l.name_fr)}</h3><div class="muted">${esc(l.name_ar)} · ${esc(l.transliteration)}</div>
    <div class="sign-meta"><span class="tag">Abjad ${l.abjad_maghribi}</span><span class="pill">${esc(l.element)}</span></div>
-   <p class="small">${esc(l.symbolic_meaning||"Aucune signification symbolique définie dans le référentiel.")}</p></div>
- </article>`).join("");
+   ${traditionalBadges(t)}
+   <p class="small">${esc(l.symbolic_meaning||undefinedText)}</p>
+   <details><summary>Correspondances documentées</summary>
+     <p><b>Demeure lunaire :</b> ${esc(t.mansion?.mansion||undefinedText)}${t.mansion?.mansion_ar?` · ${esc(t.mansion.mansion_ar)}`:""}</p>
+     <p><b>Secteur zodiacal traditionnel :</b> ${t.mansion?.zodiac_segments?.length?arr(t.mansion.zodiac_segments).map(esc).join(" · "):undefinedText}</p>
+     <p><b>Planète classique :</b> ${t.planetary?`${esc(t.planetary.planet)} · ${esc(t.planetary.day)}`:undefinedText}</p>
+     <p><b>Statut linguistique :</b> ${t.solar?"lettre solaire":t.lunar?"lettre lunaire":undefinedText}</p>
+     <p class="small muted">Source de la couche traditionnelle : ${traditionalSourceHtml()}</p>
+   </details></div>
+ </article>`;
+ }).join("");
 }
 function viewAbjad(){
  return `<h2>Calculateur Abjad Maghrébin</h2><p class="lead">Le calcul utilise uniquement les 28 lettres du référentiel. Les signes diacritiques, espaces et ponctuations sont ignorés ; les caractères hors référentiel sont signalés.</p>
@@ -130,11 +167,22 @@ function viewPlanets(){
 }
 
 function viewCorrespondences(){
+ const t=DATA.traditionalCorrespondences||{};
  const zmap=new Map(DATA.zodiac.signs.map(x=>[x.id,x])); const pmap=new Map(DATA.planets.planets.map(x=>[x.id,x]));
- return `<h2>Correspondances</h2><div class="warning"><b>Règle du projet :</b> aucune correspondance lettre → signe → planète n'est inventée. Les entrées non sourcées restent explicitement indéfinies.</div>
- <div class="table-wrap"><table><thead><tr><th>Lettre</th><th>Abjad</th><th>Élément</th><th>Signe</th><th>Planète</th><th>Statut</th></tr></thead><tbody>
- ${DATA.correspondences.records.map(c=>{const l=DATA.letters.letters.find(x=>x.id===c.letter_id),z=zmap.get(c.zodiac_sign_id),p=pmap.get(c.planet_id);return `<tr><td class="arabic">${esc(l?.letter)}</td><td>${l?.abjad_maghribi??""}</td><td>${esc(l?.element||"")}</td><td>${esc(z?.name_fr||undefinedText)}</td><td>${esc(p?.name_fr||undefinedText)}</td><td><span class="tag">${esc(c.status)}</span></td></tr>`}).join("")}
- </tbody></table></div>`;
+ const rows=DATA.letters.letters.map(l=>{
+   const c=DATA.correspondences.records.find(x=>x.letter_id===l.id);
+   const tr=traditionalForLetter(l.letter);
+   const z=c?.zodiac_sign_id?zmap.get(c.zodiac_sign_id):null;
+   const p=c?.planet_id?pmap.get(c.planet_id):null;
+   return `<tr><td class="arabic">${esc(l.letter)}</td><td>${l.abjad_maghribi}</td><td>${esc(l.element)}</td><td>${tr.mansion?`${esc(tr.mansion.mansion)}<br><span class="small">${esc(tr.mansion.mansion_ar)}</span>`:undefinedText}</td><td>${tr.mansion?.zodiac_segments?.length?arr(tr.mansion.zodiac_segments).map(esc).join("<br>"):undefinedText}</td><td>${tr.planetary?`${esc(tr.planetary.planet)}<br><span class="small">${esc(tr.planetary.day)}</span>`:undefinedText}</td><td>${tr.solar?"Solaire linguistique":tr.lunar?"Lunaire linguistique":undefinedText}</td><td>${esc(z?.name_fr||undefinedText)}</td><td>${esc(p?.name_fr||undefinedText)}</td></tr>`;
+ });
+ return `<h2>Correspondances traditionnelles</h2>
+ <div class="warning"><b>Couche distincte :</b> les données ci-dessous proviennent du référentiel traditionnel documenté. Elles ne sont ni des calculs astronomiques ni des correspondances déduites. Une donnée absente reste : <i>${undefinedText}</i></div>
+ <div class="card"><h3>28 lettres · 28 demeures · secteurs zodiacaux · 7 lettres planétaires</h3>
+ <p class="small muted">La distinction solaire/lunaire est linguistique (assimilation ou non du lām de l'article al-), et ne constitue pas une attribution astronomique au Soleil ou à la Lune.</p>
+ <p class="small">${esc(t.planetary_assignment_rule||"")}</p></div>
+ <div class="table-wrap"><table><thead><tr><th>Lettre</th><th>Abjad</th><th>Élément</th><th>Demeure lunaire</th><th>Secteur zodiacal traditionnel</th><th>Planète classique</th><th>Statut solaire/lunaire</th><th>Signe configuré</th><th>Planète configurée</th></tr></thead><tbody>${rows.join("")}</tbody></table></div>
+ <div class="card" style="margin-top:15px"><h3>Sources de cette couche</h3><p class="small">${traditionalSourceHtml()}</p><p class="tiny muted">Statut : tradition symbolique/ésotérique, non scientifique. Les positions astronomiques calculées par l'application restent séparées.</p></div>`;
 }
 
 function viewMoon(){
@@ -194,15 +242,15 @@ function viewProfile(){
 
 function viewSources(){
  return `<h2>Sources</h2><p class="lead">Les sources sont conservées dans le référentiel pour assurer la traçabilité des données.</p>
- <div class="grid wide">${DATA.sources.sources.map(s=>`<article class="card"><h3>${esc(s.title)}</h3><p><b>${esc(s.publisher)}</b></p><p>${esc(s.scope)}</p><a class="source-link" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">Ouvrir la source ↗</a><p class="tiny muted">Consultée : ${esc(s.accessed||"")}</p></article>`).join("")}</div>`;
+ <div class="grid wide">${DATA.sources.sources.map(s=>`<article class="card"><h3>${esc(s.title)}</h3><p><b>${esc(s.publisher)}</b></p><p>${esc(s.scope)}</p><a class="source-link" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">Ouvrir la source ↗</a><p class="tiny muted">Consultée : ${esc(s.accessed||"")}</p></article>`).join("")}</div>
+ <div class="card" style="margin-top:15px"><h3>Sources de la couche des correspondances traditionnelles</h3>${traditionalSourceHtml()}</div>`;
 }
-
 function viewMethod(){
  return `<h2>Méthode et limites</h2>
  <div class="grid wide">
   <div class="card"><h3>Abjad Maghrébin</h3><p>Le calcul utilise exclusivement les valeurs du fichier <code>referentiel/lettres.json</code>. Aucune autre table Abjad n'est substituée.</p></div>
   <div class="card"><h3>Astronomie / astrologie</h3><p><b>Astronomie</b> : phénomènes mesurables et calculs physiques. <b>Astrologie</b> : système interprétatif traditionnel/symbolique. Les deux domaines sont séparés dans l'interface.</p></div>
-  <div class="card"><h3>Correspondances</h3><p>${undefinedText} Une absence de donnée n'est jamais transformée en hypothèse.</p></div>
+  <div class="card"><h3>Correspondances traditionnelles</h3><p>Les demeures lunaires, la distinction linguistique solaire/lunaire et les sept lettres planétaires sont stockées dans une couche séparée avec leurs sources. ${undefinedText} Une absence de donnée n'est jamais transformée en hypothèse.</p></div>
   <div class="card"><h3>28 jours lunaires</h3><p>Le cycle de 28 jours est présenté comme une structure symbolique du référentiel. Il ne remplace pas le mois synodique astronomique.</p></div>
  </div>`;
 }
@@ -213,6 +261,7 @@ function viewReference(){
  <div class="card"><div class="kpi">${esc(m.package_version||"")}</div><b>Version du pack</b></div>
  <div class="card"><div class="kpi">${m.foundation_locked?"✓":"!"}</div><b>Fondation verrouillée</b></div>
  <div class="card"><div class="kpi">${Object.keys(m.files_sha256||{}).length}</div><b>Fichiers de référence suivis</b></div>
+ <div class="card"><div class="kpi">${arr(DATA.traditionalCorrespondences?.letter_mansion_zodiac).length}</div><b>Demeures traditionnelles</b></div>
  </div>
  <div class="card" style="margin-top:15px"><h3>Fichiers</h3><ul class="list">${Object.keys(m.files_sha256||{}).map(k=>`<li><code>referentiel/${esc(k)}</code></li>`).join("")}</ul></div>`;
 }
@@ -220,7 +269,7 @@ function viewReference(){
 function bind(view){
  if(view==="letters"){
    const filter=()=>{const q=$("#letterSearch").value.toLowerCase().trim(),e=$("#elementFilter").value;
-     const rows=DATA.letters.letters.filter(l=(!e||l.element===e)&&[l.letter,l.name_fr,l.name_ar,l.transliteration,l.element].some(v=>String(v).toLowerCase().includes(q)));
+     const rows=DATA.letters.letters.filter(l=>(!e||l.element===e)&&[l.letter,l.name_fr,l.name_ar,l.transliteration,l.element].some(v=>String(v).toLowerCase().includes(q)));
      $("#letterGrid").innerHTML=letterCards(rows)||`<div class="empty">Aucun résultat.</div>`;
    };
    $("#letterSearch").addEventListener("input",filter);$("#elementFilter").addEventListener("change",filter);
@@ -241,8 +290,8 @@ function bind(view){
       $("#astroOutput").innerHTML=astroOutput(d,lat,lon,elev);
     }catch(e){$("#astroOutput").innerHTML=errorCard(e);}
   });
-}
-if(view==="profile"){
+ }
+ if(view==="profile"){
    const n=localStorage.getItem("z28_profile_name")||"",d=localStorage.getItem("z28_profile_birth")||"";
    $("#profileName").value=n;$("#profileBirth").value=d;
    $("#saveProfile").addEventListener("click",()=>{localStorage.setItem("z28_profile_name",$("#profileName").value);localStorage.setItem("z28_profile_birth",$("#profileBirth").value);$("#profileStatus").textContent="Profil enregistré sur cet appareil.";});
