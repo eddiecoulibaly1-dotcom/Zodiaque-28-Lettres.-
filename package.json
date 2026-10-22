@@ -1,12 +1,12 @@
 {
   "name": "zodiaque-28-lettres",
-  "version": "1.5.7",
+  "version": "1.5.8",
   "private": true,
   "type": "module",
   "description": "Zodiaque & 28 Lettres — application astronomique et astrologique symbolique fondée sur un référentiel contrôlé.",
   "dependencies": {"astronomy-engine": "2.1.19"},
   "scripts": {
-    "validate": "node tests/validate_reference.mjs && node tests/validate_structure.mjs && node tests/validate_astronomy_profile.mjs && node tests/validate_profile_abjad.mjs && node tests/validate_theme_visual.mjs && node tests/validate_runtime_local_strategy.mjs && node --check app.js && node --check astronomy.js && node --check profil.js && node --check theme_synthese.js && node --check astronomie_diagnostics.js",
+    "validate": "node tests/validate_reference.mjs && node tests/validate_structure.mjs && node tests/validate_astronomy_profile.mjs && node tests/validate_profile_abjad.mjs && node tests/validate_theme_visual.mjs && node tests/validate_runtime_local_strategy.mjs && node --check app.js && node --check astronomy.js && node --check profil.js && node --check theme_synthese.js && node --check astronomie_diagnostics.js && node --check localisation.js && node --check localisation_i18n.js",
     "validate:python": "python documentation/validate_reference.py"
   }
 }
