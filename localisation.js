@@ -16,14 +16,8 @@
   const t=k=>T[lang()]?.[k]??T.fr[k]??k;
   const load=()=>{try{return JSON.parse(localStorage.getItem(LOCATION_KEY)||"{}")}catch(_){return {}}};
   const save=v=>localStorage.setItem(LOCATION_KEY,JSON.stringify(v));
-  function validTZ(zone){try{new Intl.DateTimeFormat("en-US",{timeZone:zone}).format();return true}catch(_){return false;}}
-  function offsetFor(date,zone){
-    if(!validTZ(zone))throw Error(t("tzInvalid"));
-    const p=new Intl.DateTimeFormat("en-US",{timeZone:zone,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",hourCycle:"h23"}).formatToParts(date);
-    const o={}; for(const x of p)if(x.type!=="literal")o[x.type]=x.value;
-    const asUTC=Date.UTC(Number(o.year),Number(o.month)-1,Number(o.day),Number(o.hour),Number(o.minute),Number(o.second));
-    return Math.round((asUTC-date.getTime())/60000);
-  }
+  const validTZ=zone=>window.Z28Time?.validZone(zone) ?? (()=>{try{new Intl.DateTimeFormat("en-US",{timeZone:zone}).format();return true}catch(_){return false;}})();
+  const offsetFor=(date,zone)=>window.Z28Time?.offsetFor(date,zone) ?? (()=>{throw Error(t("tzInvalid"));})();
   function birthDate(){const v=$("#pBirth")?.value||"";const m=/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/.exec(v);if(!m)return null;const a=m.slice(1).map(Number);return new Date(Date.UTC(a[0],a[1]-1,a[2],a[3],a[4]));}
   function updateOffset(){
     const zone=$("#z28Timezone")?.value?.trim(); const d=birthDate(); const out=$("#z28UtcOffset"); if(!zone||!d||!Number.isFinite(d.getTime())){if(out)out.textContent="";return;}
