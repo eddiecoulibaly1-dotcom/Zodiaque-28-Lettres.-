@@ -4,7 +4,7 @@ Application fondée sur le référentiel **Abjad Maghrébin**, les 28 lettres ar
 
 ## État actuel
 
-**Version 1.5.9 — thème natal visuel, internationalisation FR/AR/EN, localisation horaire et recherche locale de lieux.**
+**Version 1.5.10 — gestion IANA/DST du temps natal, thème natal visuel, internationalisation FR/AR/EN et recherche locale de lieux.**
 
 Le dépôt contient notamment :
 
@@ -28,7 +28,9 @@ Le dépôt contient notamment :
 - catalogue local de lieux de référence avec recherche ville/pays/fuseau ;
 - liste des fuseaux IANA disponibles dans le navigateur ;
 - géolocalisation uniquement après consentement explicite du navigateur ;
-- calcul du décalage UTC pour la date de naissance ;
+- calcul du décalage UTC pour la date exacte de naissance avec règles historiques/DST ;
+- conversion centralisée heure civile → UTC dans `timezone.js` ;
+- module lunaire unifié synchronisé avec les coordonnées du profil ;
 - interface FR / العربية / EN avec RTL arabe ;
 - conservation locale des données de profil dans le navigateur ;
 - PWA / service worker.
@@ -47,7 +49,7 @@ Le chargement du moteur privilégie désormais `vendor/astronomy/astronomy.brows
 
 ## Localisation et heure
 
-Le module de localisation sépare le lieu descriptif, la position géographique, le fuseau horaire IANA, l'heure civile de naissance et son décalage UTC. La géolocalisation n'est jamais activée automatiquement. La recherche de lieux reste locale et contrôlée dans `referentiel/lieux.json`. Voir `documentation/LOCALISATION.md`.
+Le module de localisation sépare le lieu descriptif, la position géographique, le fuseau horaire IANA, l'heure civile de naissance et son décalage UTC. Le calcul utilise le fuseau à la date concernée et couvre les changements historiques/DST fournis par `Intl`. Les heures locales ambiguës lors d'un changement d'heure nécessitent une validation du décalage. La recherche de lieux reste locale et contrôlée dans `referentiel/lieux.json`. Voir `documentation/LOCALISATION.md` et `documentation/TEMPS_FUSEAUX.md`.
 
 ## Thème natal
 
@@ -59,4 +61,4 @@ Le système fondateur utilise exclusivement l'Abjad Maghrébin et la classificat
 
 ## Validation
 
-`npm run validate` vérifie le référentiel, la structure, le profil, l'analyse Abjad, la roue visuelle, la localisation, le catalogue de lieux et la syntaxe des modules JavaScript.
+`npm run validate` vérifie le référentiel, la structure, le profil, l'analyse Abjad, la roue visuelle, la localisation, les fuseaux IANA/DST, le module lunaire et la syntaxe des modules JavaScript.
