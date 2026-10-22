@@ -1,34 +1,16 @@
 {
   "name": "Zodiaque & 28 Lettres",
-  "version": "1.5.10",
+  "version": "1.5.11",
   "canonical": true,
   "single_package": true,
-  "supersedes": [
-    "APPLICATION_V1",
-    "APPLICATION_V2_ASTRONOMIE",
-    "BUILD_FINAL"
-  ],
+  "supersedes": ["APPLICATION_V1","APPLICATION_V2_ASTRONOMIE","BUILD_FINAL"],
   "abjad": "Abjad Maghrébin",
   "letter_count": 28,
-  "elements": {
-    "Feu": 7,
-    "Terre": 7,
-    "Air": 7,
-    "Eau": 7
-  },
+  "elements": {"Feu":7,"Terre":7,"Air":7,"Eau":7},
   "astronomy_engine": "2.1.19",
-  "natal_chart": {
-    "house_system": "whole_sign",
-    "major_aspects": ["conjonction", "sextile", "carre", "trigone", "opposition"]
-  },
-  "localization": {
-    "place_catalog": "referentiel/lieux.json",
-    "place_search": "localisation_lieux.js",
-    "timezone_standard": "IANA",
-    "timezone_runtime": "timezone.js",
-    "historical_dst": true
-  },
-  "lunar_module": "module_lunaire_unifie.js",
-  "invented_correspondences": false,
-  "astronomy_astrology_separated": true
+  "natal_chart": {"house_system":"whole_sign","major_aspects":["conjonction","sextile","carre","trigone","opposition"],"ecliptic_frame":"geocentric_true_ecliptic_of_date"},
+  "localization": {"place_catalog":"referentiel/lieux.json","place_search":"localisation_lieux.js","timezone_standard":"IANA","timezone_runtime":"timezone.js","historical_dst":true},
+  "lunar_module":"module_lunaire_unifie.js",
+  "invented_correspondences":false,
+  "astronomy_astrology_separated":true
 }
