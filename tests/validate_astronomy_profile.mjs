@@ -5,8 +5,9 @@ const html=fs.readFileSync(new URL("index.html",root),"utf8");
 const profile=fs.readFileSync(new URL("profil_astronomique.js",root),"utf8");
 const adapter=fs.readFileSync(new URL("astronomy.js",root),"utf8");
 const localisation=fs.readFileSync(new URL("localisation.js",root),"utf8");
-assert.ok(html.includes("astronomy-engine@2.1.19/astronomy.browser.min.js"),"Astronomy Engine 2.1.19 absent de index.html");
+assert.ok(fs.existsSync(new URL("vendor/astronomy/astronomy.browser.min.js",root)),"Runtime local Astronomy Engine absent du dépôt");
 assert.ok(html.includes("./vendor/astronomy/astronomy.browser.min.js"),"Chargeur local Astronomy Engine absent de index.html");
+assert.ok(!html.includes("cdn.jsdelivr.net/npm/astronomy-engine"),"Dépendance CDN Astronomy Engine interdite en production");
 assert.ok(html.includes('src="profil_astronomique.js"'),"profil_astronomique.js absent de index.html");
 assert.ok(profile.includes("SiderealTime")&&profile.includes("e_tilt"),"Temps sidéral et obliquité vraie absents du calcul des angles");
 assert.ok(profile.includes("houses")&&profile.includes("calcAspects"),"Maisons et aspects absents");
@@ -16,4 +17,4 @@ assert.ok(profile.includes("GeoVector")&&profile.includes("Rotation_EQJ_ECT"),"L
 assert.ok(profile.includes("Z28Location?.load?.()"),"Le profil ne récupère pas le fuseau IANA enregistré");
 assert.ok(localisation.includes("window.Z28Location={load,offsetFor,render}"),"API Z28Location.load absente");
 assert.ok(adapter.includes("SearchRiseSet")&&adapter.includes("SearchMoonQuarter"),"Fonctions astronomiques attendues absentes");
-console.log("OK — thème natal, angles, maisons, aspects, fuseau IANA, longitudes géocentriques et API de localisation validés.");
+console.log("OK — thème natal, runtime astronomique local, angles, maisons, aspects, fuseau IANA et API de localisation validés.");
