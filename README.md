@@ -4,7 +4,7 @@ Application fondée sur le référentiel **Abjad Maghrébin**, les 28 lettres ar
 
 ## État actuel
 
-**Version 1.5.5 — thème natal visuel et migration progressive vers le runtime astronomique local.**
+**Version 1.5.8 — thème natal visuel, internationalisation FR/AR/EN et localisation horaire explicite.**
 
 Le dépôt contient notamment :
 
@@ -24,6 +24,10 @@ Le dépôt contient notamment :
 - diagnostic astronomique sans coordonnées géographiques codées en dur ;
 - analyse Abjad des noms/textes arabes ;
 - séparation explicite entre calcul astronomique et interprétation astrologique ;
+- localisation du profil avec ville/pays, coordonnées, altitude et fuseau IANA ;
+- géolocalisation uniquement après consentement explicite du navigateur ;
+- calcul du décalage UTC pour la date de naissance ;
+- interface FR / العربية / EN avec RTL arabe ;
 - conservation locale des données de profil dans le navigateur ;
 - PWA / service worker.
 
@@ -39,6 +43,10 @@ La page **Astronomie** affiche les positions techniques. Les coordonnées horizo
 
 Le chargement du moteur privilégie désormais `vendor/astronomy/astronomy.browser.min.js`. Un secours CDN reste temporairement présent uniquement tant que le fichier local n'est pas effectivement produit et validé dans le dépôt. Le CDN sera retiré dès que le runtime local sera vérifié.
 
+## Localisation et heure
+
+Le module de localisation sépare le lieu descriptif, la position géographique, le fuseau horaire IANA, l'heure civile de naissance et son décalage UTC. La géolocalisation n'est jamais activée automatiquement. Voir `documentation/LOCALISATION.md`.
+
 ## Thème natal
 
 Le profil accepte date/heure civile, décalage UTC, latitude, longitude et altitude. Il calcule les dix corps principaux, Ascendant, Milieu du Ciel, maisons en signes entiers et aspects majeurs. La roue zodiacale est une représentation visuelle de ces positions calculées ; elle n'ajoute aucune correspondance aux 28 lettres.
@@ -49,4 +57,4 @@ Le système fondateur utilise exclusivement l'Abjad Maghrébin et la classificat
 
 ## Validation
 
-`npm run validate` vérifie le référentiel, la structure, le profil, l'analyse Abjad, la roue visuelle et la syntaxe des modules JavaScript.
+`npm run validate` vérifie le référentiel, la structure, le profil, l'analyse Abjad, la roue visuelle, la localisation et la syntaxe des modules JavaScript.
