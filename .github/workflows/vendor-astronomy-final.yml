@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 env:
   ASTRONOMY_ENGINE_VERSION: "2.1.19"
@@ -38,7 +38,7 @@ Pinned package: **astronomy-engine@${ASTRONOMY_ENGINE_VERSION}**
 Upstream project: https://github.com/cosinekitty/astronomy
 Source browser build: `source/js/astronomy.browser.min.js`
 
-This copy is stored locally so production does not depend on a runtime CDN. Astronomy calculations remain separate from the application's traditional/symbolic astrology interpretation layer.
+This copy is prepared from the official pinned source so production does not depend on a runtime CDN. Astronomy calculations remain separate from the application's traditional/symbolic astrology interpretation layer.
 EOF
 
       - name: Verify runtime marker
@@ -46,15 +46,9 @@ EOF
           set -euo pipefail
           grep -Eq '\.Astronomy=[A-Za-z_$]' vendor/astronomy/astronomy.browser.min.js
 
-      - name: Commit vendored runtime
-        run: |
-          set -euo pipefail
-          if git diff --quiet -- vendor/astronomy; then
-            echo 'Astronomy Engine is already up to date.'
-            exit 0
-          fi
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add vendor/astronomy
-          git commit -m "build: vendor Astronomy Engine ${ASTRONOMY_ENGINE_VERSION} locally"
-          git push
+      - name: Publish vendored runtime artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: astronomy-engine-2.1.19-vendor
+          path: vendor/astronomy/
+          if-no-files-found: error
