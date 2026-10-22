@@ -1,6 +1,6 @@
 {
   "name": "Zodiaque & 28 Lettres",
-  "version": "1.0.0-final",
+  "version": "1.2.0",
   "canonical": true,
   "single_package": true,
   "supersedes": [
@@ -17,6 +17,10 @@
     "Eau": 7
   },
   "astronomy_engine": "2.1.19",
+  "natal_chart": {
+    "house_system": "whole_sign",
+    "major_aspects": ["conjonction", "sextile", "carre", "trigone", "opposition"]
+  },
   "invented_correspondences": false,
   "astronomy_astrology_separated": true
 }
