@@ -1,6 +1,6 @@
 {
   "name": "zodiaque-28-lettres",
-  "version": "1.0.0-final",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "description": "Zodiaque & 28 Lettres — package canonique de construction.",
@@ -8,7 +8,7 @@
     "astronomy-engine": "2.1.19"
   },
   "scripts": {
-    "validate": "node tests/validate_reference.mjs && node tests/validate_structure.mjs && node --check app.js && node --check astronomy.js",
+    "validate": "node tests/validate_reference.mjs && node tests/validate_structure.mjs && node tests/validate_astronomy_profile.mjs && node --check app.js && node --check astronomy.js && node --check profil.js",
     "validate:python": "python documentation/validate_reference.py"
   }
 }
