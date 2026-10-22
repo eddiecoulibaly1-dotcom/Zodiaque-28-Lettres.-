@@ -18,7 +18,7 @@ assert.ok(index.includes("profil_astronomique.js"),"Le profil astronomique corri
 const seasons=Astronomy.Seasons(2024);
 const targets=[["marche",seasons.mar_equinox,0],["solstice nord",seasons.jun_solstice,90],["septembre",seasons.sep_equinox,180],["solstice sud",seasons.dec_solstice,270]];
 const circular=(x,y)=>Math.abs(((x-y+540)%360)-180);
-for(const [label,event,target] of targets){const p=A.sunPosition(event.date);assert.ok(circular(p.elon,target)<0.01,`${label}: longitude solaire ${p.elon}°`);}
+for(const [label,event,target] of targets){const p=Astronomy.SunPosition(event.date);assert.ok(circular(p.elon,target)<0.01,`${label}: longitude solaire ${p.elon}°`);const adapter=A.sunPosition(event.date);assert.ok(Number.isFinite(adapter.eclipticLongitude),`${label}: longitude solaire adaptateur invalide`);}
 
 const observer=A.observer(5.2,-3.7,0);
 const sample=new Date("2024-07-01T09:00:00Z");
