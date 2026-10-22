@@ -1,0 +1,60 @@
+name: Vendor Astronomy Engine Final
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  ASTRONOMY_ENGINE_VERSION: "2.1.19"
+
+jobs:
+  vendor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download pinned official browser runtime
+        run: |
+          set -euo pipefail
+          mkdir -p vendor/astronomy
+          curl --fail --location --retry 5 --retry-delay 2 \
+            "https://raw.githubusercontent.com/cosinekitty/astronomy/v${ASTRONOMY_ENGINE_VERSION}/source/js/astronomy.browser.min.js" \
+            --output vendor/astronomy/astronomy.browser.min.js
+          test -s vendor/astronomy/astronomy.browser.min.js
+          sha256sum vendor/astronomy/astronomy.browser.min.js | tee vendor/astronomy/SHA256SUMS
+
+      - name: Record upstream provenance
+        run: |
+          cat > vendor/astronomy/README.md <<EOF
+# Astronomy Engine — vendored runtime
+
+Pinned package: **astronomy-engine@${ASTRONOMY_ENGINE_VERSION}**
+
+Upstream project: https://github.com/cosinekitty/astronomy
+Source browser build: `source/js/astronomy.browser.min.js`
+
+This copy is stored locally so production does not depend on a runtime CDN. Astronomy calculations remain separate from the application's traditional/symbolic astrology interpretation layer.
+EOF
+
+      - name: Verify runtime marker
+        run: |
+          set -euo pipefail
+          grep -Eq '\.Astronomy=[A-Za-z_$]' vendor/astronomy/astronomy.browser.min.js
+
+      - name: Commit vendored runtime
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- vendor/astronomy; then
+            echo 'Astronomy Engine is already up to date.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add vendor/astronomy
+          git commit -m "build: vendor Astronomy Engine ${ASTRONOMY_ENGINE_VERSION} locally"
+          git push
