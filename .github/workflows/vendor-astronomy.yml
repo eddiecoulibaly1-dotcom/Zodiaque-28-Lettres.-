@@ -41,7 +41,7 @@ EOF
       - name: Verify runtime marker
         run: |
           set -euo pipefail
-          grep -q 'Astronomy=' vendor/astronomy/astronomy.browser.min.js
+          grep -Eq '\.Astronomy=[A-Za-z_$]' vendor/astronomy/astronomy.browser.min.js
 
       - name: Commit vendored runtime
         run: |
