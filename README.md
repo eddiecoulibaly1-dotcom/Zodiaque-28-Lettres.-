@@ -1,10 +1,10 @@
 # Zodiaque & 28 Lettres
 
-Application autonome fondée sur le référentiel **Abjad Maghrébin**, les 28 lettres arabes, le zodiaque et les cycles lunaires.
+Application fondée sur le référentiel **Abjad Maghrébin**, les 28 lettres arabes, le zodiaque et les cycles lunaires.
 
 ## État actuel
 
-**Version 1.1.0 — profil astronomique ajouté.**
+**Version 1.2.0 — thème natal structuré.**
 
 Le dépôt contient maintenant :
 
@@ -17,6 +17,9 @@ Le dépôt contient maintenant :
 - positions du Soleil, de la Lune et des planètes ;
 - lever/coucher et prochains quartiers lunaires ;
 - profil de naissance avec Soleil, Lune, Ascendant et Milieu du Ciel ;
+- maisons en signes entiers, explicitement configurées ;
+- aspects majeurs avec orbes configurables et documentées ;
+- saisie indépendante de l'heure civile et du décalage UTC ;
 - séparation explicite entre calcul astronomique et interprétation astrologique ;
 - conservation locale des données de profil dans le navigateur ;
 - PWA / service worker.
@@ -31,9 +34,15 @@ Les interprétations astrologiques sont présentées comme **traditionnelles/sym
 
 La page **Astronomie** accepte une date/heure et des coordonnées géographiques pour calculer les positions célestes, l'azimut, l'altitude, les événements lunaires et les informations de lever/coucher.
 
-La page **Profil** accepte les données de naissance et calcule les principales coordonnées utilisées par le profil astrologique. Voir `documentation/ASTRONOMIE_PROFIL.md`.
+La page **Profil** accepte les données de naissance et calcule les principales coordonnées utilisées par le thème natal. Voir `documentation/THEME_NATAL.md`.
 
-## Dépendance
+## Thème natal
+
+Le module 1.2.0 utilise les **signes entiers** pour les maisons. Ce choix est explicite et pourra être complété par d'autres systèmes lorsqu'une méthode de référence aura été arrêtée.
+
+Les aspects majeurs calculés sont : conjonction, sextile, carré, trigone et opposition, avec des orbes documentées dans `profil.js` et `documentation/THEME_NATAL.md`.
+
+## Dépendance astronomique
 
 `package.json` référence `astronomy-engine` version `2.1.19`. Le chargement navigateur actuel utilise la distribution navigateur de cette même version.
 
