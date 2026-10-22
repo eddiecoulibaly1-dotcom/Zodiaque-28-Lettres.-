@@ -1,0 +1,53 @@
+name: Vendor Astronomy Engine
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/vendor-astronomy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  vendor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download pinned Astronomy Engine browser build
+        run: |
+          set -euo pipefail
+          mkdir -p vendor/astronomy
+          curl --fail --location --silent --show-error \
+            https://raw.githubusercontent.com/cosinekitty/astronomy/v2.1.19/source/js/astronomy.browser.min.js \
+            --output vendor/astronomy/astronomy.browser.min.js
+          test -s vendor/astronomy/astronomy.browser.min.js
+          wc -c vendor/astronomy/astronomy.browser.min.js
+
+      - name: Record upstream provenance
+        run: |
+          cat > vendor/astronomy/README.md <<'EOF'
+# Astronomy Engine — vendored runtime
+
+Pinned version: **2.1.19**
+
+Upstream project: https://github.com/cosinekitty/astronomy
+Source file: `source/js/astronomy.browser.min.js`
+
+This copy is intentionally stored locally so the application can run without a runtime CDN dependency. The astronomy calculations remain separate from the application's traditional/symbolic astrology interpretation layer.
+EOF
+
+      - name: Commit vendored runtime
+        run: |
+          if git diff --quiet -- vendor/astronomy; then
+            echo 'Astronomy Engine is already up to date.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add vendor/astronomy
+          git commit -m 'build: add local Astronomy Engine runtime'
+          git push
