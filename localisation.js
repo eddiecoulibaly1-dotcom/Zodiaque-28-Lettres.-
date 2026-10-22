@@ -17,11 +17,12 @@
   const load=()=>{try{return JSON.parse(localStorage.getItem(LOCATION_KEY)||"{}")}catch(_){return {}}};
   const save=v=>localStorage.setItem(LOCATION_KEY,JSON.stringify(v));
   const validTZ=zone=>window.Z28Time?.validZone(zone) ?? (()=>{try{new Intl.DateTimeFormat("en-US",{timeZone:zone}).format();return true}catch(_){return false;}})();
+  const resolveCivil=(value,zone)=>window.Z28Time?.parseCivil?.(value,zone)||new Date(NaN);
   const offsetFor=(date,zone)=>window.Z28Time?.offsetFor(date,zone) ?? (()=>{throw Error(t("tzInvalid"));})();
   function birthDate(){const v=$("#pBirth")?.value||"";const m=/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/.exec(v);if(!m)return null;const a=m.slice(1).map(Number);return new Date(Date.UTC(a[0],a[1]-1,a[2],a[3],a[4]));}
   function updateOffset(){
-    const zone=$("#z28Timezone")?.value?.trim(); const d=birthDate(); const out=$("#z28UtcOffset"); if(!zone||!d||!Number.isFinite(d.getTime())){if(out)out.textContent="";return;}
-    try{const off=offsetFor(d,zone),h=off/60; if($("#pOffset"))$("#pOffset").value=off; if(out)out.textContent=`${t("utc")} : UTC${off>=0?"+":""}${h.toFixed(1)}`;}catch(e){if(out)out.textContent=e.message;}
+    const zone=$("#z28Timezone")?.value?.trim(),local=$("#pBirth")?.value||"",out=$("#z28UtcOffset"); if(!zone||!local){if(out)out.textContent="";return;}
+    try{const instant=resolveCivil(local,zone);if(!Number.isFinite(instant.getTime()))throw Error(t("tzInvalid"));const off=offsetFor(instant,zone),h=off/60;if($("#pOffset"))$("#pOffset").value=off;if(out)out.textContent=`${t("utc")} : UTC${off>=0?"+":""}${h.toFixed(1)}`;}catch(e){if(out)out.textContent=e.message;}
   }
   function render(){
     const root=$("#app"); if(!root||!$("#pLat"))return;
@@ -38,10 +39,11 @@
     };
     $("#z28Timezone").addEventListener("input",updateOffset); $("#pBirth")?.addEventListener("change",updateOffset);
     $("#z28Apply").onclick=()=>{
-      const lat=Number($("#z28Lat").value),lon=Number($("#z28Lon").value),elev=Number($("#z28Elev").value||0),timezone=$("#z28Timezone").value.trim();
+      const lat=Number($("#z28Lat").value),lon=Number($("#z28Lon").value),elev=Number($("#z28Elev").value||0),timezone=$("#z28Timezone").value.trim(),local=$("#pBirth")?.value||"";
       if(!Number.isFinite(lat)||lat<-90||lat>90||!Number.isFinite(lon)||lon<-180||lon>180){$("#z28LocationStatus").textContent=t("needCoords");return;}
       if(!validTZ(timezone)){$("#z28LocationStatus").textContent=t("tzInvalid");return;}
-      const d=birthDate(); let offset=0; if(d&&Number.isFinite(d.getTime()))offset=offsetFor(d,timezone); $("#pLat").value=lat;$("#pLon").value=lon;$("#pElev").value=Math.max(0,elev);$("#pOffset").value=offset;
+      let offset=0;if(local){const instant=resolveCivil(local,timezone);if(!Number.isFinite(instant.getTime())){$("#z28LocationStatus").textContent=t("tzInvalid");return;}offset=offsetFor(instant,timezone);}
+      $("#pLat").value=lat;$("#pLon").value=lon;$("#pElev").value=Math.max(0,elev);$("#pOffset").value=offset;
       const value={city:$("#z28City").value.trim(),country:$("#z28Country").value.trim(),timezone,lat,lon,elev:Math.max(0,elev),offset,updatedAt:new Date().toISOString()}; save(value); $("#z28LocationStatus").textContent=t("saved"); if($("#pStatus"))$("#pStatus").textContent=t("profileSync");
     };
     updateOffset();
