@@ -4,7 +4,7 @@ Application fondée sur le référentiel **Abjad Maghrébin**, les 28 lettres ar
 
 ## État actuel
 
-**Version 1.5.4 — thème natal visuel et diagnostics astronomiques contrôlés.**
+**Version 1.5.5 — thème natal visuel et migration progressive vers le runtime astronomique local.**
 
 Le dépôt contient notamment :
 
@@ -37,7 +37,7 @@ Les interprétations astrologiques sont présentées comme **traditionnelles/sym
 
 La page **Astronomie** affiche les positions techniques. Les coordonnées horizontales (azimut/altitude) ne sont calculées que lorsqu'un observateur a été explicitement défini dans le profil ; aucun lieu n'est déduit automatiquement.
 
-Le projet vise à terme un runtime astronomique local sans CDN. Le fichier local Astronomy Engine doit être effectivement présent et validé avant de retirer le chargement CDN actuel.
+Le chargement du moteur privilégie désormais `vendor/astronomy/astronomy.browser.min.js`. Un secours CDN reste temporairement présent uniquement tant que le fichier local n'est pas effectivement produit et validé dans le dépôt. Le CDN sera retiré dès que le runtime local sera vérifié.
 
 ## Thème natal
 
