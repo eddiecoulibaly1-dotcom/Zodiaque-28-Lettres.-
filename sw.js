@@ -1,4 +1,4 @@
-const CACHE="zodiaque-28-lettres-final-1.1.0";
+const CACHE="zodiaque-28-lettres-final-1.2.0";
 const ASSETS=[
  "./","./index.html","./styles.css","./app.js","./astronomy.js","./profil.js",
  "./manifest.webmanifest","./icon.svg",
