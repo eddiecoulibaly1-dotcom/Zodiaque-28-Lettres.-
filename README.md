@@ -4,22 +4,25 @@ Application fondée sur le référentiel **Abjad Maghrébin**, les 28 lettres ar
 
 ## État actuel
 
-**Version 1.2.0 — thème natal structuré.**
+**Version 1.5.4 — thème natal visuel et diagnostics astronomiques contrôlés.**
 
-Le dépôt contient maintenant :
+Le dépôt contient notamment :
 
 - référentiel Abjad Maghrébin verrouillé ;
 - classification élémentaire 7 / 7 / 7 / 7 ;
 - 12 signes, modalités et planètes ;
 - calculateur Abjad ;
 - phases et structure lunaire ;
-- calculs astronomiques dans le navigateur avec Astronomy Engine 2.1.19 ;
+- calculs astronomiques avec Astronomy Engine 2.1.19 ;
 - positions du Soleil, de la Lune et des planètes ;
 - lever/coucher et prochains quartiers lunaires ;
 - profil de naissance avec Soleil, Lune, Ascendant et Milieu du Ciel ;
 - maisons en signes entiers, explicitement configurées ;
-- aspects majeurs avec orbes configurables et documentées ;
-- saisie indépendante de l'heure civile et du décalage UTC ;
+- aspects majeurs avec orbes explicites ;
+- synthèse symbolique des éléments et modalités ;
+- roue zodiacale visuelle basée uniquement sur les longitudes calculées ;
+- diagnostic astronomique sans coordonnées géographiques codées en dur ;
+- analyse Abjad des noms/textes arabes ;
 - séparation explicite entre calcul astronomique et interprétation astrologique ;
 - conservation locale des données de profil dans le navigateur ;
 - PWA / service worker.
@@ -32,20 +35,18 @@ Les interprétations astrologiques sont présentées comme **traditionnelles/sym
 
 ## Astronomie
 
-La page **Astronomie** accepte une date/heure et des coordonnées géographiques pour calculer les positions célestes, l'azimut, l'altitude, les événements lunaires et les informations de lever/coucher.
+La page **Astronomie** affiche les positions techniques. Les coordonnées horizontales (azimut/altitude) ne sont calculées que lorsqu'un observateur a été explicitement défini dans le profil ; aucun lieu n'est déduit automatiquement.
 
-La page **Profil** accepte les données de naissance et calcule les principales coordonnées utilisées par le thème natal. Voir `documentation/THEME_NATAL.md`.
+Le projet vise à terme un runtime astronomique local sans CDN. Le fichier local Astronomy Engine doit être effectivement présent et validé avant de retirer le chargement CDN actuel.
 
 ## Thème natal
 
-Le module 1.2.0 utilise les **signes entiers** pour les maisons. Ce choix est explicite et pourra être complété par d'autres systèmes lorsqu'une méthode de référence aura été arrêtée.
+Le profil accepte date/heure civile, décalage UTC, latitude, longitude et altitude. Il calcule les dix corps principaux, Ascendant, Milieu du Ciel, maisons en signes entiers et aspects majeurs. La roue zodiacale est une représentation visuelle de ces positions calculées ; elle n'ajoute aucune correspondance aux 28 lettres.
 
-Les aspects majeurs calculés sont : conjonction, sextile, carré, trigone et opposition, avec des orbes documentées dans `profil.js` et `documentation/THEME_NATAL.md`.
+## 28 lettres
 
-## Dépendance astronomique
+Le système fondateur utilise exclusivement l'Abjad Maghrébin et la classification élémentaire officielle du projet. Les correspondances traditionnelles sont conservées dans une couche distincte et ne sont jamais déduites par le moteur.
 
-`package.json` référence `astronomy-engine` version `2.1.19`. Le chargement navigateur actuel utilise la distribution navigateur de cette même version.
+## Validation
 
-## Utilisation
-
-Ouvrir `index.html` depuis un hébergement HTTPS ou un serveur local. Pour une expérience PWA complète, utiliser un hébergement HTTPS.
+`npm run validate` vérifie le référentiel, la structure, le profil, l'analyse Abjad, la roue visuelle et la syntaxe des modules JavaScript.
