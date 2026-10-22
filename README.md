@@ -1,32 +1,42 @@
-# Zodiaque & 28 Lettres — PACKAGE FINAL
+# Zodiaque & 28 Lettres
 
-**Version : 1.0.0-final**
+Application autonome fondée sur le référentiel **Abjad Maghrébin**, les 28 lettres arabes, le zodiaque et les cycles lunaires.
 
-Ceci est le **package canonique unique** destiné à la construction de l'application.
+## État actuel
 
-### Règles fondamentales
+**Version 1.1.0 — profil astronomique ajouté.**
 
-- Abjad Maghrébin uniquement.
-- Valeurs Abjad des 28 lettres verrouillées.
-- Classification élémentaire exacte 7/7/7/7.
-- Aucune correspondance lettre/zodiaque/planète inventée.
-- Astronomie et astrologie séparées.
-- Interprétations astrologiques : symboliques/traditionnelles/non scientifiques.
-- Localisation : volontaire, jamais activée automatiquement.
-- Âge lunaire astronomique distinct du jour civil.
+Le dépôt contient maintenant :
 
-### Moteur astronomique
+- référentiel Abjad Maghrébin verrouillé ;
+- classification élémentaire 7 / 7 / 7 / 7 ;
+- 12 signes, modalités et planètes ;
+- calculateur Abjad ;
+- phases et structure lunaire ;
+- calculs astronomiques dans le navigateur avec Astronomy Engine 2.1.19 ;
+- positions du Soleil, de la Lune et des planètes ;
+- lever/coucher et prochains quartiers lunaires ;
+- profil de naissance avec Soleil, Lune, Ascendant et Milieu du Ciel ;
+- séparation explicite entre calcul astronomique et interprétation astrologique ;
+- conservation locale des données de profil dans le navigateur ;
+- PWA / service worker.
 
-Astronomy Engine 2.1.19 est utilisé pour les calculs astronomiques. Le projet officiel fournit une version navigateur et indique qu'elle fonctionne côté client sans dépendances externes. Voir `documentation/ASTRONOMIE_ENGINE.md`.
+## Règles fondamentales
 
-### Validation
+Aucune correspondance lettre → signe → planète n'est inventée. Lorsqu'une correspondance n'est pas présente et sourcée dans le référentiel, l'application indique qu'elle est non définie.
 
-```bash
-npm run validate
-npm run validate:python
-```
+Les interprétations astrologiques sont présentées comme **traditionnelles/symboliques et non scientifiques**.
 
-### Important
+## Astronomie
 
-**Ne pas mélanger ce package avec les anciennes archives.**
-Pour la construction, utiliser ce dossier complet comme source de vérité.
+La page **Astronomie** accepte une date/heure et des coordonnées géographiques pour calculer les positions célestes, l'azimut, l'altitude, les événements lunaires et les informations de lever/coucher.
+
+La page **Profil** accepte les données de naissance et calcule les principales coordonnées utilisées par le profil astrologique. Voir `documentation/ASTRONOMIE_PROFIL.md`.
+
+## Dépendance
+
+`package.json` référence `astronomy-engine` version `2.1.19`. Le chargement navigateur actuel utilise la distribution navigateur de cette même version.
+
+## Utilisation
+
+Ouvrir `index.html` depuis un hébergement HTTPS ou un serveur local. Pour une expérience PWA complète, utiliser un hébergement HTTPS.
