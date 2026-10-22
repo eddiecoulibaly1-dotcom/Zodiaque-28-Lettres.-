@@ -2,8 +2,8 @@ import fs from "node:fs";
 import assert from "node:assert/strict";
 
 const root = new URL("../", import.meta.url);
-const moduleSource = fs.readFileSync(new URL("../profil_abjad.js", root), "utf8");
-const index = fs.readFileSync(new URL("../index.html", root), "utf8");
+const moduleSource = fs.readFileSync(new URL("profil_abjad.js", root), "utf8");
+const index = fs.readFileSync(new URL("index.html", root), "utf8");
 
 assert.ok(index.includes('src="./profil_abjad.js"'), "Le module Abjad du profil doit être chargé.");
 assert.ok(moduleSource.includes('referentiel/lettres.json'), "Le module doit utiliser le référentiel contrôlé des lettres.");
