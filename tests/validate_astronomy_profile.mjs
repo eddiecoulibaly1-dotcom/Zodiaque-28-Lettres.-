@@ -1,0 +1,13 @@
+import fs from "node:fs";
+import assert from "node:assert/strict";
+const root = new URL("../", import.meta.url);
+const html = fs.readFileSync(new URL("index.html", root), "utf8");
+const profile = fs.readFileSync(new URL("profil.js", root), "utf8");
+const adapter = fs.readFileSync(new URL("astronomy.js", root), "utf8");
+assert.ok(html.includes("astronomy-engine@2.1.19/astronomy.browser.min.js"), "Astronomy Engine 2.1.19 absent de index.html");
+assert.ok(html.includes('src="profil.js"'), "profil.js absent de index.html");
+assert.ok(profile.includes("Rotation_HOR_EQJ"), "Calcul de coordonnées du profil absent");
+assert.ok(profile.includes("Ecliptic"), "Conversion écliptique absente");
+assert.ok(profile.includes("Sun") && profile.includes("Moon") && profile.includes("Mercury"), "Corps principaux absents");
+assert.ok(adapter.includes("SearchRiseSet") && adapter.includes("SearchMoonQuarter"), "Fonctions astronomiques attendues absentes");
+console.log("OK — module astronomique et profil de naissance référencés.");
