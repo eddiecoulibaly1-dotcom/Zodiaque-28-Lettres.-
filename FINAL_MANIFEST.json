@@ -1,6 +1,6 @@
 {
   "name": "Zodiaque & 28 Lettres",
-  "version": "1.5.9",
+  "version": "1.5.10",
   "canonical": true,
   "single_package": true,
   "supersedes": [
@@ -24,8 +24,11 @@
   "localization": {
     "place_catalog": "referentiel/lieux.json",
     "place_search": "localisation_lieux.js",
-    "timezone_standard": "IANA"
+    "timezone_standard": "IANA",
+    "timezone_runtime": "timezone.js",
+    "historical_dst": true
   },
+  "lunar_module": "module_lunaire_unifie.js",
   "invented_correspondences": false,
   "astronomy_astrology_separated": true
 }
