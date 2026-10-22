@@ -4,7 +4,7 @@ Application fondée sur le référentiel **Abjad Maghrébin**, les 28 lettres ar
 
 ## État actuel
 
-**Version 1.5.8 — thème natal visuel, internationalisation FR/AR/EN et localisation horaire explicite.**
+**Version 1.5.9 — thème natal visuel, internationalisation FR/AR/EN, localisation horaire et recherche locale de lieux.**
 
 Le dépôt contient notamment :
 
@@ -25,6 +25,8 @@ Le dépôt contient notamment :
 - analyse Abjad des noms/textes arabes ;
 - séparation explicite entre calcul astronomique et interprétation astrologique ;
 - localisation du profil avec ville/pays, coordonnées, altitude et fuseau IANA ;
+- catalogue local de lieux de référence avec recherche ville/pays/fuseau ;
+- liste des fuseaux IANA disponibles dans le navigateur ;
 - géolocalisation uniquement après consentement explicite du navigateur ;
 - calcul du décalage UTC pour la date de naissance ;
 - interface FR / العربية / EN avec RTL arabe ;
@@ -45,7 +47,7 @@ Le chargement du moteur privilégie désormais `vendor/astronomy/astronomy.brows
 
 ## Localisation et heure
 
-Le module de localisation sépare le lieu descriptif, la position géographique, le fuseau horaire IANA, l'heure civile de naissance et son décalage UTC. La géolocalisation n'est jamais activée automatiquement. Voir `documentation/LOCALISATION.md`.
+Le module de localisation sépare le lieu descriptif, la position géographique, le fuseau horaire IANA, l'heure civile de naissance et son décalage UTC. La géolocalisation n'est jamais activée automatiquement. La recherche de lieux reste locale et contrôlée dans `referentiel/lieux.json`. Voir `documentation/LOCALISATION.md`.
 
 ## Thème natal
 
@@ -57,4 +59,4 @@ Le système fondateur utilise exclusivement l'Abjad Maghrébin et la classificat
 
 ## Validation
 
-`npm run validate` vérifie le référentiel, la structure, le profil, l'analyse Abjad, la roue visuelle, la localisation et la syntaxe des modules JavaScript.
+`npm run validate` vérifie le référentiel, la structure, le profil, l'analyse Abjad, la roue visuelle, la localisation, le catalogue de lieux et la syntaxe des modules JavaScript.
