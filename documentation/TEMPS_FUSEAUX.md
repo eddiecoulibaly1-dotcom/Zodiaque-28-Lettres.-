@@ -1,37 +1,39 @@
 # Temps civil, fuseaux IANA et DST
 
-## Version 1.5.10
+## Version 1.5.11
 
-Le thème natal distingue désormais explicitement :
+Le thème natal distingue explicitement :
 
-1. **heure civile saisie** : la date et l'heure affichées sur l'horloge locale du lieu de naissance ;
+1. **heure civile saisie** : date et heure affichées sur l'horloge locale du lieu de naissance ;
 2. **fuseau IANA** : par exemple `Africa/Abidjan`, `Europe/Paris` ou `America/New_York` ;
-3. **décalage UTC à la date exacte** : valeur calculée pour cette naissance, et non une constante supposée ;
+3. **décalage UTC à la date exacte** : valeur calculée pour cette naissance ;
 4. **instant UTC** transmis au moteur astronomique ;
 5. **coordonnées géographiques** : latitude, longitude et altitude, indépendantes du fuseau.
 
 ## Règles historiques et heure d'été
 
-Le calcul horaire utilise `Intl.DateTimeFormat` avec le fuseau IANA à la date concernée. Cela permet de tenir compte des changements historiques de décalage et de l'heure d'été lorsque l'environnement JavaScript fournit les données IANA correspondantes.
+`timezone.js` utilise `Intl.DateTimeFormat` avec le fuseau IANA à la date concernée. Les règles historiques et DST disponibles dans l'environnement JavaScript sont donc utilisées, sans décalage fixe inventé.
 
-Aucun `UTC+X` fixe n'est déduit d'une ville. Par exemple, une zone qui passe de l'heure standard à l'heure d'été peut avoir deux décalages différents au cours de la même année.
+## Transitions DST
 
-## Limite importante : heure locale ambiguë
+Une heure civile peut être **inexistante** lors du passage à l'heure d'été ou **ambiguë** lors du retour à l'heure standard. Le convertisseur ne prétend pas choisir silencieusement entre plusieurs instants : ces cas sont signalés pour validation manuelle.
 
-Lors d'un retour à l'heure standard, une heure civile peut exister deux fois. Une saisie de type `02:30` peut alors correspondre à deux instants UTC différents. À l'inverse, lors d'un passage à l'heure d'été, certaines heures civiles n'existent pas.
+La conversion normale effectue une vérification aller-retour : heure civile → candidat UTC → heure civile. Si le résultat ne correspond pas exactement à la saisie, la conversion est refusée.
 
-L'application conserve le décalage UTC calculé avec la localisation sélectionnée et affiche séparément l'heure civile. Pour les cas historiques ou de transition DST où l'heure locale est ambiguë, une validation manuelle du décalage reste recommandée avant d'utiliser le thème comme référence archivistique.
+## Astronomie
+
+Le profil astronomique corrigé transmet au moteur un instant UTC. Les longitudes natales sont géocentriques dans l'écliptique vrai de la date (ECT), conformément à la séparation entre calcul astronomique et interprétation astrologique.
 
 ## Validation
 
-Les tests couvrent notamment :
+Les tests couvrent :
 
-- Côte d'Ivoire, sans changement DST ;
+- Côte d'Ivoire sans DST ;
 - New York en hiver et en été ;
 - Paris en hiver et en été ;
 - un cas historique de New York ;
-- séparation entre lieu, fuseau et coordonnées ;
 - présence du calcul IANA centralisé ;
-- synchronisation du module lunaire avec les noms de champs actuels du profil.
+- validation de l'architecture des longitudes géocentriques ECT ;
+- synchronisation du module lunaire avec les coordonnées actuelles du profil.
 
-Le calcul astronomique reste distinct de l'interprétation astrologique traditionnelle/symbolique.
+Les interprétations astrologiques restent traditionnelles/symboliques et non scientifiques.
