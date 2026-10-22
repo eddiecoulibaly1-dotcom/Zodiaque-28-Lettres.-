@@ -4,7 +4,7 @@ Application fondée sur le référentiel **Abjad Maghrébin**, les 28 lettres ar
 
 ## État actuel
 
-**Version 1.5.10 — gestion IANA/DST du temps natal, thème natal visuel, internationalisation FR/AR/EN et recherche locale de lieux.**
+**Version 1.5.11 — validation astronomique renforcée, longitudes géocentriques ECT, gestion IANA/DST du temps natal, thème natal visuel et recherche locale de lieux.**
 
 Le dépôt contient notamment :
 
@@ -14,6 +14,7 @@ Le dépôt contient notamment :
 - calculateur Abjad ;
 - phases et structure lunaire ;
 - calculs astronomiques avec Astronomy Engine 2.1.19 ;
+- longitudes géocentriques dans l'écliptique vrai de la date (ECT) ;
 - positions du Soleil, de la Lune et des planètes ;
 - lever/coucher et prochains quartiers lunaires ;
 - profil de naissance avec Soleil, Lune, Ascendant et Milieu du Ciel ;
@@ -22,18 +23,27 @@ Le dépôt contient notamment :
 - synthèse symbolique des éléments et modalités ;
 - roue zodiacale visuelle basée uniquement sur les longitudes calculées ;
 - diagnostic astronomique sans coordonnées géographiques codées en dur ;
-- analyse Abjad des noms/textes arabes ;
-- séparation explicite entre calcul astronomique et interprétation astrologique ;
 - localisation du profil avec ville/pays, coordonnées, altitude et fuseau IANA ;
 - catalogue local de lieux de référence avec recherche ville/pays/fuseau ;
-- liste des fuseaux IANA disponibles dans le navigateur ;
-- géolocalisation uniquement après consentement explicite du navigateur ;
-- calcul du décalage UTC pour la date exacte de naissance avec règles historiques/DST ;
-- conversion centralisée heure civile → UTC dans `timezone.js` ;
+- conversion centralisée heure civile → UTC avec règles historiques/DST ;
+- refus explicite des heures civiles inexistantes ou ambiguës dans le convertisseur IANA ;
 - module lunaire unifié synchronisé avec les coordonnées du profil ;
 - interface FR / العربية / EN avec RTL arabe ;
-- conservation locale des données de profil dans le navigateur ;
 - PWA / service worker.
+
+## Astronomie
+
+La page **Astronomie** affiche les positions techniques. Les longitudes du thème natal sont géocentriques et exprimées dans l'écliptique vrai de la date (ECT). Le Soleil utilise `SunPosition`; les autres corps sont convertis depuis `GeoVector` vers ECT. Les coordonnées horizontales ne sont calculées que lorsqu'un observateur est explicitement défini.
+
+Le chargement du moteur privilégie `vendor/astronomy/astronomy.browser.min.js`. Un secours CDN reste temporairement présent tant que le fichier local n'est pas effectivement produit et validé.
+
+## Localisation et heure
+
+Le module sépare lieu descriptif, coordonnées, fuseau IANA, heure civile et instant UTC. Les règles historiques/DST sont fournies par `Intl`. Les heures civiles inexistantes ou ambiguës lors d'une transition sont signalées plutôt que résolues silencieusement.
+
+## Thème natal
+
+Le profil astronomique utilise les longitudes géocentriques ECT, puis applique séparément les conventions astrologiques symboliques pour les signes, maisons et aspects. Aucune correspondance aux 28 lettres n'est ajoutée par le moteur.
 
 ## Règles fondamentales
 
@@ -41,24 +51,6 @@ Aucune correspondance lettre → signe → planète n'est inventée. Lorsqu'une 
 
 Les interprétations astrologiques sont présentées comme **traditionnelles/symboliques et non scientifiques**.
 
-## Astronomie
-
-La page **Astronomie** affiche les positions techniques. Les coordonnées horizontales (azimut/altitude) ne sont calculées que lorsqu'un observateur a été explicitement défini dans le profil ; aucun lieu n'est déduit automatiquement.
-
-Le chargement du moteur privilégie désormais `vendor/astronomy/astronomy.browser.min.js`. Un secours CDN reste temporairement présent uniquement tant que le fichier local n'est pas effectivement produit et validé dans le dépôt. Le CDN sera retiré dès que le runtime local sera vérifié.
-
-## Localisation et heure
-
-Le module de localisation sépare le lieu descriptif, la position géographique, le fuseau horaire IANA, l'heure civile de naissance et son décalage UTC. Le calcul utilise le fuseau à la date concernée et couvre les changements historiques/DST fournis par `Intl`. Les heures locales ambiguës lors d'un changement d'heure nécessitent une validation du décalage. La recherche de lieux reste locale et contrôlée dans `referentiel/lieux.json`. Voir `documentation/LOCALISATION.md` et `documentation/TEMPS_FUSEAUX.md`.
-
-## Thème natal
-
-Le profil accepte date/heure civile, décalage UTC, latitude, longitude et altitude. Il calcule les dix corps principaux, Ascendant, Milieu du Ciel, maisons en signes entiers et aspects majeurs. La roue zodiacale est une représentation visuelle de ces positions calculées ; elle n'ajoute aucune correspondance aux 28 lettres.
-
-## 28 lettres
-
-Le système fondateur utilise exclusivement l'Abjad Maghrébin et la classification élémentaire officielle du projet. Les correspondances traditionnelles sont conservées dans une couche distincte et ne sont jamais déduites par le moteur.
-
 ## Validation
 
-`npm run validate` vérifie le référentiel, la structure, le profil, l'analyse Abjad, la roue visuelle, la localisation, les fuseaux IANA/DST, le module lunaire et la syntaxe des modules JavaScript.
+`npm run validate` vérifie le référentiel, la structure, le profil astronomique, les longitudes géocentriques ECT, l'analyse Abjad, la roue visuelle, la localisation, les fuseaux IANA/DST, le module lunaire et la syntaxe des modules JavaScript.
