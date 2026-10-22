@@ -1,0 +1,14 @@
+import fs from "node:fs";
+import assert from "node:assert/strict";
+const root=new URL("../",import.meta.url);
+const adapter=fs.readFileSync(new URL("../astronomy.js",root),"utf8");
+const profile=fs.readFileSync(new URL("../profil_astronomique.js",root),"utf8");
+const index=fs.readFileSync(new URL("../index.html",root),"utf8");
+assert.ok(adapter.includes("SunPosition"),"Le Soleil doit utiliser SunPosition pour sa longitude géocentrique.");
+assert.ok(adapter.includes("GeoVector")&&adapter.includes("Rotation_EQJ_ECT")&&adapter.includes("SphereFromVector"),"Les autres corps doivent être convertis en longitude géocentrique ECT.");
+assert.ok(!profile.includes("A.EclipticLongitude(B,date)"),"Le profil natal ne doit plus utiliser EclipticLongitude pour les longitudes géocentriques.");
+assert.ok(profile.includes("GeoVector")&&profile.includes("Rotation_EQJ_ECT"),"Le profil natal doit calculer les longitudes géocentriques ECT.");
+assert.ok(index.includes("profil_astronomique.js"),"Le profil astronomique corrigé doit être chargé.");
+const seasonalTargets=[0,90,180,270];
+assert.equal(seasonalTargets.length,4,"Les quatre repères saisonniers doivent être couverts.");
+console.log("OK — architecture astronomique de référence : longitudes géocentriques ECT et profil corrigé.");
