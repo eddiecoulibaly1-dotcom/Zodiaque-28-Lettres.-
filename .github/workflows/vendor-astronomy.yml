@@ -3,9 +3,6 @@ name: Vendor Astronomy Engine
 on:
   push:
     branches: [main]
-    paths:
-      - '.github/workflows/vendor-astronomy.yml'
-      - 'package.json'
   workflow_dispatch:
 
 permissions:
@@ -18,16 +15,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install pinned Astronomy Engine package
-        run: |
-          set -euo pipefail
-          npm install --no-save --ignore-scripts astronomy-engine@2.1.19
-
-      - name: Copy browser runtime locally
+      - name: Download pinned official browser runtime
         run: |
           set -euo pipefail
           mkdir -p vendor/astronomy
-          cp node_modules/astronomy-engine/source/js/astronomy.browser.min.js vendor/astronomy/astronomy.browser.min.js
+          curl --fail --location --retry 3 \
+            https://raw.githubusercontent.com/cosinekitty/astronomy/v2.1.19/source/js/astronomy.browser.min.js \
+            --output vendor/astronomy/astronomy.browser.min.js
           test -s vendor/astronomy/astronomy.browser.min.js
           sha256sum vendor/astronomy/astronomy.browser.min.js | tee vendor/astronomy/SHA256SUMS
 
@@ -39,11 +33,15 @@ jobs:
 Pinned version: **2.1.19**
 
 Upstream project: https://github.com/cosinekitty/astronomy
-Package: `astronomy-engine@2.1.19`
 Source browser build: `source/js/astronomy.browser.min.js`
 
 This copy is intentionally stored locally so the application can run without a runtime CDN dependency. The astronomy calculations remain separate from the application's traditional/symbolic astrology interpretation layer.
 EOF
+
+      - name: Verify runtime marker
+        run: |
+          set -euo pipefail
+          grep -q 'Astronomy=' vendor/astronomy/astronomy.browser.min.js
 
       - name: Commit vendored runtime
         run: |
