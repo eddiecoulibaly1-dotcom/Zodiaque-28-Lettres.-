@@ -4,9 +4,9 @@ import * as Astronomy from "astronomy-engine";
 
 globalThis.Astronomy=Astronomy;
 const root=new URL("../",import.meta.url);
-const adapterSource=fs.readFileSync(new URL("../astronomy.js",root),"utf8");
-const profile=fs.readFileSync(new URL("../profil_astronomique.js",root),"utf8");
-const index=fs.readFileSync(new URL("../index.html",root),"utf8");
+const adapterSource=fs.readFileSync(new URL("astronomy.js",root),"utf8");
+const profile=fs.readFileSync(new URL("profil_astronomique.js",root),"utf8");
+const index=fs.readFileSync(new URL("index.html",root),"utf8");
 const A=await import("../astronomy.js");
 
 assert.ok(adapterSource.includes("SunPosition"),"Le Soleil doit utiliser SunPosition pour sa longitude géocentrique.");
