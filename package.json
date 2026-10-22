@@ -1,9 +1,9 @@
 {
   "name": "zodiaque-28-lettres",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "type": "module",
-  "description": "Zodiaque & 28 Lettres — package canonique de construction.",
+  "description": "Zodiaque & 28 Lettres — application astronomique et astrologique symbolique fondée sur un référentiel contrôlé.",
   "dependencies": {
     "astronomy-engine": "2.1.19"
   },
