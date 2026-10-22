@@ -3,81 +3,25 @@
  * Aucune signification symbolique n'est inventée si le référentiel ne la fournit pas.
  */
 (() => {
-  const DAY_MS = 86400000;
-  const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
-  const norm = x => ((Number(x) % 360) + 360) % 360;
-  const ready = () => typeof globalThis.Astronomy !== "undefined";
-  const phaseName = phase => {
-    const p = norm(phase);
-    if (p < 22.5 || p >= 337.5) return "Nouvelle Lune";
-    if (p < 67.5) return "Premier croissant";
-    if (p < 112.5) return "Premier quartier";
-    if (p < 157.5) return "Gibbeuse croissante";
-    if (p < 202.5) return "Pleine Lune";
-    if (p < 247.5) return "Gibbeuse décroissante";
-    if (p < 292.5) return "Dernier quartier";
-    return "Dernier croissant";
-  };
-  const quarterName = q => ({0:"Nouvelle Lune",1:"Premier quartier",2:"Pleine Lune",3:"Dernier quartier"}[q] || "Phase lunaire");
-  const fmt = d => d ? new Date(d).toLocaleString("fr-FR", {dateStyle:"medium", timeStyle:"short"}) : "—";
-  const lunarAge = (A, date) => {
-    let q = A.SearchMoonQuarter(new Date(date.getTime() - 40 * DAY_MS)), lastNew = null;
-    for(let i=0; i<8 && q; i++) {
-      if(q.time.date > date) break;
-      if(q.quarter === 0) lastNew = q.time.date;
-      q = A.NextMoonQuarter(q);
-    }
-    return lastNew ? Math.max(0, (date-lastNew)/DAY_MS) : null;
-  };
-  const nextQuarters = (A, date) => {
-    const out=[]; let q=A.SearchMoonQuarter(date);
-    for(let i=0;i<4&&q;i++){out.push(q);q=A.NextMoonQuarter(q);} return out;
-  };
-  async function loadDays(){
-    const r=await fetch("referentiel/jours_lunaires.json",{cache:"no-cache"});
-    if(!r.ok) throw new Error("Impossible de charger le référentiel des 28 jours lunaires.");
-    return r.json();
-  }
+  const DAY_MS=86400000, esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c])), norm=x=>((Number(x)%360)+360)%360, ready=()=>typeof globalThis.Astronomy!=="undefined";
+  const phaseName=phase=>{const p=norm(phase);if(p<22.5||p>=337.5)return"Nouvelle Lune";if(p<67.5)return"Premier croissant";if(p<112.5)return"Premier quartier";if(p<157.5)return"Gibbeuse croissante";if(p<202.5)return"Pleine Lune";if(p<247.5)return"Gibbeuse décroissante";if(p<292.5)return"Dernier quartier";return"Dernier croissant";};
+  const quarterName=q=>({0:"Nouvelle Lune",1:"Premier quartier",2:"Pleine Lune",3:"Dernier quartier"}[q]||"Phase lunaire");
+  const fmt=d=>d?new Date(d).toLocaleString("fr-FR",{dateStyle:"medium",timeStyle:"short"}):"—";
+  const lunarAge=(A,date)=>{let q=A.SearchMoonQuarter(new Date(date.getTime()-40*DAY_MS)),lastNew=null;for(let i=0;i<8&&q;i++){if(q.time.date>date)break;if(q.quarter===0)lastNew=q.time.date;q=A.NextMoonQuarter(q);}return lastNew?Math.max(0,(date-lastNew)/DAY_MS):null;};
+  const nextQuarters=(A,date)=>{const out=[];let q=A.SearchMoonQuarter(date);for(let i=0;i<4&&q;i++){out.push(q);q=A.NextMoonQuarter(q);}return out;};
+  async function loadDays(){const r=await fetch("referentiel/jours_lunaires.json",{cache:"no-cache"});if(!r.ok)throw new Error("Impossible de charger le référentiel des 28 jours lunaires.");return r.json();}
   async function render(view){
-    if(!["moon","lunar-days"].includes(view) || !ready()) return;
-    const host=document.querySelector("#app"); if(!host || host.querySelector("[data-lunar-unified]")) return;
-    const now=new Date(), A=globalThis.Astronomy;
-    let age=null, phase=norm(A.MoonPhase(now)), illum=A.Illumination(A.Body.Moon,now), quarters=nextQuarters(A,now), obs=null, rise=null, set=null;
-    let profile={}; try{profile=JSON.parse(localStorage.getItem("z28_profile_v4")||"{}")}catch(_){ }
-    if(Number.isFinite(Number(profile.lat)) && Number.isFinite(Number(profile.lon))) {
-      obs=new A.Observer(Number(profile.lat),Number(profile.lon),Number(profile.elev||0));
-      rise=A.SearchRiseSet(A.Body.Moon,obs,+1,now,2,0);
-      set=A.SearchRiseSet(A.Body.Moon,obs,-1,now,2,0);
-    }
-    age=lunarAge(A,now);
-    const data=await loadDays(), days=Array.isArray(data.lunar_cycle_days)?data.lunar_cycle_days:[];
-    const symbolicIndex=age===null?null:Math.min(28,Math.floor(age)+1);
-    const symbolicDay=symbolicIndex?days.find(d=>d.day===symbolicIndex):null;
-    const astronomicalDay=age===null?"—":`${(age+1).toFixed(1)}e journée depuis la dernière Nouvelle Lune`;
-    const card=document.createElement("section"); card.dataset.lunarUnified="1"; card.className="card"; card.style.marginTop="16px";
-    card.innerHTML=`<h2>🌙 Tableau lunaire unifié</h2>
-      <p class="lead">Les mesures ci-dessous sont astronomiques. Le cycle des 28 jours est présenté séparément comme une structure symbolique du référentiel.</p>
-      <div class="grid">
-        <div class="card"><div class="kpi">${age===null?"—":age.toFixed(2)+" j"}</div><b>Âge lunaire astronomique</b><p class="small muted">Durée depuis la dernière Nouvelle Lune calculée.</p></div>
-        <div class="card"><div class="kpi">${phase.toFixed(2)}°</div><b>Angle de phase</b><p class="small muted">${esc(phaseName(phase))}</p></div>
-        <div class="card"><div class="kpi">${(Number(illum.phase_fraction)*100).toFixed(1)}%</div><b>Fraction éclairée</b><p class="small muted">Mesure astronomique.</p></div>
-        <div class="card"><div class="kpi">${symbolicDay?`Jour ${symbolicDay.day}`:"—"}</div><b>Repère symbolique 28 jours</b><p class="small muted">${esc(astronomicalDay)}</p></div>
-      </div>
-      <div class="card" style="margin-top:12px"><h3>Lever, coucher et prochains quartiers</h3>
-        <div class="table-wrap"><table><thead><tr><th>Événement</th><th>Date / heure</th></tr></thead><tbody>
-          <tr><td>Lever de Lune</td><td>${esc(fmt(rise?.date))}</td></tr>
-          <tr><td>Coucher de Lune</td><td>${esc(fmt(set?.date))}</td></tr>
-          ${quarters.map(q=>`<tr><td>${quarterName(q.quarter)}</td><td>${esc(fmt(q.time.date))}</td></tr>`).join("")}
-        </tbody></table></div>
-        ${(!rise&&!set)?`<p class="small muted">Renseignez une latitude et une longitude dans le profil pour obtenir le lever et le coucher locaux.</p>`:""}
-      </div>
-      <div class="card" style="margin-top:12px"><h3>28 jours lunaires — statut du référentiel</h3>
-        <p class="small muted">${esc(data.warning||"Les significations doivent rester liées à une tradition et à une source explicites.")}</p>
-        <div class="grid">${days.map(d=>`<article class="card ${d.day===symbolicIndex?"soft":""}"><h3>Jour ${d.day}</h3><p>${esc(d.name_fr)}</p><p class="small">${esc(d.symbolic_meaning||"Aucune signification universelle attribuée.")}</p></article>`).join("")}</div>
-      </div>`;
+    if(!["moon","lunar-days"].includes(view)||!ready())return;const host=document.querySelector("#app");if(!host||host.querySelector("[data-lunar-unified]"))return;
+    const now=new Date(),A=globalThis.Astronomy;let age=lunarAge(A,now),phase=norm(A.MoonPhase(now)),illum=A.Illumination(A.Body.Moon,now),quarters=nextQuarters(A,now),obs=null,rise=null,set=null;
+    let profile={};try{profile=JSON.parse(localStorage.getItem("z28_profile_v4")||"{}")}catch(_){ }
+    const location=window.Z28Location?.load?.()||{};
+    const lat=Number(profile.lat??location.lat),lon=Number(profile.lon??location.lon),elev=Number(profile.elev??location.elev??0);
+    if(Number.isFinite(lat)&&lat>=-90&&lat<=90&&Number.isFinite(lon)&&lon>=-180&&lon<=180){obs=new A.Observer(lat,lon,Number.isFinite(elev)?Math.max(0,elev):0);rise=A.SearchRiseSet(A.Body.Moon,obs,+1,now,2,0);set=A.SearchRiseSet(A.Body.Moon,obs,-1,now,2,0);}
+    const data=await loadDays(),days=Array.isArray(data.lunar_cycle_days)?data.lunar_cycle_days:[],symbolicIndex=age===null?null:Math.min(28,Math.floor(age)+1),symbolicDay=symbolicIndex?days.find(d=>d.day===symbolicIndex):null,astronomicalDay=age===null?"—":`${(age+1).toFixed(1)}e journée depuis la dernière Nouvelle Lune`;
+    const card=document.createElement("section");card.dataset.lunarUnified="1";card.className="card";card.style.marginTop="16px";
+    card.innerHTML=`<h2>🌙 Tableau lunaire unifié</h2><p class="lead">Les mesures ci-dessous sont astronomiques. Le cycle des 28 jours est présenté séparément comme une structure symbolique du référentiel.</p><div class="grid"><div class="card"><div class="kpi">${age===null?"—":age.toFixed(2)+" j"}</div><b>Âge lunaire astronomique</b><p class="small muted">Durée depuis la dernière Nouvelle Lune calculée.</p></div><div class="card"><div class="kpi">${phase.toFixed(2)}°</div><b>Angle de phase</b><p class="small muted">${esc(phaseName(phase))}</p></div><div class="card"><div class="kpi">${(Number(illum.phase_fraction)*100).toFixed(1)}%</div><b>Fraction éclairée</b><p class="small muted">Mesure astronomique.</p></div><div class="card"><div class="kpi">${symbolicDay?`Jour ${symbolicDay.day}`:"—"}</div><b>Repère symbolique 28 jours</b><p class="small muted">${esc(astronomicalDay)}</p></div></div><div class="card" style="margin-top:12px"><h3>Lever, coucher et prochains quartiers</h3><div class="table-wrap"><table><thead><tr><th>Événement</th><th>Date / heure</th></tr></thead><tbody><tr><td>Lever de Lune</td><td>${esc(fmt(rise?.date))}</td></tr><tr><td>Coucher de Lune</td><td>${esc(fmt(set?.date))}</td></tr>${quarters.map(q=>`<tr><td>${quarterName(q.quarter)}</td><td>${esc(fmt(q.time.date))}</td></tr>`).join("")}</tbody></table></div>${(!rise&&!set)?`<p class="small muted">Renseignez une latitude et une longitude dans le profil pour obtenir le lever et le coucher locaux.</p>`:""}</div><div class="card" style="margin-top:12px"><h3>28 jours lunaires — statut du référentiel</h3><p class="small muted">${esc(data.warning||"Les significations doivent rester liées à une tradition et à une source explicites.")}</p><div class="grid">${days.map(d=>`<article class="card ${d.day===symbolicIndex?"soft":""}"><h3>Jour ${d.day}</h3><p>${esc(d.name_fr)}</p><p class="small">${esc(d.symbolic_meaning||"Aucune signification universelle attribuée.")}</p></article>`).join("")}</div></div>`;
     host.appendChild(card);
   }
-  let lastView="";
-  const observe=()=>{const active=document.querySelector(".nav.active")?.dataset.view||"";if(active!==lastView){lastView=active;setTimeout(()=>render(active).catch(e=>console.warn("Module lunaire:",e)),0);}};
-  const mo=new MutationObserver(observe); document.addEventListener("DOMContentLoaded",()=>{mo.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["class"]});observe();});
+  let lastView="";const observe=()=>{const active=document.querySelector(".nav.active")?.dataset.view||"";if(active!==lastView){lastView=active;setTimeout(()=>render(active).catch(e=>console.warn("Module lunaire:",e)),0);}};
+  const mo=new MutationObserver(observe);document.addEventListener("DOMContentLoaded",()=>{mo.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["class"]});observe();});
 })();
