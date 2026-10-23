@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 env:
   ASTRONOMY_ENGINE_VERSION: "2.1.19"
@@ -19,16 +19,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
-
+          package-manager-cache: false
       - name: Install dependencies
         run: npm install --ignore-scripts --no-package-lock
-
-      - name: Ensure local Astronomy Engine runtime
+      - name: Prepare local Astronomy Engine runtime
         run: |
           set -euo pipefail
           mkdir -p vendor/astronomy
@@ -42,20 +40,10 @@ jobs:
 Version épinglée : **astronomy-engine@${ASTRONOMY_ENGINE_VERSION}**
 
 Projet amont : https://github.com/cosinekitty/astronomy
-Fichier source officiel : `source/js/astronomy.browser.min.js`
-Package npm : `astronomy-engine@${ASTRONOMY_ENGINE_VERSION}`
+Fichier source officiel : source/js/astronomy.browser.min.js
+Package npm : astronomy-engine@${ASTRONOMY_ENGINE_VERSION}
 
-Cette copie est versionnée dans le dépôt afin que l'application fonctionne sans CDN d'exécution. Les calculs astronomiques restent séparés de la couche d'interprétation astrologique traditionnelle/symbolique.
+Cette copie est produite à partir du package officiel épinglé avant validation. La production GitHub Pages utilise le même processus de préparation local.
 EOF
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add vendor/astronomy/astronomy.browser.min.js vendor/astronomy/SHA256SUMS vendor/astronomy/README.md
-          if git diff --cached --quiet; then
-            echo 'Astronomy Engine runtime already current.'
-          else
-            git commit -m 'build: vendor Astronomy Engine 2.1.19 locally'
-            git push origin HEAD:main
-          fi
-
       - name: Validate application
         run: npm run validate
