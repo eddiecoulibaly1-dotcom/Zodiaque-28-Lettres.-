@@ -35,6 +35,8 @@
     return localLabels[current] ? current : "fr";
   };
 
+  const label = (language, key) => window.Z28I18n?.text?.(language, key) || key;
+
   const go = view => {
     const button = document.querySelector(`.nav[data-view="${CSS.escape(view)}"]`);
     if (button) button.click();
@@ -72,11 +74,14 @@
   function refreshHomeText() {
     const section = document.querySelector("#productQuickActions");
     if (!section) return;
-    const l = localLabels[lang()];
+    const language = lang();
+    const l = localLabels[language];
     section.querySelector("#productQuickActionsTitle").textContent = l.quickTitle;
     section.querySelector("#productQuickActionsIntro").textContent = l.quickIntro;
     section.querySelector("#productSafetyNote").textContent = l.safety;
-    window.Z28I18n?.apply?.(lang());
+    section.querySelectorAll("[data-i18n]").forEach(button => {
+      button.textContent = label(language, button.dataset.i18n);
+    });
   }
 
   function enhanceProfile() {
