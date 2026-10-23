@@ -14,7 +14,7 @@ Le dépôt contient notamment :
 - calculateur Abjad ;
 - phases et structure lunaire ;
 - calculs astronomiques avec Astronomy Engine 2.1.19 ;
-- runtime Astronomy Engine local et versionné, sans CDN d'exécution ;
+- runtime Astronomy Engine préparé localement à partir du package npm épinglé ;
 - longitudes géocentriques dans l'écliptique vrai de la date (ECT) ;
 - positions du Soleil, de la Lune et des planètes ;
 - lever/coucher et prochains quartiers lunaires ;
@@ -36,7 +36,7 @@ Le dépôt contient notamment :
 
 La page **Astronomie** affiche les positions techniques. Les longitudes du thème natal sont géocentriques et exprimées dans l'écliptique vrai de la date (ECT). Le Soleil utilise `SunPosition`; les autres corps sont convertis depuis `GeoVector` vers ECT. Les coordonnées horizontales ne sont calculées que lorsqu'un observateur est explicitement défini.
 
-Le moteur est chargé exclusivement depuis `vendor/astronomy/astronomy.browser.min.js`. Le dépôt ne dépend pas d'un CDN d'exécution pour les calculs astronomiques.
+Le moteur de production est Astronomy Engine **2.1.19** et le runtime navigateur est préparé localement à partir du package npm épinglé. L'application ne fabrique ni ne simule de données astronomiques.
 
 ## Localisation et heure
 
@@ -54,4 +54,4 @@ Les interprétations astrologiques sont présentées comme **traditionnelles/sym
 
 ## Validation
 
-`npm run validate` vérifie le référentiel, la structure, le runtime astronomique local, le profil astronomique, les longitudes géocentriques ECT, l'analyse Abjad, la roue visuelle, la localisation, les fuseaux IANA/DST, le module lunaire et la syntaxe des modules JavaScript.
+`npm run validate` prépare le runtime Astronomy Engine local à partir de la version 2.1.19 puis vérifie le référentiel, la structure, le profil astronomique, les longitudes géocentriques ECT, l'analyse Abjad, la roue visuelle, la localisation, les fuseaux IANA/DST, le module lunaire et la syntaxe des modules JavaScript.
