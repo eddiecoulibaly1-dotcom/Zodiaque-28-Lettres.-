@@ -1,12 +1,16 @@
 import fs from "node:fs";
 
 const index = fs.readFileSync("index.html", "utf8");
+const app = fs.readFileSync("app.js", "utf8");
 const manifest = JSON.parse(fs.readFileSync("manifest.webmanifest", "utf8"));
 const sw = fs.readFileSync("sw.js", "utf8");
 const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
 
-if (!/navigator\.serviceWorker\.register\(["']\.\/sw\.js["']/.test(index)) {
-  throw new Error("index.html doit enregistrer le service worker local.");
+if (!/navigator\.serviceWorker\.register\(["']\.\/sw\.js["']/.test(app)) {
+  throw new Error("app.js doit enregistrer le service worker local.");
+}
+if (/navigator\.serviceWorker\.register/.test(index)) {
+  throw new Error("index.html ne doit pas enregistrer une seconde fois le service worker.");
 }
 if (!index.includes('href="manifest.webmanifest"')) {
   throw new Error("index.html doit déclarer le manifeste PWA.");
