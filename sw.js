@@ -40,7 +40,11 @@ self.addEventListener("fetch", event => {
           caches.open(CACHE).then(cache => cache.put(event.request, copy));
         }
         return response;
-      }).catch(() => cached);
+      }).catch(() => new Response("Hors connexion : ressource non mise en cache.", {
+        status: 503,
+        statusText: "Service Unavailable",
+        headers: {"Content-Type": "text/plain; charset=utf-8"}
+      }));
     })
   );
 });
