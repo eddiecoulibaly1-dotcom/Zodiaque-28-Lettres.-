@@ -14,7 +14,7 @@ if (/new A\.Observer\(5\.2,\s*-3\.7/.test(diagnostics)) throw new Error("Aucune 
 if (packageJson.dependencies?.["astronomy-engine"] !== "2.1.19") throw new Error("Astronomy Engine doit rester épinglé en version 2.1.19.");
 if (packageJson.scripts?.["prepare:runtime"] !== "node scripts/prepare-astronomy-runtime.mjs") throw new Error("La préparation locale doit utiliser le script déterministe officiel.");
 if (!runtimeScript.includes('const version = "2.1.19"')) throw new Error("Le script de préparation doit épingler Astronomy Engine 2.1.19.");
-if (!runtimeScript.includes("node_modules/astronomy-engine/source/js/astronomy.browser.min.js")) throw new Error("Le script doit utiliser le build navigateur officiel du package.");
+if (!runtimeScript.includes("node_modules/astronomy-engine/astronomy.browser.min.js")) throw new Error("Le script doit utiliser le build navigateur officiel du package npm.");
 if (!runtimeScript.includes("astronomy.browser.min.js")) throw new Error("Le script de préparation doit produire le runtime navigateur local.");
 if (!workflow.includes("npm run prepare:runtime")) throw new Error("Le workflow de validation doit préparer le runtime local.");
 if (!pagesWorkflow.includes("npm run prepare:runtime")) throw new Error("GitHub Pages doit préparer le runtime local avant publication.");
