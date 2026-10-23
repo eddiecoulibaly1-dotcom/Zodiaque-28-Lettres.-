@@ -1,16 +1,29 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+import os from "node:os";
+import { execFileSync } from "node:child_process";
 
 const version = "2.1.19";
-const source = path.resolve("node_modules/astronomy-engine/source/js/astronomy.browser.min.js");
+const packageSource = path.resolve("node_modules/astronomy-engine/astronomy.browser.min.js");
 const targetDir = path.resolve("vendor/astronomy");
 const target = path.join(targetDir, "astronomy.browser.min.js");
 
-if (!fs.existsSync(source)) {
-  throw new Error(`Astronomy Engine ${version} est absent. Exécutez d'abord npm install.`);
+function locateSource() {
+  if (fs.existsSync(packageSource)) return packageSource;
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "z28-astronomy-"));
+  try {
+    const tarball = execFileSync("npm", ["pack", `astronomy-engine@${version}`, "--silent"], { cwd: tmp, encoding: "utf8" }).trim().split(/\r?\n/).pop();
+    execFileSync("tar", ["-xzf", tarball], { cwd: tmp });
+    const packed = path.join(tmp, "package", "astronomy.browser.min.js");
+    if (fs.existsSync(packed)) return packed;
+    throw new Error(`Le package npm astronomy-engine@${version} ne contient pas astronomy.browser.min.js.`);
+  } catch (error) {
+    throw new Error(`Impossible de préparer Astronomy Engine ${version}: ${error.message}`);
+  }
 }
 
+const source = locateSource();
 const sourceBytes = fs.readFileSync(source);
 if (sourceBytes.length === 0) throw new Error("Le runtime Astronomy Engine source est vide.");
 const sourceText = sourceBytes.toString("utf8");
