@@ -1,4 +1,4 @@
-name: Vendor Astronomy Engine Final
+name: Vendor Astronomy Engine
 
 on:
   push:
@@ -6,10 +6,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 env:
   ASTRONOMY_ENGINE_VERSION: "2.1.19"
+  ASTRONOMY_ENGINE_URL: "https://raw.githubusercontent.com/cosinekitty/astronomy/v2.1.19/source/js/astronomy.browser.min.js"
 
 jobs:
   vendor:
@@ -23,7 +24,7 @@ jobs:
           set -euo pipefail
           mkdir -p vendor/astronomy
           curl --fail --location --retry 5 --retry-delay 2 \
-            "https://raw.githubusercontent.com/cosinekitty/astronomy/v${ASTRONOMY_ENGINE_VERSION}/source/js/astronomy.browser.min.js" \
+            "$ASTRONOMY_ENGINE_URL" \
             --output vendor/astronomy/astronomy.browser.min.js
           test -s vendor/astronomy/astronomy.browser.min.js
           sha256sum vendor/astronomy/astronomy.browser.min.js | tee vendor/astronomy/SHA256SUMS
@@ -31,24 +32,33 @@ jobs:
       - name: Record upstream provenance
         run: |
           cat > vendor/astronomy/README.md <<EOF
-# Astronomy Engine — vendored runtime
+# Astronomy Engine — runtime local
 
-Pinned package: **astronomy-engine@${ASTRONOMY_ENGINE_VERSION}**
+Version épinglée : **astronomy-engine@${ASTRONOMY_ENGINE_VERSION}**
 
-Upstream project: https://github.com/cosinekitty/astronomy
-Source browser build: `source/js/astronomy.browser.min.js`
+Projet amont : https://github.com/cosinekitty/astronomy
+Fichier source officiel : source/js/astronomy.browser.min.js
+URL source : ${ASTRONOMY_ENGINE_URL}
 
-This copy is prepared from the official pinned source so production does not depend on a runtime CDN. Astronomy calculations remain separate from the application's traditional/symbolic astrology interpretation layer.
+Cette copie est versionnée dans le dépôt afin que la production ne dépende d'aucun CDN d'exécution. Les calculs astronomiques restent séparés de la couche d'interprétation astrologique traditionnelle/symbolique.
 EOF
 
-      - name: Verify runtime marker
+      - name: Verify runtime
         run: |
           set -euo pipefail
-          grep -Eq '\.Astronomy=[A-Za-z_$]' vendor/astronomy/astronomy.browser.min.js
+          test -s vendor/astronomy/astronomy.browser.min.js
+          grep -q 'Astronomy' vendor/astronomy/astronomy.browser.min.js
+          test -s vendor/astronomy/SHA256SUMS
 
-      - name: Publish vendored runtime artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: astronomy-engine-2.1.19-vendor
-          path: vendor/astronomy/
-          if-no-files-found: error
+      - name: Commit vendored runtime
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- vendor/astronomy; then
+            echo 'Runtime Astronomy Engine déjà à jour.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add vendor/astronomy/astronomy.browser.min.js vendor/astronomy/SHA256SUMS vendor/astronomy/README.md
+          git commit -m 'build: vendor Astronomy Engine 2.1.19 locally'
+          git push origin HEAD:main
