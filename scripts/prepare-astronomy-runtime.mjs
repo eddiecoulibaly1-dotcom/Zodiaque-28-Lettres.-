@@ -5,18 +5,33 @@ import os from "node:os";
 import { execFileSync } from "node:child_process";
 
 const version = "2.1.19";
-const packageSource = path.resolve("node_modules/astronomy-engine/astronomy.browser.min.js");
 const targetDir = path.resolve("vendor/astronomy");
 const target = path.join(targetDir, "astronomy.browser.min.js");
 
 function locateSource() {
-  if (fs.existsSync(packageSource)) return packageSource;
+  const candidates = [
+    path.resolve("node_modules/astronomy-engine/source/js/astronomy.browser.min.js"),
+    path.resolve("node_modules/astronomy-engine/astronomy.browser.min.js")
+  ];
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) return candidate;
+  }
+
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "z28-astronomy-"));
   try {
-    const tarball = execFileSync("npm", ["pack", `astronomy-engine@${version}`, "--silent"], { cwd: tmp, encoding: "utf8" }).trim().split(/\r?\n/).pop();
-    execFileSync("tar", ["-xzf", tarball], { cwd: tmp });
-    const packed = path.join(tmp, "package", "astronomy.browser.min.js");
-    if (fs.existsSync(packed)) return packed;
+    const tarballName = execFileSync(
+      "npm",
+      ["pack", `astronomy-engine@${version}`, "--silent"],
+      { cwd: tmp, encoding: "utf8" }
+    ).trim().split(/\r?\n/).pop();
+    execFileSync("tar", ["-xzf", tarballName], { cwd: tmp });
+    const packedCandidates = [
+      path.join(tmp, "package", "source", "js", "astronomy.browser.min.js"),
+      path.join(tmp, "package", "astronomy.browser.min.js")
+    ];
+    for (const candidate of packedCandidates) {
+      if (fs.existsSync(candidate)) return candidate;
+    }
     throw new Error(`Le package npm astronomy-engine@${version} ne contient pas astronomy.browser.min.js.`);
   } catch (error) {
     throw new Error(`Impossible de préparer Astronomy Engine ${version}: ${error.message}`);
@@ -27,7 +42,7 @@ const source = locateSource();
 const sourceBytes = fs.readFileSync(source);
 if (sourceBytes.length === 0) throw new Error("Le runtime Astronomy Engine source est vide.");
 const sourceText = sourceBytes.toString("utf8");
-if (!/\.Astronomy=[A-Za-z_$]/.test(sourceText)) {
+if (!/\.Astronomy\s*=|\.Astronomy\s*\)/.test(sourceText)) {
   throw new Error("Le build navigateur Astronomy Engine ne semble pas exposer globalThis.Astronomy.");
 }
 
@@ -41,7 +56,7 @@ const provenance = [
   `Version épinglée : astronomy-engine@${version}`,
   "",
   "Projet amont : https://github.com/cosinekitty/astronomy",
-  "Fichier source officiel : astronomy.browser.min.js du package npm épinglé",
+  "Fichier source officiel : build navigateur astronomy.browser.min.js du package npm épinglé",
   "",
   "Le runtime navigateur est préparé localement à partir du package npm officiel épinglé.",
   "GitHub Pages prépare la même copie avant publication. L'application ne dépend pas d'un CDN d'exécution.",
