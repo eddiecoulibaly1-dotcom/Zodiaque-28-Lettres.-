@@ -12,7 +12,6 @@ permissions:
 
 env:
   ASTRONOMY_ENGINE_VERSION: "2.1.19"
-  ASTRONOMY_ENGINE_URL: "https://raw.githubusercontent.com/cosinekitty/astronomy/v2.1.19/source/js/astronomy.browser.min.js"
 
 jobs:
   validate:
@@ -26,13 +25,14 @@ jobs:
         with:
           node-version: 22
 
+      - name: Install dependencies
+        run: npm install --ignore-scripts --no-package-lock
+
       - name: Ensure local Astronomy Engine runtime
         run: |
           set -euo pipefail
           mkdir -p vendor/astronomy
-          curl --fail --location --retry 5 --retry-delay 2 \
-            "$ASTRONOMY_ENGINE_URL" \
-            --output vendor/astronomy/astronomy.browser.min.js
+          cp "node_modules/astronomy-engine/source/js/astronomy.browser.min.js" vendor/astronomy/astronomy.browser.min.js
           test -s vendor/astronomy/astronomy.browser.min.js
           grep -Eq '\.Astronomy=[A-Za-z_$]' vendor/astronomy/astronomy.browser.min.js
           sha256sum vendor/astronomy/astronomy.browser.min.js | tee vendor/astronomy/SHA256SUMS
@@ -43,7 +43,7 @@ Version épinglée : **astronomy-engine@${ASTRONOMY_ENGINE_VERSION}**
 
 Projet amont : https://github.com/cosinekitty/astronomy
 Fichier source officiel : `source/js/astronomy.browser.min.js`
-URL source : ${ASTRONOMY_ENGINE_URL}
+Package npm : `astronomy-engine@${ASTRONOMY_ENGINE_VERSION}`
 
 Cette copie est versionnée dans le dépôt afin que l'application fonctionne sans CDN d'exécution. Les calculs astronomiques restent séparés de la couche d'interprétation astrologique traditionnelle/symbolique.
 EOF
@@ -56,9 +56,6 @@ EOF
             git commit -m 'build: vendor Astronomy Engine 2.1.19 locally'
             git push origin HEAD:main
           fi
-
-      - name: Install dependencies
-        run: npm install --ignore-scripts
 
       - name: Validate application
         run: npm run validate
