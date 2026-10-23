@@ -4,7 +4,7 @@ Application fondée sur le référentiel **Abjad Maghrébin**, les 28 lettres ar
 
 ## État actuel
 
-**Version 1.5.12 — validation astronomique renforcée, longitudes géocentriques ECT, gestion IANA/DST du temps natal, thème natal visuel et recherche locale de lieux.**
+**Version 1.5.13 — PWA hors ligne renforcée, service worker enregistré, manifeste PWA complet, validation astronomique renforcée, longitudes géocentriques ECT, gestion IANA/DST du temps natal, thème natal visuel et recherche locale de lieux.**
 
 Le dépôt contient notamment :
 
@@ -30,7 +30,7 @@ Le dépôt contient notamment :
 - refus explicite des heures civiles inexistantes ou ambiguës dans le convertisseur IANA ;
 - module lunaire unifié synchronisé avec les coordonnées du profil ;
 - interface FR / العربية / EN avec RTL arabe ;
-- PWA / service worker.
+- PWA / service worker enregistré et cache versionné.
 
 ## Astronomie
 
@@ -46,6 +46,10 @@ Le module sépare lieu descriptif, coordonnées, fuseau IANA, heure civile et in
 
 Le profil astronomique utilise les longitudes géocentriques ECT, puis applique séparément les conventions astrologiques symboliques pour les signes, maisons et aspects. Aucune correspondance aux 28 lettres n'est ajoutée par le moteur.
 
+## PWA
+
+Le manifeste définit explicitement la langue, le sens d'interface, le périmètre, l'icône et les métadonnées d'installation. Le service worker est enregistré au chargement de l'application et utilise un cache versionné contenant le runtime astronomique local et les référentiels nécessaires au fonctionnement hors ligne.
+
 ## Règles fondamentales
 
 Aucune correspondance lettre → signe → planète n'est inventée. Lorsqu'une correspondance n'est pas présente et sourcée dans le référentiel, l'application indique qu'elle est non définie.
@@ -54,4 +58,4 @@ Les interprétations astrologiques sont présentées comme **traditionnelles/sym
 
 ## Validation
 
-`npm run validate` prépare le runtime Astronomy Engine local à partir de la version 2.1.19 puis vérifie le référentiel, la structure, le profil astronomique, les longitudes géocentriques ECT, l'analyse Abjad, la roue visuelle, la localisation, les fuseaux IANA/DST, le module lunaire et la syntaxe des modules JavaScript.
+`npm run validate` prépare le runtime Astronomy Engine local à partir de la version 2.1.19 puis vérifie le référentiel, la structure, le profil astronomique, les longitudes géocentriques ECT, l'analyse Abjad, la roue visuelle, la localisation, les fuseaux IANA/DST, le module lunaire, le runtime local, la PWA et la syntaxe des modules JavaScript.
