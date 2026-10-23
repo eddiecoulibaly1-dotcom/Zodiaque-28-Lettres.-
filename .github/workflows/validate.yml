@@ -10,9 +10,6 @@ on:
 permissions:
   contents: read
 
-env:
-  ASTRONOMY_ENGINE_VERSION: "2.1.19"
-
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -27,23 +24,6 @@ jobs:
       - name: Install dependencies
         run: npm install --ignore-scripts --no-package-lock
       - name: Prepare local Astronomy Engine runtime
-        run: |
-          set -euo pipefail
-          mkdir -p vendor/astronomy
-          cp "node_modules/astronomy-engine/source/js/astronomy.browser.min.js" vendor/astronomy/astronomy.browser.min.js
-          test -s vendor/astronomy/astronomy.browser.min.js
-          grep -Eq '\.Astronomy=[A-Za-z_$]' vendor/astronomy/astronomy.browser.min.js
-          sha256sum vendor/astronomy/astronomy.browser.min.js | tee vendor/astronomy/SHA256SUMS
-          cat > vendor/astronomy/README.md <<EOF
-# Astronomy Engine — runtime local
-
-Version épinglée : **astronomy-engine@${ASTRONOMY_ENGINE_VERSION}**
-
-Projet amont : https://github.com/cosinekitty/astronomy
-Fichier source officiel : source/js/astronomy.browser.min.js
-Package npm : astronomy-engine@${ASTRONOMY_ENGINE_VERSION}
-
-Cette copie est produite à partir du package officiel épinglé avant validation. La production GitHub Pages utilise le même processus de préparation local.
-EOF
+        run: npm run prepare:runtime
       - name: Validate application
         run: npm run validate
