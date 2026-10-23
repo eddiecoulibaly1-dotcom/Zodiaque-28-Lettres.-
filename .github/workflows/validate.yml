@@ -34,7 +34,7 @@ jobs:
             "$ASTRONOMY_ENGINE_URL" \
             --output vendor/astronomy/astronomy.browser.min.js
           test -s vendor/astronomy/astronomy.browser.min.js
-          grep -q 'Astronomy' vendor/astronomy/astronomy.browser.min.js
+          grep -Eq '\.Astronomy=[A-Za-z_$]' vendor/astronomy/astronomy.browser.min.js
           sha256sum vendor/astronomy/astronomy.browser.min.js | tee vendor/astronomy/SHA256SUMS
           cat > vendor/astronomy/README.md <<EOF
 # Astronomy Engine — runtime local
@@ -42,15 +42,17 @@ jobs:
 Version épinglée : **astronomy-engine@${ASTRONOMY_ENGINE_VERSION}**
 
 Projet amont : https://github.com/cosinekitty/astronomy
-Fichier source officiel : source/js/astronomy.browser.min.js
+Fichier source officiel : `source/js/astronomy.browser.min.js`
 URL source : ${ASTRONOMY_ENGINE_URL}
 
 Cette copie est versionnée dans le dépôt afin que l'application fonctionne sans CDN d'exécution. Les calculs astronomiques restent séparés de la couche d'interprétation astrologique traditionnelle/symbolique.
 EOF
-          if ! git diff --quiet -- vendor/astronomy; then
-            git config user.name 'github-actions[bot]'
-            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git add vendor/astronomy/astronomy.browser.min.js vendor/astronomy/SHA256SUMS vendor/astronomy/README.md
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add vendor/astronomy/astronomy.browser.min.js vendor/astronomy/SHA256SUMS vendor/astronomy/README.md
+          if git diff --cached --quiet; then
+            echo 'Astronomy Engine runtime already current.'
+          else
             git commit -m 'build: vendor Astronomy Engine 2.1.19 locally'
             git push origin HEAD:main
           fi
