@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 const root=new URL("../",import.meta.url);
 const src=fs.readFileSync(new URL("localisation.js",root),"utf8");
 const index=fs.readFileSync(new URL("index.html",root),"utf8");
-const hasScript=(name)=>new RegExp(`<script[^>]+src=["'](?:\\./)?${name.replace(".","\\.")}["']`).test(index);
+const hasScript=(name)=>index.includes(`src="./${name}"`)||index.includes(`src="${name}"`)||index.includes(`src='./${name}'`)||index.includes(`src='${name}'`);
 
 assert.ok(src.includes("navigator.geolocation.getCurrentPosition"),"La géolocalisation doit être déclenchée explicitement par le navigateur.");
 assert.ok(src.includes("Intl.DateTimeFormat"),"Le calcul du décalage UTC doit utiliser le moteur de fuseau du navigateur.");
