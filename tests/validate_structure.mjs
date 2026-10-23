@@ -5,6 +5,6 @@ const required=["index.html","app.js","astronomy.js","profil.js","profil_astrono
 for(const p of required)assert.ok(fs.existsSync(new URL(p,root)),`Fichier manquant: ${p}`);
 const app=fs.readFileSync(new URL("app.js",root),"utf8"),profile=fs.readFileSync(new URL("profil_astronomique.js",root),"utf8"),version=fs.readFileSync(new URL("VERSION",root),"utf8").trim();
 assert.ok(app.includes("abjad_maghribi"),"L'application doit utiliser la clé Abjad Maghribi.");
-assert.equal(version,"1.5.11","VERSION doit être 1.5.11.");
+assert.equal(version,"1.5.12","VERSION doit être 1.5.12.");
 assert.ok(profile.includes("wholeSignHouses")===false && profile.includes("GeoVector") && profile.includes("Rotation_EQJ_ECT"),"Le profil doit utiliser les longitudes géocentriques ECT.");
-console.log("OK — structure 1.5.11, profil géocentrique, fuseaux IANA et validation astronomique présents.");
+console.log("OK — structure 1.5.12, profil géocentrique, fuseaux IANA et validation astronomique présents.");
