@@ -3,7 +3,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 
 const version = "2.1.19";
-const source = path.resolve("node_modules/astronomy-engine/source/js/astronomy.browser.min.js");
+const source = path.resolve("node_modules/astronomy-engine/astronomy.browser.min.js");
 const targetDir = path.resolve("vendor/astronomy");
 const target = path.join(targetDir, "astronomy.browser.min.js");
 
