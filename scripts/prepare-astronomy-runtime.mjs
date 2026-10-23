@@ -41,7 +41,7 @@ const provenance = [
   `Version épinglée : astronomy-engine@${version}`,
   "",
   "Projet amont : https://github.com/cosinekitty/astronomy",
-  "Fichier source officiel : source/js/astronomy.browser.min.js",
+  "Fichier source officiel : astronomy.browser.min.js du package npm épinglé",
   "",
   "Le runtime navigateur est préparé localement à partir du package npm officiel épinglé.",
   "GitHub Pages prépare la même copie avant publication. L'application ne dépend pas d'un CDN d'exécution.",
