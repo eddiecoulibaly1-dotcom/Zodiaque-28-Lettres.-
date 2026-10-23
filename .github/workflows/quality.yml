@@ -10,9 +10,6 @@ on:
 permissions:
   contents: read
 
-env:
-  ASTRONOMY_ENGINE_VERSION: "2.1.19"
-
 jobs:
   quality:
     runs-on: ubuntu-latest
@@ -23,15 +20,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          package-manager-cache: false
       - name: Install dependencies
         run: npm install --ignore-scripts --no-package-lock
       - name: Prepare local Astronomy Engine runtime
-        run: |
-          set -euo pipefail
-          mkdir -p vendor/astronomy
-          cp "node_modules/astronomy-engine/astronomy.browser.min.js" vendor/astronomy/astronomy.browser.min.js
-          test -s vendor/astronomy/astronomy.browser.min.js
-          grep -Eq '\.Astronomy=[A-Za-z_$]' vendor/astronomy/astronomy.browser.min.js
-          sha256sum vendor/astronomy/astronomy.browser.min.js | tee vendor/astronomy/SHA256SUMS
+        run: npm run prepare:runtime
       - name: Validate application
         run: npm run validate
