@@ -28,9 +28,10 @@
     const counts = Object.fromEntries(ELEMENTS.map(e => [e, 0]));
     const values = Object.fromEntries(ELEMENTS.map(e => [e, 0]));
     let total = 0, recognized = 0;
-    for (const ch of [...(text || "")]) {
-      if (/[\u064B-\u065F\u0670\u06D6-\u06ED]/u.test(ch) || /[\s\p{P}\p{S}]/u.test(ch)) continue;
-      const l = map.get(ch);
+    for (const ch of [...(text || "").normalize("NFC")]) {
+      const normalized = window.Z28AbjadNormalization?.normalizeLetter(ch) ?? ( /[\u064B-\u065F\u0670\u06D6-\u06ED]/u.test(ch) || /[\s\p{P}\p{S}]/u.test(ch) || ch === "ـ" ? null : ch);
+      if (normalized === null) continue;
+      const l = map.get(normalized);
       if (!l) continue;
       total += Number(l.abjad_maghribi);
       recognized++;

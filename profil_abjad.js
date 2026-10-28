@@ -31,15 +31,16 @@
     const details = [];
     let total = 0;
     let recognized = 0;
-    for (const ch of [...(text || "")]) {
-      if (/[\u064B-\u065F\u0670\u06D6-\u06ED]/u.test(ch) || /[\s\p{P}\p{S}]/u.test(ch)) continue;
-      const l = map.get(ch);
+    for (const ch of [...(text || "").normalize("NFC")]) {
+      const normalized = window.Z28AbjadNormalization?.normalizeLetter(ch) ?? ( /[\u064B-\u065F\u0670\u06D6-\u06ED]/u.test(ch) || /[\s\p{P}\p{S}]/u.test(ch) || ch === "ـ" ? null : ch);
+      if (normalized === null) continue;
+      const l = map.get(normalized);
       if (!l) { unknown.set(ch, (unknown.get(ch) || 0) + 1); continue; }
       total += Number(l.abjad_maghribi);
       recognized++;
       counts[l.element]++;
       values[l.element] += Number(l.abjad_maghribi);
-      details.push(l);
+      details.push({...l, inputLetter: ch});
     }
     const maxCount = Math.max(...Object.values(counts), 0);
     const maxValue = Math.max(...Object.values(values), 0);
@@ -55,7 +56,7 @@
       </div>
     </div>
     <div class="card" style="margin-top:12px"><h3>Détail lettre par lettre</h3>
-      ${r.details.length ? `<div class="table-wrap"><table><thead><tr><th>Lettre</th><th>Nom</th><th>Abjad</th><th>Élément</th></tr></thead><tbody>${r.details.map(l => `<tr><td class="arabic">${esc(l.letter)}</td><td>${esc(l.name_fr)}</td><td>${l.abjad_maghribi}</td><td>${esc(l.element)}</td></tr>`).join("")}</tbody></table></div>` : `<p class="muted">Aucune lettre reconnue.</p>`}
+      ${r.details.length ? `<div class="table-wrap"><table><thead><tr><th>Saisie</th><th>Lettre référentiel</th><th>Nom</th><th>Abjad</th><th>Élément</th></tr></thead><tbody>${r.details.map(l => `<tr><td class="arabic">${esc(l.inputLetter)}</td><td class="arabic">${esc(l.letter)}</td><td>${esc(l.name_fr)}</td><td>${l.abjad_maghribi}</td><td>${esc(l.element)}</td></tr>`).join("")}</tbody></table></div>` : `<p class="muted">Aucune lettre reconnue.</p>`}
       ${r.unknown.length ? `<div class="warning"><b>Caractères non référencés :</b> ${r.unknown.map(x => `<span class="pill">${esc(x[0])} ×${x[1]}</span>`).join(" ")}</div>` : ""}
     </div>
     <p class="tiny muted">Cette analyse utilise exclusivement l'Abjad Maghrébin et la classification élémentaire du référentiel. Aucune correspondance lettre → signe → planète n'est déduite.</p>`;
