@@ -14,4 +14,5 @@ if (flow.includes("name?.value")) throw new Error("Référence au nom hors de sa
 if (!flow.includes("const profileName = document.querySelector(\"#pName\")")) throw new Error("Le nom du profil doit être lu dans une portée valide.");
 if (!flow.includes('let host = $("#profileSynthesisHost")')) throw new Error("Le conteneur de synthèse doit être réutilisé sans imbriquer de panneaux.");
 if (flow.includes('$("#profileSynthesis") || document.createElement("div")')) throw new Error("Ancien rendu susceptible de créer des panneaux imbriqués détecté.");
+if (!flow.includes('$("#profileFlowCard")')) throw new Error("La garde anti-boucle du MutationObserver est absente.");
 console.log("OK — parcours V2 Profil → Abjad → thème → synthèse validé.");
