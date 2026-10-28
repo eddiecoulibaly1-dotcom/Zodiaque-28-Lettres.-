@@ -58,7 +58,9 @@
 
   async function mount() {
     const root = $("#app"), calc = $("#pCalc");
-    if (!root || !calc || $("#profileSynthesis")) return;
+    // Garde idempotente : le MutationObserver réagit aux propres insertions du module.
+    // Sans cette vérification, le panneau se recrée sans fin et bloque le navigateur mobile.
+    if (!root || !calc || $("#profileSynthesis") || $("#profileFlowCard")) return;
     const panel = document.createElement("section");
     panel.id = "profileFlowCard";
     panel.className = "card";
