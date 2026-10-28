@@ -18,8 +18,8 @@ if (!index.includes('href="manifest.webmanifest"')) {
 if (manifest.start_url !== "./" || manifest.scope !== "./") {
   throw new Error("Le manifeste PWA doit utiliser le périmètre local de l'application.");
 }
-if (!manifest.icons?.some(icon => icon.src === "icon.svg" && icon.type === "image/svg+xml")) {
-  throw new Error("Le manifeste PWA doit déclarer l'icône locale SVG.");
+if (!manifest.icons?.some(icon => icon.src === "icons/icon-192.svg" && icon.type === "image/svg+xml")) {
+  throw new Error("Le manifeste PWA doit déclarer une icône locale SVG adaptée à Android.");
 }
 if (manifest.lang !== "fr" || manifest.dir !== "ltr") {
   throw new Error("Les métadonnées linguistiques PWA doivent être explicites.");
