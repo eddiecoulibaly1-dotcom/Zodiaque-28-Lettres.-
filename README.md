@@ -4,7 +4,7 @@ Application fondée sur le référentiel **Abjad Maghrébin**, les 28 lettres ar
 
 ## État actuel
 
-**Version 1.5.15 — PWA hors ligne renforcée, service worker enregistré, manifeste PWA complet, validation astronomique renforcée, longitudes géocentriques ECT, gestion IANA/DST du temps natal, thème natal visuel et recherche locale de lieux.**
+**Version 1.5.17 — PWA hors ligne renforcée, service worker enregistré, manifeste PWA complet, validation astronomique renforcée, longitudes géocentriques ECT, gestion IANA/DST du temps natal, thème natal visuel et recherche locale de lieux.**
 
 Le dépôt contient notamment :
 
