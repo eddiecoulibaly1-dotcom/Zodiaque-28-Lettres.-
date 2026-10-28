@@ -4,7 +4,7 @@ Application fondée sur le référentiel **Abjad Maghrébin**, les 28 lettres ar
 
 ## État actuel
 
-**Version 1.5.14 — PWA hors ligne renforcée, service worker enregistré, manifeste PWA complet, validation astronomique renforcée, longitudes géocentriques ECT, gestion IANA/DST du temps natal, thème natal visuel et recherche locale de lieux.**
+**Version 1.5.15 — PWA hors ligne renforcée, service worker enregistré, manifeste PWA complet, validation astronomique renforcée, longitudes géocentriques ECT, gestion IANA/DST du temps natal, thème natal visuel et recherche locale de lieux.**
 
 Le dépôt contient notamment :
 
@@ -32,7 +32,10 @@ Le dépôt contient notamment :
 - refus explicite des heures civiles inexistantes ou ambiguës dans le convertisseur IANA ;
 - module lunaire unifié synchronisé avec les coordonnées du profil ;
 - interface FR / العربية / EN avec RTL arabe ;
-- PWA / service worker enregistré et cache versionné.
+- PWA / service worker enregistré et cache versionné ;
+- diagnostic visible de l'installation Android et des ressources hors connexion ;
+- icônes d'installation dédiées 192 × 192 et 512 × 512 ;
+- repli sur la page d'accueil mise en cache lors d'une navigation hors connexion.
 
 ## Astronomie
 

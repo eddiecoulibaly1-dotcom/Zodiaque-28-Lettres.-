@@ -33,6 +33,19 @@ if (!sw.includes("./vendor/astronomy/astronomy.browser.min.js")) {
 if (!sw.includes("./abjad_normalisation.js") || !sw.includes("./profil_synthese.js") || !sw.includes("./application_ui.js")) {
   throw new Error("Le cache hors ligne doit inclure les modules du parcours de profil et Abjad.");
 }
+if (!manifest.icons?.some(icon => icon.src === "icons/icon-192.svg" && icon.sizes === "192x192") || !manifest.icons?.some(icon => icon.src === "icons/icon-512.svg" && icon.sizes === "512x512")) {
+  throw new Error("Le manifeste doit déclarer des icônes d'installation Android en 192 et 512 pixels.");
+}
+if (!index.includes('src="./pwa.js"') || !sw.includes('"./pwa.js"')) {
+  throw new Error("Le diagnostic PWA doit être chargé et disponible hors connexion.");
+}
+if (!sw.includes('"./icons/icon-192.svg"') || !sw.includes('"./icons/icon-512.svg"')) {
+  throw new Error("Les icônes Android doivent être pré-cachées pour l'installation hors connexion.");
+}
+if (!sw.includes('event.request.mode === "navigate"') || !sw.includes('caches.match("./index.html")')) {
+  throw new Error("Le service worker doit restituer le shell HTML en navigation hors connexion.");
+}
+if (!sw.includes("1.5.15")) throw new Error("Le service worker doit utiliser le cache versionné 1.5.15.");
 if (!sw.includes("./referentiel/reference-manifest.json")) {
   throw new Error("Le cache hors ligne doit inclure le manifeste du référentiel.");
 }

@@ -1,10 +1,10 @@
-const CACHE="zodiaque-28-lettres-1.5.14";
+const CACHE="zodiaque-28-lettres-1.5.15";
 const ASSETS=[
   "./","./index.html","./styles.css","./app.js","./astronomy.js",
   "./profil.js","./profil_astronomique.js","./abjad_normalisation.js","./profil_abjad.js","./profil_lunaire.js",
   "./localisation.js","./localisation_i18n.js","./localisation_lieux.js","./timezone.js",
   "./i18n.js","./theme_synthese.js","./astronomie_diagnostics.js","./module_lunaire_unifie.js","./application_ui.js","./profil_synthese.js",
-  "./manifest.webmanifest","./icon.svg",
+  "./manifest.webmanifest","./icon.svg","./icons/icon-192.svg","./icons/icon-512.svg","./pwa.js",
   "./vendor/astronomy/astronomy.browser.min.js",
   "./referentiel/lettres.json","./referentiel/zodiaque.json","./referentiel/planetes.json",
   "./referentiel/correspondances.json","./referentiel/correspondances_traditionnelles.json",
@@ -40,11 +40,17 @@ self.addEventListener("fetch", event => {
           caches.open(CACHE).then(cache => cache.put(event.request, copy));
         }
         return response;
-      }).catch(() => new Response("Hors connexion : ressource non mise en cache.", {
-        status: 503,
-        statusText: "Service Unavailable",
-        headers: {"Content-Type": "text/plain; charset=utf-8"}
-      }));
+      }).catch(async () => {
+        if (event.request.mode === "navigate") {
+          const shell = await caches.match("./index.html");
+          if (shell) return shell;
+        }
+        return new Response("Hors connexion : cette ressource n'est pas disponible dans le cache local.", {
+          status: 503,
+          statusText: "Service Unavailable",
+          headers: {"Content-Type": "text/plain; charset=utf-8"}
+        });
+      });
     })
   );
 });
