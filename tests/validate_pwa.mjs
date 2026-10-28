@@ -36,6 +36,8 @@ if (!sw.includes('event.request.mode === "navigate"') || !sw.includes('new URL("
 if (!sw.includes("await cache.add(path)") || !sw.includes("Ressource non mise en cache") || !sw.includes("__z28_cache_report__.json")) {
   throw new Error("L'installation doit tolérer une ressource manquante et enregistrer un rapport de cache.");
 }
+if (!pwa.includes('new URL("./", document.baseURI).href')) throw new Error("Le contrôle du service worker doit utiliser une URL absolue sur GitHub Pages.");
+if (!pwa.includes('"./pwa.js"')) throw new Error("Le diagnostic PWA doit vérifier sa propre disponibilité hors connexion.");
 if (!pwa.includes("Ressources manquantes") || !pwa.includes("cache incomplet") && !pwa.includes("Cache incomplet")) {
   throw new Error("Le diagnostic doit signaler les ressources manquantes.");
 }
