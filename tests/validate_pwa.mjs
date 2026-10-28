@@ -10,10 +10,10 @@ const version = fs.readFileSync("VERSION", "utf8").trim();
 const finalManifest = JSON.parse(fs.readFileSync("FINAL_MANIFEST.json", "utf8"));
 const readme = fs.readFileSync("README.md", "utf8");
 
-if (!/navigator\\.serviceWorker\\.register\\(["']\\.\\/sw\\.js["']/.test(app)) {
+if (!app.includes('navigator.serviceWorker.register("./sw.js")')) {
   throw new Error("app.js doit enregistrer le service worker local.");
 }
-if (/navigator\\.serviceWorker\\.register/.test(index)) {
+if (index.includes("navigator.serviceWorker.register")) {
   throw new Error("index.html ne doit pas enregistrer une seconde fois le service worker.");
 }
 if (!index.includes('href="manifest.webmanifest"')) throw new Error("index.html doit déclarer le manifeste PWA.");
