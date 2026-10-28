@@ -30,6 +30,9 @@ if (!sw.includes(`zodiaque-28-lettres-${pkg.version}`)) {
 if (!sw.includes("./vendor/astronomy/astronomy.browser.min.js")) {
   throw new Error("Le cache hors ligne doit inclure le runtime astronomique local.");
 }
+if (!sw.includes("./abjad_normalisation.js") || !sw.includes("./profil_synthese.js") || !sw.includes("./application_ui.js")) {
+  throw new Error("Le cache hors ligne doit inclure les modules du parcours de profil et Abjad.");
+}
 if (!sw.includes("./referentiel/reference-manifest.json")) {
   throw new Error("Le cache hors ligne doit inclure le manifeste du référentiel.");
 }

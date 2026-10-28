@@ -67,8 +67,8 @@
     const theme = $("#pTheme");
     if (theme) theme.after(panel); else root.append(panel);
 
-    const text = $("#pText"), name = $("#pName");
     const syncName = () => {
+      const text = $("#pText"), name = $("#pName");
       if (!text || !name) return;
       text.value = name.value.trim();
       localStorage.setItem(KEY, text.value);
@@ -76,11 +76,11 @@
     $("#profileUseName").onclick = () => {
       syncName();
       $("#profileFlowStatus").textContent = "Nom transféré vers l’analyse Abjad.";
-      text?.focus();
+      $("#pText")?.focus();
     };
     $("#profileAnalyzeName").onclick = async () => {
       syncName();
-      const value = text?.value || "";
+      const value = $("#pText")?.value || "";
       const status = $("#profileFlowStatus");
       status.textContent = "Analyse en cours…";
       try {
