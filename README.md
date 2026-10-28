@@ -4,14 +4,16 @@ Application fondée sur le référentiel **Abjad Maghrébin**, les 28 lettres ar
 
 ## État actuel
 
-**Version 1.5.13 — PWA hors ligne renforcée, service worker enregistré, manifeste PWA complet, validation astronomique renforcée, longitudes géocentriques ECT, gestion IANA/DST du temps natal, thème natal visuel et recherche locale de lieux.**
+**Version 1.5.14 — PWA hors ligne renforcée, service worker enregistré, manifeste PWA complet, validation astronomique renforcée, longitudes géocentriques ECT, gestion IANA/DST du temps natal, thème natal visuel et recherche locale de lieux.**
 
 Le dépôt contient notamment :
 
 - référentiel Abjad Maghrébin verrouillé ;
 - classification élémentaire 7 / 7 / 7 / 7 ;
 - 12 signes, modalités et planètes ;
-- calculateur Abjad ;
+- calculateur Abjad avec normalisation orthographique arabe explicite (variantes d'alif et alif maqṣūra) ;
+- conservation comme caractères non référencés des graphies hamzées et de la tāʾ marbūṭa, faute de règle validée ;
+- parcours de synthèse du profil relié au calcul Abjad ;
 - phases et structure lunaire ;
 - calculs astronomiques avec Astronomy Engine 2.1.19 ;
 - runtime Astronomy Engine préparé localement à partir du package npm épinglé ;
