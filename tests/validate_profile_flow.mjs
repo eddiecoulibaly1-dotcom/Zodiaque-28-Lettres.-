@@ -12,4 +12,6 @@ if (!flow.includes("traditionnel/symbolique")) throw new Error("Le cadre symboli
 if (!flow.includes("aucune correspondance lettre → signe → planète non définie")) throw new Error("La règle anti-invention des correspondances n'est pas protégée.");
 if (flow.includes("name?.value")) throw new Error("Référence au nom hors de sa portée détectée.");
 if (!flow.includes("const profileName = document.querySelector(\"#pName\")")) throw new Error("Le nom du profil doit être lu dans une portée valide.");
+if (!flow.includes('let host = $("#profileSynthesisHost")')) throw new Error("Le conteneur de synthèse doit être réutilisé sans imbriquer de panneaux.");
+if (flow.includes('$("#profileSynthesis") || document.createElement("div")')) throw new Error("Ancien rendu susceptible de créer des panneaux imbriqués détecté.");
 console.log("OK — parcours V2 Profil → Abjad → thème → synthèse validé.");
