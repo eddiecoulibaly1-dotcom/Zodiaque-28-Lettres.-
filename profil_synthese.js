@@ -88,7 +88,8 @@
         const result = analyse(value);
         const host = $("#profileSynthesis") || document.createElement("div");
         if (!host.id) { host.id = "profileSynthesisHost"; panel.after(host); }
-        host.innerHTML = render(result, name?.value.trim() || value);
+        const profileName = document.querySelector("#pName")?.value?.trim() || value;
+        host.innerHTML = render(result, profileName);
         status.textContent = "Analyse Abjad et synthèse mises à jour.";
         document.querySelector("#profileSynthesis")?.scrollIntoView({behavior:"smooth", block:"nearest"});
       } catch (e) {
