@@ -2,51 +2,59 @@ import fs from "node:fs";
 
 const index = fs.readFileSync("index.html", "utf8");
 const app = fs.readFileSync("app.js", "utf8");
+const pwa = fs.readFileSync("pwa.js", "utf8");
 const manifest = JSON.parse(fs.readFileSync("manifest.webmanifest", "utf8"));
 const sw = fs.readFileSync("sw.js", "utf8");
 const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
+const version = fs.readFileSync("VERSION", "utf8").trim();
+const finalManifest = JSON.parse(fs.readFileSync("FINAL_MANIFEST.json", "utf8"));
+const readme = fs.readFileSync("README.md", "utf8");
 
-if (!/navigator\.serviceWorker\.register\(["']\.\/sw\.js["']/.test(app)) {
+if (!/navigator\\.serviceWorker\\.register\\(["']\\.\\/sw\\.js["']/.test(app)) {
   throw new Error("app.js doit enregistrer le service worker local.");
 }
-if (/navigator\.serviceWorker\.register/.test(index)) {
+if (/navigator\\.serviceWorker\\.register/.test(index)) {
   throw new Error("index.html ne doit pas enregistrer une seconde fois le service worker.");
 }
-if (!index.includes('href="manifest.webmanifest"')) {
-  throw new Error("index.html doit déclarer le manifeste PWA.");
+if (!index.includes('href="manifest.webmanifest"')) throw new Error("index.html doit déclarer le manifeste PWA.");
+if (manifest.start_url !== "./" || manifest.scope !== "./") throw new Error("Le manifeste PWA doit utiliser le périmètre local de l'application.");
+if (manifest.lang !== "fr" || manifest.dir !== "ltr") throw new Error("Les métadonnées linguistiques PWA doivent être explicites.");
+if (!manifest.icons?.some(icon => icon.src === "icons/icon-192.svg" && icon.sizes === "192x192") ||
+    !manifest.icons?.some(icon => icon.src === "icons/icon-512.svg" && icon.sizes === "512x512")) {
+  throw new Error("Le manifeste doit déclarer les icônes locales 192 et 512 px.");
 }
-if (manifest.start_url !== "./" || manifest.scope !== "./") {
-  throw new Error("Le manifeste PWA doit utiliser le périmètre local de l'application.");
+if (pkg.version !== version || finalManifest.version !== pkg.version) throw new Error("package.json, VERSION et FINAL_MANIFEST.json doivent partager la même version.");
+if (!index.includes(`Application ${pkg.version}`)) throw new Error("Le pied de page doit afficher la version de l'application.");
+if (!readme.includes(`Version ${pkg.version}`)) throw new Error("Le README doit documenter la version courante.");
+if (!sw.includes(`zodiaque-28-lettres-${pkg.version}`)) throw new Error(`Le cache du service worker doit correspondre à la version ${pkg.version}.`);
+if (!index.includes('src="./pwa.js"') || !sw.includes('"./pwa.js"')) throw new Error("Le diagnostic PWA doit être chargé et pré-caché.");
+if (!sw.includes('"./vendor/astronomy/astronomy.browser.min.js"')) throw new Error("Le runtime astronomique local doit être pré-caché.");
+if (!sw.includes('"./referentiel/reference-manifest.json"')) throw new Error("Le manifeste du référentiel doit être pré-caché.");
+if (!sw.includes('event.request.mode === "navigate"') || !sw.includes('new URL("./index.html", self.registration.scope)')) {
+  throw new Error("Le service worker doit restituer le shell HTML lors d'une navigation hors connexion.");
 }
-if (!manifest.icons?.some(icon => icon.src === "icons/icon-192.svg" && icon.type === "image/svg+xml")) {
-  throw new Error("Le manifeste PWA doit déclarer une icône locale SVG adaptée à Android.");
+if (!sw.includes("await cache.add(path)") || !sw.includes("Ressource non mise en cache") || !sw.includes("__z28_cache_report__.json")) {
+  throw new Error("L'installation doit tolérer une ressource manquante et enregistrer un rapport de cache.");
 }
-if (manifest.lang !== "fr" || manifest.dir !== "ltr") {
-  throw new Error("Les métadonnées linguistiques PWA doivent être explicites.");
+if (!pwa.includes("Ressources manquantes") || !pwa.includes("cache incomplet") && !pwa.includes("Cache incomplet")) {
+  throw new Error("Le diagnostic doit signaler les ressources manquantes.");
 }
-if (!sw.includes(`zodiaque-28-lettres-${pkg.version}`)) {
-  throw new Error(`Le cache du service worker doit correspondre à la version ${pkg.version}.`);
+
+const parseAssetList = (source, marker) => {
+  const start = source.indexOf(marker);
+  if (start < 0) throw new Error(`Liste de ressources absente : ${marker}`);
+  const tail = source.slice(start);
+  const body = tail.slice(tail.indexOf("[") + 1, tail.indexOf("]"));
+  return [...body.matchAll(/"([^"]+)"/g)].map(match => match[1]);
+};
+const cachedAssets = parseAssetList(sw, "const ASSETS");
+const checkedAssets = parseAssetList(pwa, "const REQUIRED");
+for (const path of checkedAssets) {
+  if (!cachedAssets.includes(path)) throw new Error(`La ressource contrôlée n'est pas déclarée dans le cache : ${path}`);
 }
-if (!sw.includes("./vendor/astronomy/astronomy.browser.min.js")) {
-  throw new Error("Le cache hors ligne doit inclure le runtime astronomique local.");
-}
-if (!sw.includes("./abjad_normalisation.js") || !sw.includes("./profil_synthese.js") || !sw.includes("./application_ui.js")) {
-  throw new Error("Le cache hors ligne doit inclure les modules du parcours de profil et Abjad.");
-}
-if (!manifest.icons?.some(icon => icon.src === "icons/icon-192.svg" && icon.sizes === "192x192") || !manifest.icons?.some(icon => icon.src === "icons/icon-512.svg" && icon.sizes === "512x512")) {
-  throw new Error("Le manifeste doit déclarer des icônes d'installation Android en 192 et 512 pixels.");
-}
-if (!index.includes('src="./pwa.js"') || !sw.includes('"./pwa.js"')) {
-  throw new Error("Le diagnostic PWA doit être chargé et disponible hors connexion.");
-}
-if (!sw.includes('"./icons/icon-192.svg"') || !sw.includes('"./icons/icon-512.svg"')) {
-  throw new Error("Les icônes Android doivent être pré-cachées pour l'installation hors connexion.");
-}
-if (!sw.includes('event.request.mode === "navigate"') || !sw.includes('caches.match("./index.html")')) {
-  throw new Error("Le service worker doit restituer le shell HTML en navigation hors connexion.");
-}
-if (!sw.includes("1.5.15")) throw new Error("Le service worker doit utiliser le cache versionné 1.5.15.");
-if (!sw.includes("./referentiel/reference-manifest.json")) {
-  throw new Error("Le cache hors ligne doit inclure le manifeste du référentiel.");
-}
-console.log(`OK — PWA, service worker et cache versionné validés pour ${pkg.version}.`);
+const missingFiles = cachedAssets
+  .filter(path => path !== "./" && path !== "./vendor/astronomy/astronomy.browser.min.js")
+  .filter(path => !fs.existsSync(path.replace(/^\.\//, "")));
+if (missingFiles.length) throw new Error("Ressources de cache absentes du dépôt : " + missingFiles.join(", "));
+if (!fs.existsSync("vendor/astronomy/astronomy.browser.min.js")) throw new Error("Le runtime astronomique doit être préparé avant la validation PWA.");
+console.log(`OK — PWA ${pkg.version} : versions synchronisées, ${cachedAssets.length} ressources déclarées et diagnostic hors ligne exhaustif.`);
