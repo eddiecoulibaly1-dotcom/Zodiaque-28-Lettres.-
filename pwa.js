@@ -62,7 +62,7 @@
       return;
     }
     try {
-      const registration = await navigator.serviceWorker.getRegistration(new URL("./", document.baseURI).pathname);
+      const registration = await navigator.serviceWorker.getRegistration(new URL("./", document.baseURI).href);
       if (!registration) {
         status.textContent = "Service worker non enregistré. Ouvrez le site en HTTPS, avec une connexion Internet, puis rechargez la page.";
         return;
