@@ -29,8 +29,8 @@ jobs:
           node-version: 22
       - name: Install dependencies
         run: npm install --ignore-scripts --no-package-lock
-      - name: Prepare local Astronomy Engine runtime
-        run: npm run prepare:runtime
+      - name: Validate application
+        run: npm run validate
       - name: Stage public application
         run: |
           set -euo pipefail
