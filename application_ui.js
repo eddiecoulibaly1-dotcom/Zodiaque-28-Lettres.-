@@ -76,11 +76,12 @@
     if (!section) return;
     const language = lang();
     const l = localLabels[language];
-    section.querySelector("#productQuickActionsTitle").textContent = l.quickTitle;
-    section.querySelector("#productQuickActionsIntro").textContent = l.quickIntro;
-    section.querySelector("#productSafetyNote").textContent = l.safety;
+    if (section.querySelector("#productQuickActionsTitle").textContent !== l.quickTitle) section.querySelector("#productQuickActionsTitle").textContent = l.quickTitle;
+    if (section.querySelector("#productQuickActionsIntro").textContent !== l.quickIntro) section.querySelector("#productQuickActionsIntro").textContent = l.quickIntro;
+    if (section.querySelector("#productSafetyNote").textContent !== l.safety) section.querySelector("#productSafetyNote").textContent = l.safety;
     section.querySelectorAll("[data-i18n]").forEach(button => {
-      button.textContent = label(language, button.dataset.i18n);
+      const nextText = label(language, button.dataset.i18n);
+      if (button.textContent !== nextText) button.textContent = nextText;
     });
   }
 
@@ -96,7 +97,8 @@
       badge.className = "tag";
       title.insertAdjacentElement("afterend", badge);
     }
-    badge.textContent = localLabels[lang()].badge;
+    const nextBadge = localLabels[lang()].badge;
+    if (badge.textContent !== nextBadge) badge.textContent = nextBadge;
   }
 
   function run() {
