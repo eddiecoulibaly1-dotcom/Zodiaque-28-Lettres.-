@@ -32,8 +32,9 @@
 
 ## Intégration actuelle
 - `firebase-client.js` contient le client modulaire Firebase et les opérations Auth/CRUD initiales.
-- `docs/FIREBASE_SETUP.md` documente la configuration et les précautions.
-- Le module client n’est pas encore branché aux écrans existants. Il faut connecter l’interface dans une étape distincte sans remplacer le moteur astronomique.
+- `firebase-ui.js` ajoute une section « Compte / Mes profils » avec inscription, connexion, réinitialisation du mot de passe et gestion CRUD des profils.
+- `index.html` charge le nouveau module et `sw.js` met à jour le cache PWA.
+- Cette intégration est sur la branche de développement uniquement. Elle doit être testée dans un environnement Preview avant toute publication.
 - La migration SQL Supabase ajoutée précédemment est un artefact historique de la première option ; elle n’est pas utilisée par la solution Firebase.
 
 ## Déploiement et coûts
