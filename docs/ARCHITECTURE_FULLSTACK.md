@@ -1,60 +1,53 @@
 # Zodiaque & 28 Lettres — architecture full-stack cible
 
-## Décisions
+## Décisions actuelles
 - Dépôt canonique : `eddiecoulibaly1-dotcom/Zodiaque-28-Lettres.-`.
-- Conserver le référentiel Abjad Maghrébin, le moteur Astronomy Engine 2.1.19 et les modules de calcul existants tant que les tests ne justifient pas de changement.
-- Vercel : hébergement web/PWA et déploiements liés à Git.
-- Supabase : Auth et PostgreSQL pour les comptes et profils sauvegardés.
-- GitHub Actions : validation obligatoire avant toute publication.
-- Migration développée sur une branche dédiée, sans remplacement immédiat de la version actuellement publiée.
+- Conserver le référentiel Abjad Maghrébin, le moteur Astronomy Engine 2.1.19 et les modules existants.
+- Firebase Authentication + Cloud Firestore pour les comptes et profils sauvegardés.
+- Vercel reste l'hébergement envisagé pour la PWA ; vérifier les coûts du plan associé avant tout déploiement.
+- GitHub Pages / `main` reste la version de référence jusqu'à validation de la nouvelle version.
+- Développement sur `feature/full-stack-auth`.
 
 ## Périmètre V1
-1. Création de compte par e-mail/mot de passe, vérification d’e-mail, connexion, déconnexion et réinitialisation du mot de passe.
-2. Espace personnel avec nom d’affichage et langue préférée.
-3. Créer, consulter, modifier et supprimer des profils sauvegardés.
-4. Sauvegarder les entrées utiles au thème natal : nom, date/heure de naissance, fuseau IANA, coordonnées et libellé du lieu.
-5. Enregistrer un instantané JSON des résultats du thème afin de conserver ce qui a été calculé, sans prétendre qu'il est recalculé automatiquement à chaque évolution du moteur.
-6. PWA installable et fonctionnement local des fonctions de calcul ; la connexion réseau est nécessaire pour authentification et synchronisation.
+1. Inscription par e-mail/mot de passe, confirmation d’e-mail, connexion, déconnexion et réinitialisation du mot de passe.
+2. Espace personnel et profils astrologiques sauvegardés.
+3. Créer, consulter, modifier et supprimer un profil de naissance.
+4. Conserver nom, date/heure de naissance, fuseau IANA, coordonnées, lieu, notes et instantané JSON du calcul.
+5. Maintenir le calcul local/PWA hors connexion ; le réseau est requis pour Auth et la synchronisation Firestore.
+
+## Structure Firestore
+- Collection utilisateur : `users/{uid}/profiles/{profileId}`.
+- Champs autorisés dans un profil : `label`, `name`, `birthDate`, `birthTime`, `timeZone`, `latitude`, `longitude`, `place`, `calculationSnapshot`, `notes`, `createdAt`, `updatedAt`.
+- Les règles Firestore doivent vérifier que `request.auth != null` et `request.auth.uid == uid` pour chaque opération.
+- Les règles publiées dans Firebase doivent correspondre exactement à ce chemin et aux champs envoyés par le client.
+- Tester l’isolation avec deux comptes distincts avant la production.
 
 ## Sécurité
-- Utiliser uniquement la clé Supabase publishable côté navigateur ; ne jamais exposer une clé secret/service_role.
-- RLS activée sur chaque table exposée.
-- Chaque politique exige que `auth.uid() = user_id`; les politiques UPDATE possèdent USING et WITH CHECK.
-- Aucun profil sauvegardé accessible anonymement.
-- Les données de naissance et les notes sont privées, supprimables par leur propriétaire.
-- Secrets Vercel configurés dans le tableau de bord, jamais commités dans Git.
-- Configurer les URL de redirection Auth pour l'URL de production et les URL de prévisualisation nécessaires.
+- La configuration Firebase Web est prévue pour le navigateur ; elle n’est pas une clé Admin. Les règles Firestore et Firebase Authentication assurent l’autorisation.
+- Ne jamais publier de clé privée, de clé de compte de service ou de secret Admin.
+- N’autoriser aucune lecture/écriture anonyme des profils.
+- Vérifier les domaines autorisés, les modèles d’e-mail et les paramètres de confirmation d’adresse dans Firebase Authentication.
+- Les règles actuelles sont un premier contrôle ; elles doivent être testées et révisées pour les validations de types, longueurs et plages de coordonnées avant production.
+- Ne pas activer les sauvegardes planifiées ni le forfait Blaze sans accord explicite.
 
-## Données
-- `profiles`: préférences et nom d'affichage associés à l'identité Auth.
-- `saved_profiles`: profils de naissance possédés par un utilisateur, coordonnées, fuseau et instantané de calcul.
-- Les tables utilisent des clés UUID, des contraintes sur les coordonnées et des politiques RLS de propriété.
+## Intégration actuelle
+- `firebase-client.js` contient le client modulaire Firebase et les opérations Auth/CRUD initiales.
+- `docs/FIREBASE_SETUP.md` documente la configuration et les précautions.
+- Le module client n’est pas encore branché aux écrans existants. Il faut connecter l’interface dans une étape distincte sans remplacer le moteur astronomique.
+- La migration SQL Supabase ajoutée précédemment est un artefact historique de la première option ; elle n’est pas utilisée par la solution Firebase.
 
-## Déploiement et stratégie de migration
-1. Garder `main` et GitHub Pages comme version de référence tant que la version Vercel n'a pas passé les tests.
-2. Développer sur `feature/full-stack-auth`.
-3. Initialiser un projet Supabase dédié à Zodiaque, sans réutiliser les bases DJAWA ou ELELY BIO FERME.
-4. Appliquer et vérifier la migration SQL dans le projet dédié.
-5. Ajouter le client Supabase avec des dépendances versionnées et les variables d'environnement publiques nécessaires.
-6. Ajouter les écrans d'authentification et les opérations CRUD des profils.
-7. Créer le projet Vercel lié au dépôt, configurer les variables, puis tester un déploiement Preview.
-8. Exécuter les tests de régression du référentiel, du moteur astronomique, de l'Abjad, de la PWA, de l'authentification et de l'isolation RLS entre deux utilisateurs.
-9. Ne promouvoir en production qu'après tests sur Android. Conserver un plan de retour à la version précédente.
+## Déploiement et coûts
+1. Ne pas modifier `main` ni la version GitHub Pages avant validation.
+2. Compléter l’interface Auth/profils sur la branche de développement.
+3. Exécuter les tests existants du référentiel, de l’Abjad, de l’astronomie, de la localisation et de la PWA.
+4. Tester création/connexion/réinitialisation et CRUD Firestore avec deux utilisateurs.
+5. Vérifier les quotas Spark et les conditions actuelles de Firebase.
+6. Vérifier la facturation Vercel : l’espace connecté précédemment indiqué est sur un plan Pro, donc ne pas supposer que l’hébergement y sera gratuit.
+7. Déployer une Preview, vérifier sur Android et ne promouvoir qu’après validation.
 
-## Variables d'environnement
-- `VITE_SUPABASE_URL`: URL du projet Supabase (publique).
-- `VITE_SUPABASE_PUBLISHABLE_KEY`: clé publishable (publique).
-- Ne jamais créer de variable `VITE_*` contenant une clé secrète : les variables préfixées VITE sont intégrées au code navigateur.
-
-## Contrôle des coûts
-- Commencer par les offres gratuites lorsqu'elles sont disponibles.
-- Le devis actuel retourné pour créer un projet Supabase dans l'organisation existante est de 0 USD/mois ; vérifier les limites d'usage et les conditions de pause avant mise en production.
-- L'espace Vercel connecté est sur un plan Pro ; ne pas présumer que l'hébergement Vercel de cette équipe est gratuit. Vérifier la facturation ou choisir explicitement un espace Free avant le déploiement.
-- Ne pas créer de branches Supabase de développement facturables ni activer de fonctions payantes sans accord explicite.
-
-## Acceptation
-- Deux utilisateurs de test ne peuvent ni lire ni modifier les profils de l'autre.
-- Inscription, confirmation e-mail, connexion, déconnexion et récupération de mot de passe fonctionnent.
-- Un utilisateur peut sauvegarder puis recharger son thème natal après reconnexion.
-- Les tests du référentiel et du moteur astronomique passent sans modification involontaire.
-- L'application ne se bloque pas au chargement sur Android et fonctionne localement pour les fonctions hors connexion prises en charge.
+## Critères d’acceptation
+- Deux utilisateurs ne peuvent ni lire ni modifier les profils de l’autre.
+- Inscription, confirmation d’e-mail, connexion, déconnexion et réinitialisation fonctionnent.
+- Un utilisateur peut sauvegarder puis recharger son profil après reconnexion.
+- Les tests du référentiel et du moteur astronomique passent sans régression.
+- L’application reste utilisable hors connexion pour les fonctions locales prises en charge.
