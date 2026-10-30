@@ -9,6 +9,7 @@ Application fondée sur le référentiel **Abjad Maghrébin**, les 28 lettres ar
 Le dépôt contient notamment :
 
 - référentiel Abjad Maghrébin verrouillé ;
+- consultation du diagramme cosmologique des 28 lettres et des sphères (Gardiner 2017), distinct des correspondances hebdomadaires et du moteur astronomique ;
 - classification élémentaire 7 / 7 / 7 / 7 ;
 - 12 signes, modalités et planètes ;
 - calculateur Abjad avec normalisation orthographique arabe explicite (variantes d'alif et alif maqṣūra) ;
