@@ -17,3 +17,15 @@ if (!ui.includes("Astronomie technique · astrologie symbolique")) {
 }
 
 console.log("OK — couche UI produit intégrée et contrôlée.");
+
+if (!index.includes('data-view="cosmology"')) {
+  throw new Error("La navigation doit exposer les sphères cosmologiques.");
+}
+if (!ui.includes('cosmology:"referentiel/spheres_cosmologiques.json"') ||
+    !ui.includes("function viewCosmology()") ||
+    !ui.includes("function cosmologyRows(")) {
+  throw new Error("La vue consultable des sphères cosmologiques n'est pas reliée au référentiel.");
+}
+if (!ui.includes("cosmologicalForLetter(l.id)")) {
+  throw new Error("Les fiches lettres doivent afficher leurs sphères cosmologiques.");
+}
