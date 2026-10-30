@@ -74,10 +74,6 @@ function traditionalForLetter(letter){
   return {mansion,planetary,solar,lunar};
 }
 function cosmologicalForLetter(letterId){
-  const spheres=arr(DATA.cosmology?.spheres);
-  return spheres.filter(s=>arr(s.letter_ids).includes(letterId));
-}
-function cosmologicalForLetter(letterId){
   return arr(DATA.cosmology?.spheres).filter(s=>arr(s.letter_ids).includes(letterId));
 }
 function traditionalStatus(t){
