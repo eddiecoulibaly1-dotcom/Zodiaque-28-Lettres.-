@@ -352,10 +352,14 @@ function bind(view){
    $("#clearAbjad").addEventListener("click",()=>{ $("#abjadInput").value="";$("#abjadOutput").innerHTML="";});
  }
  if(view==="cosmology"){
-   $("#app").addEventListener("click",e=>{
-     const chip=e.target.closest("[data-letter-id]");
-     if(chip) openCosmologyLetter(chip.dataset.letterId);
-   });
+   const appRoot=$("#app");
+   if(!appRoot.dataset.cosmologyClickBound){
+     appRoot.addEventListener("click",e=>{
+       const chip=e.target.closest("[data-letter-id]");
+       if(chip) openCosmologyLetter(chip.dataset.letterId);
+     });
+     appRoot.dataset.cosmologyClickBound="true";
+   }
    const filter=()=>{
      const q=$("#cosmologySearch").value;
      const category=$("#cosmologyCategory").value;
