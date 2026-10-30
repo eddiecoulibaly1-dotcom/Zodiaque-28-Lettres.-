@@ -235,7 +235,7 @@ function viewCosmology(){
   </div>
   <div class="card" style="margin-top:15px">
     <h3>Lettres non attribuées dans ce diagramme</h3>
-    ${unassigned.length?unassigned.map(l=>`<span class="pill"><span class="arabic" style="font-size:1.35rem">${esc(l.letter)}</span> ${esc(l.name_fr)}</span>`).join(" "):"<p class=\"muted\">Aucune.</p>"}
+    ${unassigned.length?unassigned.map(l=>`<button type="button" class="pill letter-link" data-letter-id="${esc(l.id)}" style="border:0;cursor:pointer;font:inherit;color:inherit"><span class="arabic" style="font-size:1.35rem">${esc(l.letter)}</span> ${esc(l.name_fr)}</button>`).join(" "):"<p class=\"muted\">Aucune.</p>"}
     <p class="small muted">${esc(c.rules?.unassigned_means||"Une absence dans ce diagramme ne prouve pas une absence dans les autres traditions.")}</p>
   </div>
   <div class="card" style="margin-top:15px">
@@ -352,6 +352,10 @@ function bind(view){
    $("#clearAbjad").addEventListener("click",()=>{ $("#abjadInput").value="";$("#abjadOutput").innerHTML="";});
  }
  if(view==="cosmology"){
+   $("#app").addEventListener("click",e=>{
+     const chip=e.target.closest("[data-letter-id]");
+     if(chip) openCosmologyLetter(chip.dataset.letterId);
+   });
    const filter=()=>{
      const q=$("#cosmologySearch").value;
      const category=$("#cosmologyCategory").value;
