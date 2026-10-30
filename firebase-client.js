@@ -10,7 +10,8 @@ import {
   signOut,
   sendPasswordResetEmail,
   onAuthStateChanged,
-  updateProfile
+  updateProfile,
+  reload
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 import {
   getFirestore,
@@ -43,6 +44,7 @@ export const db = getFirestore(app);
 function requireUser() {
   const user = auth.currentUser;
   if (!user) throw new Error("Vous devez être connecté pour accéder à vos profils.");
+  if (!user.emailVerified) throw new Error("Confirme ton adresse e-mail avant d’accéder aux profils sauvegardés.");
   return user;
 }
 
@@ -61,7 +63,24 @@ export async function registerWithEmail(email, password, displayName = "") {
 
 export async function loginWithEmail(email, password) {
   const credential = await signInWithEmailAndPassword(auth, email.trim(), password);
+  await reload(credential.user);
   return credential.user;
+}
+
+export async function resendVerificationEmail() {
+  const user = auth.currentUser;
+  if (!user) throw new Error("Connecte-toi pour demander un nouvel e-mail de confirmation.");
+  await reload(user);
+  if (user.emailVerified) return true;
+  await sendEmailVerification(user);
+  return false;
+}
+
+export async function refreshEmailVerification() {
+  const user = auth.currentUser;
+  if (!user) return null;
+  await reload(user);
+  return user;
 }
 
 export async function logout() {
