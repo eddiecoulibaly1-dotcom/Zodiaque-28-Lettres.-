@@ -9,7 +9,7 @@
     "./icons/icon-192.svg", "./icons/icon-512.svg",
     "./vendor/astronomy/astronomy.browser.min.js",
     "./referentiel/lettres.json", "./referentiel/zodiaque.json", "./referentiel/planetes.json",
-    "./referentiel/correspondances.json", "./referentiel/correspondances_traditionnelles.json",
+    "./referentiel/correspondances.json", "./referentiel/correspondances_traditionnelles.json", "./referentiel/spheres_cosmologiques.json",
     "./referentiel/elements.json", "./referentiel/modalites.json", "./referentiel/phases_lunaires.json",
     "./referentiel/jours_lunaires.json", "./referentiel/lieux.json", "./referentiel/sources.json",
     "./referentiel/reference-manifest.json"

@@ -5,7 +5,7 @@ const PATHS = {
   letters:"referentiel/lettres.json", elements:"referentiel/elements.json",
   modalities:"referentiel/modalites.json", zodiac:"referentiel/zodiaque.json",
   planets:"referentiel/planetes.json", correspondences:"referentiel/correspondances.json",
-  traditionalCorrespondences:"referentiel/correspondances_traditionnelles.json",
+  traditionalCorrespondences:"referentiel/correspondances_traditionnelles.json", cosmology:"referentiel/spheres_cosmologiques.json",
   phases:"referentiel/phases_lunaires.json", lunarDays:"referentiel/jours_lunaires.json",
   sources:"referentiel/sources.json", manifest:"referentiel/reference-manifest.json"
 };
@@ -41,7 +41,7 @@ function render(view="home"){
   setActive(view);
   const f={home:viewHome,letters:viewLetters,abjad:viewAbjad,elements:viewElements,zodiac:viewZodiac,
     planets:viewPlanets,correspondences:viewCorrespondences,moon:viewMoon,astronomy:viewAstronomy,lunarDays:viewLunarDays,
-    profile:viewProfile,sources:viewSources,method:viewMethod,reference:viewReference}[view];
+    profile:viewProfile,sources:viewSources,method:viewMethod,reference:viewReference,cosmology:viewCosmology}[view];
   try{ $("#app").innerHTML=f(); bind(view); } catch(e){ $("#app").innerHTML=errorCard(e); }
 }
 function errorCard(e){ return `<div class="card"><h2>Erreur</h2><p>${esc(e.message)}</p></div>`; }
@@ -73,6 +73,9 @@ function traditionalForLetter(letter){
   const lunar=arr(t.lunar_letters).includes(letter);
   return {mansion,planetary,solar,lunar};
 }
+function cosmologicalForLetter(letterId){
+  return arr(DATA.cosmology?.spheres).filter(s=>arr(s.letter_ids).includes(letterId));
+}
 function traditionalStatus(t){
   const labels=[];
   if(t.solar) labels.push("Solaire linguistique");
@@ -93,17 +96,19 @@ function viewLetters(){
 function letterCards(rows){
  return rows.map(l=>{
    const t=traditionalForLetter(l.letter);
-   return `<article class="card letter-card">
+   const cosmological=cosmologicalForLetter(l.id);
+   return `<article class="card letter-card" id="letter-card-${esc(l.id)}">
    <div class="glyph arabic-lg">${esc(l.letter)}</div>
    <div><h3>${esc(l.name_fr)}</h3><div class="muted">${esc(l.name_ar)} · ${esc(l.transliteration)}</div>
    <div class="sign-meta"><span class="tag">Abjad ${l.abjad_maghribi}</span><span class="pill">${esc(l.element)}</span></div>
    ${traditionalBadges(t)}
    <p class="small">${esc(l.symbolic_meaning||undefinedText)}</p>
-   <details><summary>Correspondances documentées</summary>
+   <details id="letter-details-${esc(l.id)}"><summary>Correspondances documentées</summary>
      <p><b>Demeure lunaire :</b> ${esc(t.mansion?.mansion||undefinedText)}${t.mansion?.mansion_ar?` · ${esc(t.mansion.mansion_ar)}`:""}</p>
      <p><b>Secteur zodiacal traditionnel :</b> ${t.mansion?.zodiac_segments?.length?arr(t.mansion.zodiac_segments).map(esc).join(" · "):undefinedText}</p>
      <p><b>Planète classique :</b> ${t.planetary?`${esc(t.planetary.planet)} · ${esc(t.planetary.day)}`:undefinedText}</p>
      <p><b>Statut linguistique :</b> ${t.solar?"lettre solaire":t.lunar?"lettre lunaire":undefinedText}</p>
+     <p><b>Sphère(s) cosmologique(s) :</b> ${cosmological.length?cosmological.map(s=>esc(s.name_fr)).join(" · "):"Non attribuée dans ce diagramme."}</p>
      <p class="small muted">Source de la couche traditionnelle : ${traditionalSourceHtml()}</p>
    </details></div>
  </article>`;
@@ -177,12 +182,67 @@ function viewCorrespondences(){
    return `<tr><td class="arabic">${esc(l.letter)}</td><td>${l.abjad_maghribi}</td><td>${esc(l.element)}</td><td>${tr.mansion?`${esc(tr.mansion.mansion)}<br><span class="small">${esc(tr.mansion.mansion_ar)}</span>`:undefinedText}</td><td>${tr.mansion?.zodiac_segments?.length?arr(tr.mansion.zodiac_segments).map(esc).join("<br>"):undefinedText}</td><td>${tr.planetary?`${esc(tr.planetary.planet)}<br><span class="small">${esc(tr.planetary.day)}</span>`:undefinedText}</td><td>${tr.solar?"Solaire linguistique":tr.lunar?"Lunaire linguistique":undefinedText}</td><td>${esc(z?.name_fr||undefinedText)}</td><td>${esc(p?.name_fr||undefinedText)}</td></tr>`;
  });
  return `<h2>Correspondances traditionnelles</h2>
- <div class="warning"><b>Couche distincte :</b> les données ci-dessous proviennent du référentiel traditionnel documenté. Elles ne sont ni des calculs astronomiques ni des correspondances déduites. Une donnée absente reste : <i>${undefinedText}</i></div>
+ <div class="card" style="margin-bottom:15px"><h3>Diagramme des sphères cosmologiques</h3><p class="muted">Consulter séparément les associations des lettres aux sphères supérieures, planétaires, élémentaires et principes spéciaux.</p><button class="secondary" data-go="cosmology">Ouvrir les sphères cosmologiques</button></div>\n <div class="warning"><b>Couche distincte :</b> les données ci-dessous proviennent du référentiel traditionnel documenté. Elles ne sont ni des calculs astronomiques ni des correspondances déduites. Une donnée absente reste : <i>${undefinedText}</i></div>
  <div class="card"><h3>28 lettres · 28 demeures · secteurs zodiacaux · 7 lettres planétaires</h3>
  <p class="small muted">La distinction solaire/lunaire est linguistique (assimilation ou non du lām de l'article al-), et ne constitue pas une attribution astronomique au Soleil ou à la Lune.</p>
  <p class="small">${esc(t.planetary_assignment_rule||"")}</p></div>
  <div class="table-wrap"><table><thead><tr><th>Lettre</th><th>Abjad</th><th>Élément</th><th>Demeure lunaire</th><th>Secteur zodiacal traditionnel</th><th>Planète classique</th><th>Statut solaire/lunaire</th><th>Signe configuré</th><th>Planète configurée</th></tr></thead><tbody>${rows.join("")}</tbody></table></div>
  <div class="card" style="margin-top:15px"><h3>Sources de cette couche</h3><p class="small">${traditionalSourceHtml()}</p><p class="tiny muted">Statut : tradition symbolique/ésotérique, non scientifique. Les positions astronomiques calculées par l'application restent séparées.</p></div>`;
+}
+
+
+function cosmologyRows(query="", category=""){
+  const q=query.toLocaleLowerCase("fr").trim();
+  const letterMap=new Map(DATA.letters.letters.map(l=>[l.id,l]));
+  const sphereRows=arr(DATA.cosmology?.spheres).filter(s=>{
+    if(category && s.category!==category) return false;
+    const letters=arr(s.letter_ids).map(id=>letterMap.get(id)).filter(Boolean);
+    const haystack=[s.name_fr,s.category,...letters.flatMap(l=>[l.letter,l.name_fr,l.transliteration,String(l.abjad_maghribi)])].join(" ").toLocaleLowerCase("fr");
+    return !q || haystack.includes(q);
+  }).map(s=>{
+    const letters=arr(s.letter_ids).map(id=>letterMap.get(id)).filter(Boolean);
+    return `<tr><td><b>${esc(s.name_fr)}</b></td><td><span class="pill">${esc(s.category.replaceAll("_"," "))}</span></td><td>${letters.map(l=>`<button type="button" class="pill letter-link" data-letter-id="${esc(l.id)}" title="Ouvrir la fiche de ${esc(l.name_fr)}" aria-label="Ouvrir la fiche de ${esc(l.name_fr)}" style="border:0;cursor:pointer;font:inherit;color:inherit"><span class="arabic" style="font-size:1.35rem">${esc(l.letter)}</span> ${esc(l.name_fr)} <span class="muted small">(${l.abjad_maghribi})</span></button>`).join(" ")}</td></tr>`;
+  }).join("");
+  const unassigned=arr(DATA.cosmology?.not_assigned_in_this_diagram).map(id=>letterMap.get(id)).filter(Boolean);
+  const unassignedSearch=["non attribuée dans ce diagramme",...unassigned.flatMap(l=>[l.letter,l.name_fr,l.transliteration,String(l.abjad_maghribi)])].join(" ").toLocaleLowerCase("fr");
+  const showUnassigned=!category && (!q || unassignedSearch.includes(q));
+  const unassignedRow=showUnassigned?`<tr><td><b>Non attribuées dans ce diagramme</b></td><td><span class="pill">non attribuée</span></td><td>${unassigned.map(l=>`<span class="pill" title="${esc(l.name_fr)} · Abjad ${l.abjad_maghribi}"><span class="arabic" style="font-size:1.35rem">${esc(l.letter)}</span> ${esc(l.name_fr)} <span class="muted small">(${l.abjad_maghribi})</span></span>`).join(" ")}</td></tr>`:"";
+  return sphereRows+unassignedRow;
+}
+function viewCosmology(){
+  const c=DATA.cosmology||{};
+  const categories=[["sphere_superieure","Sphères supérieures"],["sphere_planetaire","Sphères planétaires"],["sphere_elementaire","Sphères élémentaires"],["principe_special","Principes spéciaux"]];
+  const letterMap=new Map(DATA.letters.letters.map(l=>[l.id,l]));
+  const unassigned=arr(c.not_assigned_in_this_diagram).map(id=>letterMap.get(id)).filter(Boolean);
+  const counts=categories.map(([id,label])=>({id,label,count:arr(c.spheres).filter(s=>s.category===id).length}));
+  return `<h2>Sphères cosmologiques</h2>
+  <p class="lead">Consultez les associations entre les 28 lettres et les sphères du diagramme cosmographique étudié par Noah Gardiner.</p>
+  <div class="warning"><b>À distinguer :</b> ces associations décrivent un diagramme cosmologique précis. Elles ne représentent ni les maîtres planétaires des jours de la semaine, ni les positions calculées par le moteur astronomique. Les répétitions présentes dans la source sont conservées.</div>
+  <div class="grid">
+    ${counts.map(x=>`<div class="card"><div class="kpi">${x.count}</div><b>${esc(x.label)}</b></div>`).join("")}
+    <div class="card"><div class="kpi">${arr(c.spheres).length}</div><b>Sphères et principes</b></div>
+  </div>
+  <div class="toolbar">
+    <input id="cosmologySearch" type="search" placeholder="Rechercher une lettre, un nom ou une sphère…" aria-label="Rechercher dans les sphères cosmologiques">
+    <select id="cosmologyCategory" aria-label="Filtrer par catégorie">
+      <option value="">Toutes les catégories</option>
+      ${categories.map(([id,label])=>`<option value="${id}">${esc(label)}</option>`).join("")}
+    </select>
+  </div>
+  <div class="table-wrap" id="cosmologyTableWrap">
+    <table><thead><tr><th>Sphère / principe</th><th>Catégorie</th><th>Lettres associées</th></tr></thead>
+    <tbody id="cosmologyRows">${cosmologyRows()}</tbody></table>
+  </div>
+  <div class="card" style="margin-top:15px">
+    <h3>Lettres non attribuées dans ce diagramme</h3>
+    ${unassigned.length?unassigned.map(l=>`<button type="button" class="pill letter-link" data-letter-id="${esc(l.id)}" style="border:0;cursor:pointer;font:inherit;color:inherit"><span class="arabic" style="font-size:1.35rem">${esc(l.letter)}</span> ${esc(l.name_fr)}</button>`).join(" "):"<p class=\"muted\">Aucune.</p>"}
+    <p class="small muted">${esc(c.rules?.unassigned_means||"Une absence dans ce diagramme ne prouve pas une absence dans les autres traditions.")}</p>
+  </div>
+  <div class="card" style="margin-top:15px">
+    <h3>Source et méthode</h3>
+    <p class="small">${sourcesHtml(c.source_ids)}</p>
+    <p class="small muted">Les lettres répétées dans plusieurs sphères sont conservées telles qu'elles apparaissent dans le diagramme étudié. Cette table est documentaire et symbolique, non un calcul astronomique.</p>
+  </div>`;
 }
 
 function viewMoon(){
@@ -266,6 +326,19 @@ function viewReference(){
  <div class="card" style="margin-top:15px"><h3>Fichiers</h3><ul class="list">${Object.keys(m.files_sha256||{}).map(k=>`<li><code>referentiel/${esc(k)}</code></li>`).join("")}</ul></div>`;
 }
 
+function openCosmologyLetter(letterId){
+  const letter=DATA.letters.letters.find(l=>l.id===letterId);
+  if(!letter) return;
+  render("letters");
+  const search=$("#letterSearch");
+  search.value=letter.letter;
+  search.dispatchEvent(new Event("input"));
+  const card=document.getElementById("letter-card-"+letter.id);
+  const details=document.getElementById("letter-details-"+letter.id);
+  if(details) details.open=true;
+  card?.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
 function bind(view){
  if(view==="letters"){
    const filter=()=>{const q=$("#letterSearch").value.toLowerCase().trim(),e=$("#elementFilter").value;
@@ -277,6 +350,23 @@ function bind(view){
  if(view==="abjad"){
    $("#calcAbjad").addEventListener("click",()=>$("#abjadOutput").innerHTML=abjadOutput(calcAbjad($("#abjadInput").value)));
    $("#clearAbjad").addEventListener("click",()=>{ $("#abjadInput").value="";$("#abjadOutput").innerHTML="";});
+ }
+ if(view==="cosmology"){
+   const appRoot=$("#app");
+   if(!appRoot.dataset.cosmologyClickBound){
+     appRoot.addEventListener("click",e=>{
+       const chip=e.target.closest("[data-letter-id]");
+       if(chip) openCosmologyLetter(chip.dataset.letterId);
+     });
+     appRoot.dataset.cosmologyClickBound="true";
+   }
+   const filter=()=>{
+     const q=$("#cosmologySearch").value;
+     const category=$("#cosmologyCategory").value;
+     $("#cosmologyRows").innerHTML=cosmologyRows(q,category)||'<tr><td colspan="3" class="empty">Aucune correspondance.</td></tr>';
+   };
+   $("#cosmologySearch").addEventListener("input",filter);
+   $("#cosmologyCategory").addEventListener("change",filter);
  }
  if(view==="astronomy"){
   const now=new Date();

@@ -11,8 +11,9 @@
     "modalites.json": "78d2ee9f4abee8abd3f9c4bb82058886c79c1bb6aab043f7dc7b31532aec5a3c",
     "phases_lunaires.json": "42716b5b4625ec8fa3a680b982883ec52f21298a9b8b7912b5c662ae4db80843",
     "planetes.json": "a6aae1cf6de4026f9882e7d15e3a801c34e7b461feeda565a9983a2e80b10d04",
-    "sources.json": "24e51e0738a555efa17064a96ea33c2f0a5485d26f560a3e3d1a7a050fa1b1d3",
-    "zodiaque.json": "28056bfc6c310f4c0e6a83c431d5edfd63da99f498ada5f2980ca88a60bfd6c7"
+    "sources.json": "63ec4782f4b23cea12eb9c4969b2eb9dbb5c8a32ecc6b26d89fb3934a6b58d3b",
+    "zodiaque.json": "28056bfc6c310f4c0e6a83c431d5edfd63da99f498ada5f2980ca88a60bfd6c7",
+    "spheres_cosmologiques.json": "604924bdfa69397b6a78463e31c3c0ec56c984c06eff499ee24554a9f7632f94"
   },
   "created": "2026-10-21",
   "note": "Le manifeste doit être régénéré si un fichier de référence est modifié."

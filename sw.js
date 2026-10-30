@@ -1,14 +1,14 @@
-const CACHE = "zodiaque-28-lettres-1.5.18";
+const CACHE = "zodiaque-28-lettres-1.5.18-cosmology";
 const ASSETS = [
   "./", "./index.html", "./styles.css", "./app.js", "./astronomy.js",
   "./profil.js", "./profil_astronomique.js", "./abjad_normalisation.js", "./profil_abjad.js", "./profil_lunaire.js",
   "./localisation.js", "./localisation_i18n.js", "./localisation_lieux.js", "./timezone.js",
   "./i18n.js", "./theme_synthese.js", "./astronomie_diagnostics.js", "./module_lunaire_unifie.js",
-  "./application_ui.js", "./profil_synthese.js", "./manifest.webmanifest", "./icon.svg",
+  "./application_ui.js", "./profil_synthese.js", "./firebase-client.js", "./firebase-ui.js", "./manifest.webmanifest", "./icon.svg",
   "./icons/icon-192.svg", "./icons/icon-512.svg", "./pwa.js",
   "./vendor/astronomy/astronomy.browser.min.js",
   "./referentiel/lettres.json", "./referentiel/zodiaque.json", "./referentiel/planetes.json",
-  "./referentiel/correspondances.json", "./referentiel/correspondances_traditionnelles.json",
+  "./referentiel/correspondances.json", "./referentiel/correspondances_traditionnelles.json", "./referentiel/spheres_cosmologiques.json",
   "./referentiel/elements.json", "./referentiel/modalites.json", "./referentiel/phases_lunaires.json",
   "./referentiel/jours_lunaires.json", "./referentiel/lieux.json", "./referentiel/sources.json",
   "./referentiel/reference-manifest.json"

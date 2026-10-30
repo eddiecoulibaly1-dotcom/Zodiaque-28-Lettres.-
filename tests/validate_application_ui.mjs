@@ -2,6 +2,7 @@ import fs from "node:fs";
 
 const index = fs.readFileSync("index.html", "utf8");
 const ui = fs.readFileSync("application_ui.js", "utf8");
+const app = fs.readFileSync("app.js", "utf8");
 
 if (!index.includes('src="application_ui.js"')) {
   throw new Error("application_ui.js n'est pas intégré à index.html");
@@ -17,3 +18,19 @@ if (!ui.includes("Astronomie technique · astrologie symbolique")) {
 }
 
 console.log("OK — couche UI produit intégrée et contrôlée.");
+
+if (!index.includes('data-view="cosmology"')) {
+  throw new Error("La navigation doit exposer les sphères cosmologiques.");
+}
+if (!app.includes('cosmology:"referentiel/spheres_cosmologiques.json"') ||
+    !app.includes("function viewCosmology()") ||
+    !app.includes("function cosmologyRows(")) {
+  throw new Error("La vue consultable des sphères cosmologiques n'est pas reliée au référentiel.");
+}
+if (!app.includes("cosmologicalForLetter(l.id)")) {
+  throw new Error("Les fiches lettres doivent afficher leurs sphères cosmologiques.");
+}
+if (!app.includes("if(!appRoot.dataset.cosmologyClickBound)") ||
+    !app.includes('appRoot.dataset.cosmologyClickBound="true"')) {
+  throw new Error("Le gestionnaire de clics cosmologiques doit être enregistré une seule fois.");
+}

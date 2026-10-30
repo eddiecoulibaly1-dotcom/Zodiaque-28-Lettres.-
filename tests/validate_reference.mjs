@@ -43,4 +43,60 @@ for(const c of corr){
     assert.equal(c.planet_id,null);
   }
 }
+
+const cosmology = read("referentiel/spheres_cosmologiques.json");
+const sources = read("referentiel/sources.json").sources;
+const letterById = new Map(letters.map(l => [l.id, l.letter]));
+const sourceIds = new Set(sources.map(s => s.id));
+
+assert.ok(sourceIds.has("SRC_GARDINER_2017"), "Source Gardiner 2017 absente.");
+assert.ok(cosmology.source_ids.includes("SRC_GARDINER_2017"), "La table cosmologique doit référencer Gardiner 2017.");
+
+const expectedSpheres = [
+  ["Intellect", ["ا", "ع"]],
+  ["Kursi (Trône / Piédestal)", ["ب", "ف"]],
+  ["Saturne", ["ج", "د"]],
+  ["Jupiter", ["د", "ق"]],
+  ["Mars", ["ه", "ر"]],
+  ["Soleil", ["و", "س"]],
+  ["Vénus", ["ز", "ت"]],
+  ["Mercure", ["ح", "ث"]],
+  ["Lune", ["ط", "خ"]],
+  ["Feu", ["ي", "ذ"]],
+  ["Air", ["ك", "ز"]],
+  ["Eau", ["ل", "غ"]],
+  ["Terre", ["م", "ش"]],
+  ["Table préservée", ["ص"]],
+  ["Calame divin", ["ن"]]
+];
+
+assert.equal(cosmology.spheres.length, expectedSpheres.length, "Nombre de sphères cosmologiques incorrect.");
+for (let i = 0; i < expectedSpheres.length; i++) {
+  const [name, expectedLetters] = expectedSpheres[i];
+  const actual = cosmology.spheres[i];
+  assert.equal(actual.name_fr, name, `Ordre ou nom de sphère incorrect à la position ${i + 1}.`);
+  const actualLetters = actual.letter_ids.map(id => {
+    assert.ok(letterById.has(id), `Identifiant de lettre inconnu : ${id}`);
+    return letterById.get(id);
+  });
+  assert.deepEqual(actualLetters, expectedLetters, `Attribution cosmologique incorrecte pour ${name}.`);
+}
+
+const allAssigned = cosmology.spheres.flatMap(s => s.letter_ids.map(id => letterById.get(id)));
+const counts = new Map();
+for (const letter of allAssigned) counts.set(letter, (counts.get(letter) || 0) + 1);
+assert.equal(allAssigned.length, 28, "Le diagramme doit comporter 28 positions de lettres.");
+assert.deepEqual(
+  [...counts.entries()].filter(([, count]) => count > 1).sort(),
+  [["د", 2], ["ز", 2]],
+  "Les seules répétitions attendues sont د et ز."
+);
+assert.deepEqual(
+  cosmology.not_assigned_in_this_diagram.map(id => letterById.get(id)).sort(),
+  ["ض", "ظ"].sort(),
+  "Les lettres non attribuées dans ce diagramme doivent être ض et ظ."
+);
+assert.equal(cosmology.rules.distinct_from_weekday_rulership, true);
+assert.equal(cosmology.rules.preserve_source_duplicates, true);
+
 console.log("OK — référentiel final validé.");
