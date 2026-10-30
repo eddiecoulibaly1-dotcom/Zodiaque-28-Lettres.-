@@ -77,6 +77,9 @@ function cosmologicalForLetter(letterId){
   const spheres=arr(DATA.cosmology?.spheres);
   return spheres.filter(s=>arr(s.letter_ids).includes(letterId));
 }
+function cosmologicalForLetter(letterId){
+  return arr(DATA.cosmology?.spheres).filter(s=>arr(s.letter_ids).includes(letterId));
+}
 function traditionalStatus(t){
   const labels=[];
   if(t.solar) labels.push("Solaire linguistique");
@@ -97,6 +100,7 @@ function viewLetters(){
 function letterCards(rows){
  return rows.map(l=>{
    const t=traditionalForLetter(l.letter);
+   const cosmological=cosmologicalForLetter(l.id);
    return `<article class="card letter-card">
    <div class="glyph arabic-lg">${esc(l.letter)}</div>
    <div><h3>${esc(l.name_fr)}</h3><div class="muted">${esc(l.name_ar)} · ${esc(l.transliteration)}</div>
@@ -108,6 +112,7 @@ function letterCards(rows){
      <p><b>Secteur zodiacal traditionnel :</b> ${t.mansion?.zodiac_segments?.length?arr(t.mansion.zodiac_segments).map(esc).join(" · "):undefinedText}</p>
      <p><b>Planète classique :</b> ${t.planetary?`${esc(t.planetary.planet)} · ${esc(t.planetary.day)}`:undefinedText}</p>
      <p><b>Statut linguistique :</b> ${t.solar?"lettre solaire":t.lunar?"lettre lunaire":undefinedText}</p>
+     <p><b>Sphère(s) cosmologique(s) :</b> ${cosmological.length?cosmological.map(s=>esc(s.name_fr)).join(" · "):"Non attribuée dans ce diagramme."}</p>
      <p class="small muted">Source de la couche traditionnelle : ${traditionalSourceHtml()}</p>
    </details></div>
  </article>`;
