@@ -64,6 +64,9 @@ export async function registerWithEmail(email, password, displayName = "") {
 export async function loginWithEmail(email, password) {
   const credential = await signInWithEmailAndPassword(auth, email.trim(), password);
   await reload(credential.user);
+  // Firestore Rules read email_verified from the ID token, not only from User.emailVerified.
+  // Force a token refresh so a recently confirmed address is reflected in the security claim.
+  await credential.user.getIdToken(true);
   return credential.user;
 }
 
@@ -71,7 +74,10 @@ export async function resendVerificationEmail() {
   const user = auth.currentUser;
   if (!user) throw new Error("Connecte-toi pour demander un nouvel e-mail de confirmation.");
   await reload(user);
-  if (user.emailVerified) return true;
+  if (user.emailVerified) {
+    await user.getIdToken(true);
+    return true;
+  }
   await sendEmailVerification(user);
   return false;
 }
@@ -80,6 +86,8 @@ export async function refreshEmailVerification() {
   const user = auth.currentUser;
   if (!user) return null;
   await reload(user);
+  // Refresh the signed token so request.auth.token.email_verified is up to date in Firestore.
+  await user.getIdToken(true);
   return user;
 }
 
