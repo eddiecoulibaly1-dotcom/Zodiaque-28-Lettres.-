@@ -30,3 +30,9 @@ assert.ok(rules.includes("allow create: if isOwner(uid) && validProfile(request.
 assert.ok(!client.includes("serviceAccount") && !client.includes("private_key"), "Admin credentials must never be present in client code.");
 
 console.log("OK — Firebase Auth, interface, Firestore path and owner-only rules are structurally validated.");
+
+assert.ok(client.includes("if (!user.emailVerified)"), "Unverified users must be blocked from profile access.");
+assert.ok(rules.includes("request.auth.token.email_verified == true"), "Firestore must require a verified email.");
+assert.ok(ui.includes("password.length >= 12"), "Strong password length policy missing.");
+assert.ok(ui.includes("/[A-Z]/.test(password)") && ui.includes("/[a-z]/.test(password)") && ui.includes("/[0-9]/.test(password)") && ui.includes("/[^A-Za-z0-9]/.test(password)"), "Strong password complexity checks missing.");
+assert.ok(ui.includes("id=\"refreshEmailVerification\"") && ui.includes("id=\"resendVerification\""), "Email verification recovery controls missing.");
