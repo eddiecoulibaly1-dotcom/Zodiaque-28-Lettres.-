@@ -97,13 +97,13 @@ function letterCards(rows){
  return rows.map(l=>{
    const t=traditionalForLetter(l.letter);
    const cosmological=cosmologicalForLetter(l.id);
-   return `<article class="card letter-card">
+   return `<article class="card letter-card" id="letter-card-${esc(l.id)}">
    <div class="glyph arabic-lg">${esc(l.letter)}</div>
    <div><h3>${esc(l.name_fr)}</h3><div class="muted">${esc(l.name_ar)} · ${esc(l.transliteration)}</div>
    <div class="sign-meta"><span class="tag">Abjad ${l.abjad_maghribi}</span><span class="pill">${esc(l.element)}</span></div>
    ${traditionalBadges(t)}
    <p class="small">${esc(l.symbolic_meaning||undefinedText)}</p>
-   <details><summary>Correspondances documentées</summary>
+   <details id="letter-details-${esc(l.id)}"><summary>Correspondances documentées</summary>
      <p><b>Demeure lunaire :</b> ${esc(t.mansion?.mansion||undefinedText)}${t.mansion?.mansion_ar?` · ${esc(t.mansion.mansion_ar)}`:""}</p>
      <p><b>Secteur zodiacal traditionnel :</b> ${t.mansion?.zodiac_segments?.length?arr(t.mansion.zodiac_segments).map(esc).join(" · "):undefinedText}</p>
      <p><b>Planète classique :</b> ${t.planetary?`${esc(t.planetary.planet)} · ${esc(t.planetary.day)}`:undefinedText}</p>
@@ -201,7 +201,7 @@ function cosmologyRows(query="", category=""){
     return !q || haystack.includes(q);
   }).map(s=>{
     const letters=arr(s.letter_ids).map(id=>letterMap.get(id)).filter(Boolean);
-    return `<tr><td><b>${esc(s.name_fr)}</b></td><td><span class="pill">${esc(s.category.replaceAll("_"," "))}</span></td><td>${letters.map(l=>`<span class="pill" title="${esc(l.name_fr)} · Abjad ${l.abjad_maghribi}"><span class="arabic" style="font-size:1.35rem">${esc(l.letter)}</span> ${esc(l.name_fr)} <span class="muted small">(${l.abjad_maghribi})</span></span>`).join(" ")}</td></tr>`;
+    return `<tr><td><b>${esc(s.name_fr)}</b></td><td><span class="pill">${esc(s.category.replaceAll("_"," "))}</span></td><td>${letters.map(l=>`<button type="button" class="pill letter-link" data-letter-id="${esc(l.id)}" title="Ouvrir la fiche de ${esc(l.name_fr)}" aria-label="Ouvrir la fiche de ${esc(l.name_fr)}" style="border:0;cursor:pointer;font:inherit;color:inherit"><span class="arabic" style="font-size:1.35rem">${esc(l.letter)}</span> ${esc(l.name_fr)} <span class="muted small">(${l.abjad_maghribi})</span></button>`).join(" ")}</td></tr>`;
   }).join("");
   const unassigned=arr(DATA.cosmology?.not_assigned_in_this_diagram).map(id=>letterMap.get(id)).filter(Boolean);
   const unassignedSearch=["non attribuée dans ce diagramme",...unassigned.flatMap(l=>[l.letter,l.name_fr,l.transliteration,String(l.abjad_maghribi)])].join(" ").toLocaleLowerCase("fr");
@@ -324,6 +324,19 @@ function viewReference(){
  <div class="card"><div class="kpi">${arr(DATA.traditionalCorrespondences?.letter_mansion_zodiac).length}</div><b>Demeures traditionnelles</b></div>
  </div>
  <div class="card" style="margin-top:15px"><h3>Fichiers</h3><ul class="list">${Object.keys(m.files_sha256||{}).map(k=>`<li><code>referentiel/${esc(k)}</code></li>`).join("")}</ul></div>`;
+}
+
+function openCosmologyLetter(letterId){
+  const letter=DATA.letters.letters.find(l=>l.id===letterId);
+  if(!letter) return;
+  render("letters");
+  const search=$("#letterSearch");
+  search.value=letter.letter;
+  search.dispatchEvent(new Event("input"));
+  const card=document.getElementById("letter-card-"+letter.id);
+  const details=document.getElementById("letter-details-"+letter.id);
+  if(details) details.open=true;
+  card?.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
 function bind(view){
