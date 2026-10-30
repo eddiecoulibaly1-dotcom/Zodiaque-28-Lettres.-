@@ -194,7 +194,7 @@ function viewCorrespondences(){
 function cosmologyRows(query="", category=""){
   const q=query.toLocaleLowerCase("fr").trim();
   const letterMap=new Map(DATA.letters.letters.map(l=>[l.id,l]));
-  return arr(DATA.cosmology?.spheres).filter(s=>{
+  const sphereRows=arr(DATA.cosmology?.spheres).filter(s=>{
     if(category && s.category!==category) return false;
     const letters=arr(s.letter_ids).map(id=>letterMap.get(id)).filter(Boolean);
     const haystack=[s.name_fr,s.category,...letters.flatMap(l=>[l.letter,l.name_fr,l.transliteration,String(l.abjad_maghribi)])].join(" ").toLocaleLowerCase("fr");
@@ -203,6 +203,11 @@ function cosmologyRows(query="", category=""){
     const letters=arr(s.letter_ids).map(id=>letterMap.get(id)).filter(Boolean);
     return `<tr><td><b>${esc(s.name_fr)}</b></td><td><span class="pill">${esc(s.category.replaceAll("_"," "))}</span></td><td>${letters.map(l=>`<span class="pill" title="${esc(l.name_fr)} · Abjad ${l.abjad_maghribi}"><span class="arabic" style="font-size:1.35rem">${esc(l.letter)}</span> ${esc(l.name_fr)} <span class="muted small">(${l.abjad_maghribi})</span></span>`).join(" ")}</td></tr>`;
   }).join("");
+  const unassigned=arr(DATA.cosmology?.not_assigned_in_this_diagram).map(id=>letterMap.get(id)).filter(Boolean);
+  const unassignedSearch=["non attribuée dans ce diagramme",...unassigned.flatMap(l=>[l.letter,l.name_fr,l.transliteration,String(l.abjad_maghribi)])].join(" ").toLocaleLowerCase("fr");
+  const showUnassigned=!category && (!q || unassignedSearch.includes(q));
+  const unassignedRow=showUnassigned?`<tr><td><b>Non attribuées dans ce diagramme</b></td><td><span class="pill">non attribuée</span></td><td>${unassigned.map(l=>`<span class="pill" title="${esc(l.name_fr)} · Abjad ${l.abjad_maghribi}"><span class="arabic" style="font-size:1.35rem">${esc(l.letter)}</span> ${esc(l.name_fr)} <span class="muted small">(${l.abjad_maghribi})</span></span>`).join(" ")}</td></tr>`:"";
+  return sphereRows+unassignedRow;
 }
 function viewCosmology(){
   const c=DATA.cosmology||{};
