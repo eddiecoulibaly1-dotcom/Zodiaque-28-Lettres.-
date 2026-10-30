@@ -1,0 +1,158 @@
+{
+  "schema_version": "1.0.0",
+  "id": "COSMOLOGICAL_SPHERES_GARDINER_2017",
+  "title": "Diagramme cosmographique des lettres et des sphères",
+  "status": "transcription_documentee",
+  "source_ids": [
+    "SRC_GARDINER_2017"
+  ],
+  "rules": {
+    "distinct_from_weekday_rulership": true,
+    "preserve_source_duplicates": true,
+    "unassigned_means": "Non attribuée dans ce diagramme précis; cela ne signifie pas absence de toute correspondance dans les autres traditions."
+  },
+  "spheres": [
+    {
+      "id": "intellect",
+      "name_fr": "Intellect",
+      "category": "sphere_superieure",
+      "letter_ids": [
+        "letter_01",
+        "letter_16"
+      ]
+    },
+    {
+      "id": "kursi",
+      "name_fr": "Kursi (Trône / Piédestal)",
+      "category": "sphere_superieure",
+      "letter_ids": [
+        "letter_02",
+        "letter_17"
+      ]
+    },
+    {
+      "id": "saturn",
+      "name_fr": "Saturne",
+      "category": "sphere_planetaire",
+      "letter_ids": [
+        "letter_03",
+        "letter_04"
+      ]
+    },
+    {
+      "id": "jupiter",
+      "name_fr": "Jupiter",
+      "category": "sphere_planetaire",
+      "letter_ids": [
+        "letter_04",
+        "letter_19"
+      ]
+    },
+    {
+      "id": "mars",
+      "name_fr": "Mars",
+      "category": "sphere_planetaire",
+      "letter_ids": [
+        "letter_05",
+        "letter_20"
+      ]
+    },
+    {
+      "id": "sun",
+      "name_fr": "Soleil",
+      "category": "sphere_planetaire",
+      "letter_ids": [
+        "letter_06",
+        "letter_15"
+      ]
+    },
+    {
+      "id": "venus",
+      "name_fr": "Vénus",
+      "category": "sphere_planetaire",
+      "letter_ids": [
+        "letter_07",
+        "letter_22"
+      ]
+    },
+    {
+      "id": "mercury",
+      "name_fr": "Mercure",
+      "category": "sphere_planetaire",
+      "letter_ids": [
+        "letter_08",
+        "letter_23"
+      ]
+    },
+    {
+      "id": "moon",
+      "name_fr": "Lune",
+      "category": "sphere_planetaire",
+      "letter_ids": [
+        "letter_09",
+        "letter_24"
+      ]
+    },
+    {
+      "id": "fire",
+      "name_fr": "Feu",
+      "category": "sphere_elementaire",
+      "letter_ids": [
+        "letter_10",
+        "letter_25"
+      ]
+    },
+    {
+      "id": "air",
+      "name_fr": "Air",
+      "category": "sphere_elementaire",
+      "letter_ids": [
+        "letter_11",
+        "letter_07"
+      ]
+    },
+    {
+      "id": "water",
+      "name_fr": "Eau",
+      "category": "sphere_elementaire",
+      "letter_ids": [
+        "letter_12",
+        "letter_28"
+      ]
+    },
+    {
+      "id": "earth",
+      "name_fr": "Terre",
+      "category": "sphere_elementaire",
+      "letter_ids": [
+        "letter_13",
+        "letter_21"
+      ]
+    },
+    {
+      "id": "preserved_tablet",
+      "name_fr": "Table préservée",
+      "category": "principe_special",
+      "letter_ids": [
+        "letter_18"
+      ]
+    },
+    {
+      "id": "divine_pen",
+      "name_fr": "Calame divin",
+      "category": "principe_special",
+      "letter_ids": [
+        "letter_14"
+      ]
+    }
+  ],
+  "not_assigned_in_this_diagram": [
+    "letter_19",
+    "letter_27"
+  ],
+  "documentation": [
+    "Les doublons د (Saturne et Jupiter) et ز (Vénus et Air) sont conservés tels que rapportés dans le diagramme étudié.",
+    "Les lettres ض et ظ ne figurent pas dans les attributions de ce diagramme précis.",
+    "Ces attributions ne doivent pas être converties en correspondances entre planètes et jours de la semaine."
+  ]
+}
