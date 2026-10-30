@@ -21,7 +21,7 @@
 Le module utilise le SDK Firebase modulaire via les modules CDN officiels pour rester compatible avec le site statique existant. L'interface est branchée par `firebase-ui.js` et propose inscription, connexion, déconnexion, réinitialisation du mot de passe et gestion des profils.
 
 ## Schéma Firestore
-Les profils sont stockés sous `users/{uid}/profiles/{profileId}`. Les règles doivent autoriser uniquement `request.auth.uid == uid` et limiter les champs aux champs du profil.
+Les profils sont stockés sous `users/{uid}/profiles/{profileId}`. Le fichier `firestore.rules` fournit des règles strictes pour ce chemin : chaque utilisateur ne lit, crée, modifie et supprime que ses propres documents ; les champs et leurs types sont contrôlés. Le fichier doit être comparé aux règles visibles dans la console Firebase avant publication.
 
 ## Sécurité
 - La configuration Firebase Web (dont `apiKey`) est destinée à être intégrée au client web ; ce n'est pas une clé Admin.
