@@ -45,7 +45,7 @@
       "category": "sphere_planetaire",
       "letter_ids": [
         "letter_04",
-        "letter_19"
+        "letter_20"
       ]
     },
     {
@@ -54,7 +54,7 @@
       "category": "sphere_planetaire",
       "letter_ids": [
         "letter_05",
-        "letter_20"
+        "letter_21"
       ]
     },
     {
@@ -72,7 +72,7 @@
       "category": "sphere_planetaire",
       "letter_ids": [
         "letter_07",
-        "letter_22"
+        "letter_23"
       ]
     },
     {
@@ -81,7 +81,7 @@
       "category": "sphere_planetaire",
       "letter_ids": [
         "letter_08",
-        "letter_23"
+        "letter_24"
       ]
     },
     {
@@ -90,7 +90,7 @@
       "category": "sphere_planetaire",
       "letter_ids": [
         "letter_09",
-        "letter_24"
+        "letter_25"
       ]
     },
     {
@@ -99,7 +99,7 @@
       "category": "sphere_elementaire",
       "letter_ids": [
         "letter_10",
-        "letter_25"
+        "letter_26"
       ]
     },
     {
@@ -126,7 +126,7 @@
       "category": "sphere_elementaire",
       "letter_ids": [
         "letter_13",
-        "letter_21"
+        "letter_22"
       ]
     },
     {
