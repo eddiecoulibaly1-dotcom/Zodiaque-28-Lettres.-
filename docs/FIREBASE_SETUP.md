@@ -18,7 +18,7 @@
 - `getBirthProfile(profileId)`
 - `deleteBirthProfile(profileId)`
 
-Le module utilise le SDK Firebase modulaire via les modules CDN officiels pour rester compatible avec le site statique existant. Il n'est pas encore branché à l'interface : cette intégration doit être faite séparément, puis testée sans modifier le moteur astronomique.
+Le module utilise le SDK Firebase modulaire via les modules CDN officiels pour rester compatible avec le site statique existant. L'interface est branchée par `firebase-ui.js` et propose inscription, connexion, déconnexion, réinitialisation du mot de passe et gestion des profils.
 
 ## Schéma Firestore
 Les profils sont stockés sous `users/{uid}/profiles/{profileId}`. Les règles doivent autoriser uniquement `request.auth.uid == uid` et limiter les champs aux champs du profil.
