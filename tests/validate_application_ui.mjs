@@ -30,3 +30,7 @@ if (!app.includes('cosmology:"referentiel/spheres_cosmologiques.json"') ||
 if (!app.includes("cosmologicalForLetter(l.id)")) {
   throw new Error("Les fiches lettres doivent afficher leurs sphères cosmologiques.");
 }
+if (!app.includes("if(!appRoot.dataset.cosmologyClickBound)") ||
+    !app.includes('appRoot.dataset.cosmologyClickBound="true"')) {
+  throw new Error("Le gestionnaire de clics cosmologiques doit être enregistré une seule fois.");
+}
