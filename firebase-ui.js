@@ -4,6 +4,8 @@ import {
   loginWithEmail,
   logout,
   requestPasswordReset,
+  resendVerificationEmail,
+  refreshEmailVerification,
   observeAuth,
   saveBirthProfile,
   listBirthProfiles,
@@ -66,17 +68,26 @@ function accountView(user) {
           <input id="registerName" autocomplete="name" maxlength="100">
           <label for="registerEmail">Adresse e-mail</label>
           <input id="registerEmail" type="email" autocomplete="email" required>
-          <label for="registerPassword">Mot de passe (6 caractères minimum)</label>
-          <input id="registerPassword" type="password" autocomplete="new-password" minlength="6" required>
+          <label for="registerPassword">Mot de passe (12 caractères minimum, majuscule, minuscule, chiffre et symbole)</label>
+          <input id="registerPassword" type="password" autocomplete="new-password" minlength="12" required>
           <button class="primary" type="submit">Créer mon compte</button>
         </form>
       </section>
     </div>
     <div id="firebaseStatus" class="notice" role="status">Une confirmation sera envoyée à l'adresse e-mail lors de l'inscription.</div>`;
 
+  if (user && !user.emailVerified) return `
+    <h2>Confirme ton adresse e-mail</h2>
+    <p class="lead">Un lien de confirmation a été envoyé à <b>${esc(user.email)}</b>.</p>
+    <section class="card"><p>Tu dois confirmer cette adresse avant de consulter ou sauvegarder tes profils. Ouvre le lien reçu, puis reviens ici.</p>
+      <div class="toolbar"><button id="refreshEmailVerification" class="primary" type="button">J’ai confirmé mon adresse</button>
+      <button id="resendVerification" class="secondary" type="button">Renvoyer l’e-mail</button>
+      <button id="firebaseLogout" class="secondary" type="button">Se déconnecter</button></div></section>
+    <div id="firebaseStatus" class="notice" role="status">La confirmation est obligatoire pour accéder aux profils cloud.</div>`;
+
   return `
     <h2>Compte et profils sauvegardés</h2>
-    <p class="lead">Connecté en tant que <b>${esc(user.email)}</b>${user.emailVerified ? " · e-mail confirmé" : " · e-mail à confirmer"}.</p>
+    <p class="lead">Connecté en tant que <b>${esc(user.email)}</b> · e-mail confirmé.</p>
     <div class="card">
       <div class="detail-head"><div><h3>Mes profils de naissance</h3><p class="muted small">Les profils sont privés et liés à ce compte.</p></div><button id="firebaseLogout" class="secondary" type="button">Se déconnecter</button></div>
       <div id="firebaseProfilesList" class="grid wide" style="margin-top:14px">${busy ? "Chargement…" : renderProfileCards()}</div>
@@ -156,9 +167,14 @@ function bindAuthForms() {
     if (busy) return;
     busy = true;
     try {
+      const password = document.querySelector("#registerPassword").value;
+      if (!isStrongPassword(password)) {
+        status("Le mot de passe doit contenir au moins 12 caractères, une majuscule, une minuscule, un chiffre et un symbole.", "warning");
+        return;
+      }
       await registerWithEmail(
         document.querySelector("#registerEmail").value,
-        document.querySelector("#registerPassword").value,
+        password,
         document.querySelector("#registerName").value
       );
       status("Compte créé. Consulte ta boîte e-mail pour confirmer l'adresse.", "success");
@@ -175,6 +191,10 @@ function bindAuthForms() {
       status("Si cette adresse correspond à un compte, un e-mail de réinitialisation a été envoyé.", "success");
     } catch (error) { status(friendlyError(error), "warning"); }
   });
+}
+
+function isStrongPassword(password) {
+  return password.length >= 12 && /[a-z]/.test(password) && /[A-Z]/.test(password) && /[0-9]/.test(password) && /[^A-Za-z0-9]/.test(password);
 }
 
 function friendlyError(error) {
@@ -268,6 +288,14 @@ function bindProfileForm() {
 }
 
 function bindSignedInView() {
+  document.querySelector("#resendVerification")?.addEventListener("click", async () => {
+    try { const verified = await resendVerificationEmail(); status(verified ? "Adresse déjà confirmée." : "Nouvel e-mail de confirmation envoyé.", "success"); }
+    catch (error) { status(friendlyError(error), "warning"); }
+  });
+  document.querySelector("#refreshEmailVerification")?.addEventListener("click", async () => {
+    try { const user = await refreshEmailVerification(); if (user?.emailVerified) render(); else status("Confirmation non détectée. Ouvre le lien reçu puis réessaie.", "warning"); }
+    catch (error) { status(friendlyError(error), "warning"); }
+  });
   document.querySelector("#firebaseLogout")?.addEventListener("click", async () => {
     try { await logout(); status("Déconnexion réussie.", "success"); }
     catch (error) { status(friendlyError(error), "warning"); }
